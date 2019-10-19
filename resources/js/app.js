@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('isotope-layout');
 
 window.Vue = require('vue');
 
