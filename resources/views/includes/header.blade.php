@@ -1,7 +1,8 @@
 <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+            {{--{{ config('app.name', 'Laravel') }}--}}
+            <img src="/img/leaseofferte-logo.png" alt="" class="img-fluid" style="height: 50px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -14,15 +15,15 @@
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto main-menu-top">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('site.home') }}">home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('site.solution.index') }}">lease offerte</a>
+                    <a class="nav-link" href="{{ route('site.solution.index') }}">lease oplossingen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">info</a>
+                    <a class="nav-link" href="{{ route('site.about') }}">info</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('site.contact.index') }}">contact</a>

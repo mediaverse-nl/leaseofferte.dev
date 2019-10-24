@@ -1,27 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="jumbotron">
+    <div class="jumbotron" style="height: 220px;">
         <div class="container">
-             <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="padding: 5px 0px !important; margin-bottom: 0px !important;">
+                    <li class="breadcrumb-item"><a href="{!! route('site.home') !!}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{!! route('site.solution.index') !!}">Lease oplossingen</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{!! $solution->title !!}</li>
+                </ol>
+            </nav>
          </div>
     </div>
+
     <div class="container">
 
         <div class="row">
 
-            <div class="col-md-9">
+            <div class="col-md-8" style="margin-bottom: 150px;">
 
-               <h1>{!! $solution->title !!}</h1>
-               <p><img src="{!! $solution->thumbnail() !!}" alt="" class="img-thumbnail"></p>
-               <p>{!! $solution->description !!}</p>
+                <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
+                    <div class="card-body" style="padding: 30px;">
+                        <h1 class="h1" style="color: #006A8E">{!! $solution->title !!}</h1>
+                        <p><img src="{!! $solution->thumbnail() !!}" alt="" class="img-fluid"></p>
+                        <p style="color: #006A8E">{!! $solution->description !!}</p>
+                    </div>
+                </div>
 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="grid">
-
-                    @include('components.lease-calculator')
-
+                    <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
+                        <div class="card-body" style="padding: 0px;">
+                            <div style="padding: 20px;">
+                                <h2 style="font-size: 32px;" class="text-center">Lease Calculator</h2>
+                            </div>
+                            @include('components.lease-calculator')
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -32,12 +48,17 @@
 @push('css')
     <style>
         .jumbotron {
-{{--            background-image: url("{!!  !!}");--}}
+            background-color: #009FD6;
             background-size: cover;
             background-position: center center;
+            border-radius: 0px;
+            color: #FFFFFF;
         }
         .img-thumbnail{
             border: none !important;
+        }
+        .card-header{
+            border-radius: 0px !important;
         }
     </style>
 @endpush

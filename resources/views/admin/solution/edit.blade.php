@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-    {!! Breadcrumbs::render('admin.category.edit', $solution) !!}
+    {!! Breadcrumbs::render('admin.solution.edit', $solution) !!}
 @endsection
 
 @section('content')
@@ -11,6 +11,7 @@
                 <div class="card-body">
 
                     {!! Form::model($solution, ['route' => ['admin.solution.update', $solution->id], 'method' => 'PATCH']) !!}
+                    {{--{!! dd($solution->categories); !!}--}}
 
                         <div class="form-group">
                             {!! Form::label('title', 'title') !!}
@@ -19,8 +20,14 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::label('category_id', 'category_id') !!}
+                            {!! Form::select('category_id', $solution->categories, null, ['class' => 'form-control'.(!$errors->has('category_id') ? '': ' is-invalid ')]) !!}
+                            @include('components.error', ['field' => 'category_id'])
+                        </div>
+
+                        <div class="form-group">
                             {!! Form::label('description', 'description') !!}
-                            {!! Form::textarea('description', null, ['class' => 'form-control'.(!$errors->has('description') ? '': ' is-invalid ')]) !!}
+                            {!! Form::textarea('description', null, ['class' => 'form-control'.(!$errors->has('description') ? '': ' is-invalid '), 'rows' => '8']) !!}
                             @include('components.error', ['field' => 'value'])
                         </div>
 
@@ -32,7 +39,7 @@
 
                         <div class="form-group">
                             {!! Form::label('meta_description', 'meta_description') !!}
-                            {!! Form::textarea('meta_description', null, ['class' => 'form-control'.(!$errors->has('meta_description') ? '': ' is-invalid ')]) !!}
+                            {!! Form::textarea('meta_description', null, ['class' => 'form-control'.(!$errors->has('meta_description') ? '': ' is-invalid '), 'rows' => '3']) !!}
                             @include('components.error', ['field' => 'meta_description'])
                         </div>
 
@@ -59,7 +66,7 @@
 
                         @component('components.model', [
                             'id' => 'CreateCategory',
-                            'title' => 'Create entry ',
+                            'title' => 'Edit entry ',
                             'actionRoute' => route('admin.solution.update', $solution->id),
                             'btnClass' => 'btn btn-warning',
                             'btnIcon' => null,

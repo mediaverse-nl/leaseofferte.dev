@@ -12,39 +12,74 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
+        DB::table('category')->insert([
             'id' => 1,
-            'value' => 'auto operational lease',
+            'value' => 'Productie & Industrie',
         ]);
 
-        DB::table('categories')->insert([
+        DB::table('category')->insert([
             'id' => 2,
-            'value' => 'auto financial lease',
+            'value' => 'Bouw & Grondverzet',
         ]);
 
-        DB::table('categories')->insert([
+        DB::table('category')->insert([
             'id' => 3,
-            'value' => 'trucks',
+            'value' => 'Trucks & Trailers',
         ]);
 
-        DB::table('categories')->insert([
+        DB::table('category')->insert([
             'id' => 4,
-            'value' => 'bouw',
+            'value' => 'Agrarisch & Tuinbouw',
         ]);
 
-        DB::table('categories')->insert([
+        DB::table('category')->insert([
             'id' => 5,
-            'value' => 'landbouw',
+            'value' => 'ICT, beeld & geluid',
         ]);
 
-        DB::table('categories')->insert([
+        DB::table('category')->insert([
             'id' => 6,
-            'value' => 'heftruck',
+            'value' => 'Medical',
         ]);
 
-        DB::table('categories')->insert([
+        DB::table('category')->insert([
             'id' => 7,
-            'value' => 'machine',
+            'value' => 'Grafische equipment',
+        ]);
+
+        DB::table('category')->insert([
+            'id' => 8,
+            'value' => 'Auto & Bestelbus',
+        ]);
+
+        DB::table('category')->insert([
+            'id' => 9,
+            'value' => 'Food & AGF',
+        ]);
+
+        DB::table('category')->insert([
+            'id' => 10,
+            'value' => 'Intern transport & magazijn',
+        ]);
+
+        DB::table('category')->insert([
+            'id' => 11,
+            'value' => 'Kantoor / bedrijfsinventaris',
+        ]);
+
+        DB::table('category')->insert([
+            'id' => 12,
+            'value' => 'Afval & Recycling',
+        ]);
+
+        DB::table('category')->insert([
+            'id' => 13,
+            'value' => 'Bijzonder transport',
+        ]);
+
+        DB::table('category')->insert([
+            'id' => 14,
+            'value' => 'Diverse',
         ]);
     }
 }

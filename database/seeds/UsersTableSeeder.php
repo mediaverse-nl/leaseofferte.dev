@@ -16,12 +16,14 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
+            'admin' => 1,
             'password' => bcrypt('asdasd'),
         ]);
 
         DB::table('users')->insert([
             'name' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',
+            'admin' => 0,
             'password' => bcrypt('asdasd'),
         ]);
     }

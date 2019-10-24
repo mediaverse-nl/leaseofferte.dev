@@ -36,6 +36,22 @@ Breadcrumbs::for('admin.faq.create', function($breadcrumbs) use ($create_name) {
     $breadcrumbs->push($create_name, route('admin.faq.create'));
 });
 
+// dashboard > solution
+Breadcrumbs::for('admin.solution.index', function($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push('Objects', route('admin.solution.index'));
+});
+// dashboard > solution > edit
+Breadcrumbs::for('admin.solution.edit', function($breadcrumbs, $model) use ($edit_name) {
+    $breadcrumbs->parent('admin.solution.index');
+    $breadcrumbs->push($edit_name, route('admin.solution.edit', $model->id));
+});
+// dashboard > solution > create
+Breadcrumbs::for('admin.solution.create', function($breadcrumbs) use ($create_name) {
+    $breadcrumbs->parent('admin.solution.index');
+    $breadcrumbs->push($create_name, route('admin.solution.create'));
+});
+
 // dashboard > event
 Breadcrumbs::for('admin.seo-manager.index', function($breadcrumbs) {
     $breadcrumbs->parent('admin.dashboard');
@@ -45,6 +61,22 @@ Breadcrumbs::for('admin.seo-manager.index', function($breadcrumbs) {
 Breadcrumbs::for('admin.seo-manager.edit', function($breadcrumbs, $model) use ($edit_name) {
     $breadcrumbs->parent('admin.seo-manager.index');
     $breadcrumbs->push($edit_name, route('admin.seo-manager.edit', $model->id));
+});
+
+// dashboard > page
+Breadcrumbs::for('admin.pages.index', function($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push('Pages', route('admin.pages.index'));
+});
+// dashboard > page > edit
+Breadcrumbs::for('admin.pages.edit', function($breadcrumbs, $model) use ($edit_name) {
+    $breadcrumbs->parent('admin.pages.index');
+    $breadcrumbs->push($edit_name, route('admin.pages.edit', $model->id));
+});
+// dashboard > page > create
+Breadcrumbs::for('admin.pages.create', function($breadcrumbs) use ($create_name) {
+    $breadcrumbs->parent('admin.pages.index');
+    $breadcrumbs->push($create_name, route('admin.pages.create'));
 });
 
 // dashboard > category

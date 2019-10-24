@@ -13,7 +13,7 @@ class Category extends Model
 
     protected $primaryKey = 'id';
 
-    protected $table = 'categories';
+    protected $table = 'category';
 
     public $timestamps = false;
 

@@ -32,20 +32,6 @@
                         {!! Form::open(['url' => $actionRoute, 'method' => 'delete']) !!}
                             {!! Form::submit('Proceed', ['class' => 'btn btn-primary', 'style' => "border-radius: 0px;"]) !!}
                         {!! Form::close() !!}
-                    @elseif(str_contains($title, 'Terugboeken'))
-                        {{--{!! Form::open(['url' => $actionRoute, 'method' => 'patch']) !!}--}}
-                            {{--{!! $description or ''!!}--}}
-                            {{----}}
-                            {{--{!! Form::submit('Proceed', ['class' => 'btn btn-primary', 'style' => "border-radius: 0px;"]) !!}--}}
-                        {{--{!! Form::close() !!}--}}
-                    @elseif(str_contains($title, 'Refund'))
-                        {!! Form::open(['url' => $actionRoute, 'method' => 'patch']) !!}
-                            {!! Form::submit('Proceed', ['class' => 'btn btn-primary', 'style' => "border-radius: 0px;"]) !!}
-                        {!! Form::close() !!}
-                    @elseif(str_contains($title, 'Charge Back'))
-                        {!! Form::open(['url' => $actionRoute, 'method' => 'patch']) !!}
-                            {!! Form::submit('Proceed', ['class' => 'btn btn-primary', 'style' => "border-radius: 0px;"]) !!}
-                        {!! Form::close() !!}
                     @elseif(str_contains($title, 'Edit'))
                         {!! Form::submit('Proceed', ['class' => 'btn btn-primary', 'style' => "border-radius: 0px;"]) !!}
                     @elseif(str_contains($title, 'Create'))

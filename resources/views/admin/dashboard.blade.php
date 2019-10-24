@@ -10,27 +10,11 @@
             <div class="card text-white bg-primary o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fa fa-fw fa-users"></i>
+                        <i class="fa fa-fw fa-search"></i>
                     </div>
-                    <div class="mr-5">{!! \App\User::count() !!} - users</div>
+                    <div class="mr-5">SEO</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href=" ">
-                    <span class="float-left">View Details</span>
-                    <span class="float-right">
-                    <i class="fa fa-angle-right"></i>
-                  </span>
-                </a>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-secondary o-hidden h-100">
-                <div class="card-body">
-                    <div class="card-body-icon">
-                        <i class="fa fa-fw fa-barcode"></i>
-                    </div>
-                    <div class="mr-5">  </div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="{!! route('admin.category.index') !!}">
                     <span class="float-left">View Details</span>
                     <span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -90,43 +74,43 @@
     </div>
 
     <div class="row">
-        <div class="col-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-chart-area"></i>
-                    Orders
-                </div>
-                <div class="card-body">
-                    <div class="chartjs-size-monitor">
-                        <div id="mysecondchart" class="chartjs-render-monitor" style="height: 250px;"></div>
-                    </div>
-                </div>
+        {{--<div class="col-6">--}}
+            {{--<div class="card mb-3">--}}
+                {{--<div class="card-header">--}}
+                    {{--<i class="fas fa-chart-area"></i>--}}
+                    {{--Orders--}}
+                {{--</div>--}}
+                {{--<div class="card-body">--}}
+                    {{--<div class="chartjs-size-monitor">--}}
+                        {{--<div id="mysecondchart" class="chartjs-render-monitor" style="height: 250px;"></div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 {{--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>--}}
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-chart-area"></i>
-                    Registered Users
-                </div>
-                <div class="card-body">
-                    <div id="myfirstchart" style="height: 250px;"></div>
-                </div>
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="col-6">--}}
+            {{--<div class="card mb-3">--}}
+                {{--<div class="card-header">--}}
+                    {{--<i class="fas fa-chart-area"></i>--}}
+                    {{--Registered Users--}}
+                {{--</div>--}}
+                {{--<div class="card-body">--}}
+                    {{--<div id="myfirstchart" style="height: 250px;"></div>--}}
+                {{--</div>--}}
                 {{--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>--}}
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-chart-area"></i>
-                    Order Methods
-                </div>
-                <div class="card-body chartjs-size-monitor">
-                    <div id="donutExample" style="height: 250px;"></div>
-                </div>
-             </div>
-        </div>
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="col-6">--}}
+            {{--<div class="card mb-3">--}}
+                {{--<div class="card-header">--}}
+                    {{--<i class="fas fa-chart-area"></i>--}}
+                    {{--Order Methods--}}
+                {{--</div>--}}
+                {{--<div class="card-body chartjs-size-monitor">--}}
+                    {{--<div id="donutExample" style="height: 250px;"></div>--}}
+                {{--</div>--}}
+             {{--</div>--}}
+        {{--</div>--}}
     </div>
 
 @endsection

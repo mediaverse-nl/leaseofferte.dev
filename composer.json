@@ -10,12 +10,17 @@
     "require": {
         "php": "^7.2.19",
         "anhskohbo/no-captcha": "^3.1",
+        "artesaos/seotools": "^0.12.1",
+        "barryvdh/laravel-dompdf": "^0.8.2",
+        "browner12/helpers": "^2.0",
+        "caouecs/laravel-lang": "~4.0",
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
-        "browner12/helpers": "^2.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.2.0",
+        "spatie/laravel-cookie-consent": "^2.6",
+        "spatie/laravel-sitemap": "^5.2",
         "unisharp/laravel-filemanager": "v2.0.0-alpha8"
     },
     "require-dev": {

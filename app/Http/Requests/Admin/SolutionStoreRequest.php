@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Category;
+use App\Solution;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SolutionStoreRequest extends FormRequest
@@ -23,8 +25,23 @@ class SolutionStoreRequest extends FormRequest
      */
     public function rules()
     {
+        $solution = new Solution();
+
+        $categories = $solution->categories;
+
+        $categories = array_keys($categories);
+
+        unset($categories[0]);
+
+        $categories = implode(',', $categories);
+
         return [
-            //
+            'image' => 'nullable',
+            'title' => 'required|min:3|max:70',
+            'category_id' => 'required|in:'.$categories,
+            'description' => 'required',
+            'meta_title' => 'nullable',
+            'meta_description' => 'nullable',
         ];
     }
 }

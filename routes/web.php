@@ -4,7 +4,7 @@
 Route::name('admin.')->namespace('Admin')->middleware('isAdmin')->prefix('admin/') ->group(function () {
     Route::get('/', 'DashboardController')->name('dashboard'); ;
     Route::get('/dashboard', 'DashboardController');
-//    Route::resource('pages', 'PageController');
+    Route::resource('pages', 'PageController');
 //    Route::resource('review', 'ReviewController');
     Route::resource('solution', 'SolutionController');
     Route::resource('category', 'CategoryController');
@@ -23,6 +23,13 @@ Route::group(['prefix' => 'admin/laravel-filemanager', 'middleware' => ['web', '
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
+//Route::get('/symlink', function (){
+//    return symlink(
+//        '/home/mediaver/domains/mediaverse-dev.nl/laravel-leaseofferte/storage/app/public',
+//        '/home/mediaver/domains/mediaverse-dev.nl/private_html/storage'
+//        );
+//})->name('page.show');
+
 //Auth::routes();
 //Route::get('/logout', 'Auth\LoginController@logout');
 //Route::get('/site-map', 'Site\SiteMapController');
@@ -39,11 +46,11 @@ Route::name('site.')->namespace('Site')->group(function () {
 //    Route::post('/review', 'ReviewController@store')->name('review.store');
     Route::get('/contact', 'ContactController@index')->name('contact.index');
     Route::post('/contact', 'ContactController@store')->name('contact.store');
-//    Route::get('/over-ons', 'PageController@about')->name('about');
-    Route::get('/faq', 'PageController@faq')->name('faq');
-    Route::get('/algemene-voorwaarden', 'PageController@terms')->name('terms');
-    Route::get('/privacy-en-cookiebeleid', 'PageController@policy')->name('privacy');
+    Route::get('/over-ons', 'SiteController@about')->name('about');
+    Route::get('/faq', 'SiteController@faq')->name('faq');
+    Route::get('/algemene-voorwaarden', 'SiteController@terms')->name('terms');
+    Route::get('/privacy-en-cookiebeleid', 'SiteController@policy')->name('privacy');
     Route::get('/lease-oplossingen', 'LeaseSolutionController@index')->name('solution.index');
     Route::get('/lease-oplossingen-{title}/{id}', 'LeaseSolutionController@show')->name('solution.show');
-//    Route::get('/{slug}', 'PageController@show'); //This replaces all the individual routes
+    Route::get('/{slug}', 'PageController@show'); //This replaces all the individual routes
 });

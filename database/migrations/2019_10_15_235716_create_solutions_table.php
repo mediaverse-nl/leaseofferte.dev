@@ -14,7 +14,7 @@ class CreateSolutionsTable extends Migration
     public function up()
     {
         Schema::create('solutions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('category_id')->nullable()->unsigned();
             $table->foreign('category_id')->references('id')->on('category');
             $table->string('image', 1000)->nullable();

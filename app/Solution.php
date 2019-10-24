@@ -12,13 +12,20 @@ class Solution extends Model
 
     public $timestamps = true;
 
-//    protected $fillable = ['title', 'category_id', 'body'];
+    protected $fillable = ['value'];
 
     protected $dates = ['created_at', 'updated_at'];
 
     public function category()
     {
         return $this->belongsTo('App\Category','category_id', 'id');
+    }
+
+    public function getCategoriesAttribute()
+    {
+        $categories = new Category();
+
+        return array_merge(['-- select --'], $categories->pluck('value', 'id')->toArray());
     }
 
     public function getUrlTitleAttribute()

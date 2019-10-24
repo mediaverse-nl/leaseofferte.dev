@@ -29,6 +29,27 @@
     {{--</li>--}}
 
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Components">
+        <a class="nav-link nav-link-collapse {{request()->is('admin/pages*') ? '' : 'collapsed'}}" data-toggle="collapse" href="#pagesComponents" data-parent="#exampleAccordion" aria-expanded="false">
+            <i class="fa fa-fw fa-align-left"></i>
+            <span class="nav-link-text">Pages</span>
+        </a>
+        <ul class="sidenav-second-level collapse {{request()->is('admin/pages*') ? 'show' : ''}}" id="pagesComponents" style="">
+            <li class="{{request()->is('admin/pages/create') ? '' : (request()->is('admin/pages*') ? 'active' : '')}}">
+                <a href="{{route('admin.pages.index')}}">
+                    <i class="fa fa-fw fa-list"></i>
+                    <span class="nav-link-text">index</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/pages/create') ? 'active' : ''}}">
+                <a href="{{route('admin.pages.create')}}">
+                    <i class="fa fa-fw fa-plus"></i>
+                    <span class="nav-link-text">create</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Components">
         <a class="nav-link nav-link-collapse {{request()->is('admin/category*') ? '' : 'collapsed'}}" data-toggle="collapse" href="#categoryComponents" data-parent="#exampleAccordion" aria-expanded="false">
             <i class="fa fa-fw fa-list"></i>
             <span class="nav-link-text">Category</span>
@@ -51,7 +72,7 @@
 
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Components">
         <a class="nav-link nav-link-collapse {{request()->is('admin/solution*') ? '' : 'collapsed'}}" data-toggle="collapse" href="#solutionComponents" data-parent="#exampleAccordion" aria-expanded="false">
-            <i class="fa fa-fw fa-list"></i>
+            <i class="fa fa-fw fa-cube"></i>
             <span class="nav-link-text">Objects</span>
         </a>
         <ul class="sidenav-second-level collapse {{request()->is('admin/solution*') ? 'show' : ''}}" id="solutionComponents" style="">

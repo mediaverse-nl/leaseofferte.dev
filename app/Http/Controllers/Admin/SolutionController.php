@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\SolutionStoreRequest;
 use App\Http\Requests\Admin\SolutionUpdateRequest;
 use App\Solution;
 use Illuminate\Http\Request;
@@ -41,7 +42,10 @@ class SolutionController extends Controller
      */
     public function create()
     {
-        //
+        $solution = $this->solution;
+
+        return view('admin.solution.create')
+            ->with('solution', $solution);
     }
 
     /**
@@ -50,20 +54,21 @@ class SolutionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SolutionStoreRequest $request)
     {
-        //
-    }
+        $solution = $this->solution;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $solution->image = $request->image;
+        $solution->title = $request->title;
+        $solution->category_id = $request->category_id;
+        $solution->description = $request->description;
+        $solution->meta_title = $request->meta_title;
+        $solution->meta_description = $request->meta_description;
+
+        $solution->save();
+
+        return redirect()
+            ->route('admin.solution.index');
     }
 
     /**
@@ -80,6 +85,7 @@ class SolutionController extends Controller
 
         $solution->image = $request->image;
         $solution->title = $request->title;
+        $solution->category_id = $request->category_id;
         $solution->description = $request->description;
         $solution->meta_title = $request->meta_title;
         $solution->meta_description = $request->meta_description;
@@ -99,6 +105,12 @@ class SolutionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $solution = $this->solution
+            ->findOrFail($id);
+
+        $solution->delete();
+
+        return redirect()
+            ->route('admin.solution.index');
     }
 }

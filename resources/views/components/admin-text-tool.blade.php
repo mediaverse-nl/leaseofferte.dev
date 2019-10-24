@@ -5,10 +5,13 @@
     height: 20px !important;
     width: 20px !important;
     font-size: 11px !important;
+    background: none !important;
     text-align: left !important;" class="btn btn-default">
-    <button type="button" class="btn btn-primary btn-circle"
+    <button type="button" class="btn btn-success btn-circle"
       style="width: 30px;
+      background: #gr;
         height: 30px;
+        border: 1px solid white;
         padding: 6px 0px;
         border-radius: 15px;
         text-align: center;

@@ -18,7 +18,10 @@ class CreatePageTable extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->longText('body');
+            $table->longText('meta_description')->nullable();
+            $table->longText('meta_title')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

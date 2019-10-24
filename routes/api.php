@@ -15,7 +15,10 @@ use Illuminate\Http\Request;
 
 
 Route::post('/text-editor-{id}', 'Api\TextEditorController@edit');
+Route::get('/lease-calculator', 'Api\LeaseCalculatorController@show');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
