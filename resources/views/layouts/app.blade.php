@@ -14,7 +14,7 @@
 
     <!-- Fonts -->
     {{--<link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -78,6 +78,40 @@
             text-transform: uppercase;
             font-weight: bold;
         }
+
+        .cookie-consent {
+            position: fixed;
+            bottom: 40px;
+            left: 10%;
+            right: 10%;
+            width: 80%;
+            padding: 30px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #eee;
+            border-radius: 5px;
+            box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+        .js-cookie-consent-agree {
+            display: block;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            padding: 10px;
+            background: #f78e0c !important;
+            color: #FFFFFF;
+        }
     </style>
 
     {{--    @if(Auth::check() && Auth::user()->admin == 1)--}}
@@ -125,6 +159,8 @@
     </div>
 
     @include('includes.footer')
+
+    @include('cookieConsent::index')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"  ></script>

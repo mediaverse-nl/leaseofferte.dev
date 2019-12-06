@@ -22,6 +22,8 @@ class CreateCategoryTable extends Migration
             $table->string('value');
             $table->string('image')->nullable();
             $table->unique(['value', 'category_id']);
+            //financing rate
+            $table->string('interest_rate');
             $table->softDeletes();
         });
     }

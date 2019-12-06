@@ -33,9 +33,9 @@
                     <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
                         <div class="card-body" style="padding: 0px;">
                             <div style="padding: 20px;">
-                                <h2 style="font-size: 32px;" class="text-center">Lease Calculator</h2>
+                                <h2 style="font-size: 32px;" class="text-center">Financial Lease Calculator <br> {!! $solution->category->value !!}</h2>
                             </div>
-                            @include('components.lease-calculator')
+                            @include('components.lease-calculator', ['preselectedObject' => $solution->category->id])
                         </div>
                     </div>
                 </div>
@@ -47,6 +47,18 @@
 
 @push('css')
     <style>
+        #stepsForm{
+            margin-top: 0px !important;
+            border-radius: 0px !important;
+            border: none !important;
+        }
+        #stepsForm .card-header{
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-top: 0px !important;
+            border-radius: 0px !important;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+        }
         .jumbotron {
             background-color: #009FD6;
             background-size: cover;

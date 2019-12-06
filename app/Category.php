@@ -34,6 +34,11 @@ class Category extends Model
         return $this->hasMany('App\Solution','category_id', 'id');
     }
 
+    public function dynamicFields()
+    {
+        return $this->hasMany('App\DynamicField','category_id', 'id');
+    }
+
     public function scopeParents($query)
     {
         $query->where('category_id', '=', null);

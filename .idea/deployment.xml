@@ -1,76 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="mediaverse-dev.nl">
+  <component name="PublishConfigData" autoUpload="Always">
     <serverData>
-      <paths name="bliksemdesign">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="fundoe">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="fundoe.nl">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="madiaverse-dev.hailsuit">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="mediaver">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="mediaverse">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="mediaverse-dev.nl">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/laravel-leaseofferte" local="$PROJECT_DIR$" web="/" />
-            <mapping deploy="/private_html" local="$PROJECT_DIR$/public" />
-            <mapping deploy="/public_html" local="$PROJECT_DIR$/public" />
-          </mappings>
-          <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/.env" />
-            <excludedPath local="true" path="$PROJECT_DIR$/vendor" />
-            <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
-            <excludedPath path="/private_html/index.php" />
-            <excludedPath local="true" path="$PROJECT_DIR$/public/index.php" />
-          </excludedPaths>
-        </serverdata>
-      </paths>
-      <paths name="mediaverse-dev.webshop">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="tantemartje.nl">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/private_html" local="$PROJECT_DIR$/public" web="/" />
+            <mapping deploy="/laravel-leaseofferte" local="$PROJECT_DIR$" web="" />
           </mappings>
         </serverdata>
       </paths>

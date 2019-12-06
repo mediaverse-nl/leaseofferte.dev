@@ -35,6 +35,8 @@ Route::group(['prefix' => 'admin/laravel-filemanager', 'middleware' => ['web', '
 //Route::get('/site-map', 'Site\SiteMapController');
 Auth::routes();
 
+//Route::get('/test', 'TestController');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 //site
@@ -46,6 +48,8 @@ Route::name('site.')->namespace('Site')->group(function () {
 //    Route::post('/review', 'ReviewController@store')->name('review.store');
     Route::get('/contact', 'ContactController@index')->name('contact.index');
     Route::post('/contact', 'ContactController@store')->name('contact.store');
+    Route::post('/calculator', 'CalculatorController@store')->name('calculator.store');
+    Route::post('/formStep', 'CalculatorController@formStep')->name('calculator.formStep');
     Route::get('/over-ons', 'SiteController@about')->name('about');
     Route::get('/faq', 'SiteController@faq')->name('faq');
     Route::get('/algemene-voorwaarden', 'SiteController@terms')->name('terms');

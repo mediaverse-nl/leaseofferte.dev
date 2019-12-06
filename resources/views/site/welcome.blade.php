@@ -45,67 +45,26 @@
 
                                 <p>Dien bij ons uw aanvraag in, en u weet binnen enkele uren waar deze geaccepteerd wordt, en wat het optimale lease tarief en de optimale voorwaarden zijn.</p>
 
-                                <br>
-                                <br>
-
-
                                 @component('components.lease-calculator')
                                 @endcomponent
 
                             </div>
                             <div class="col-md-6">
-                                <h2 class="h2" style="color: #006A8E;">Lease offerte AUTO - financial lease</h2>
+                                <h2 class="h2 text-center" style="color: #006A8E;">Lease offerte - financial lease</h2>
 
                                 <div class="card" id="calculator" style="border: none !important; background: #FFFFFF !important;">
                                     <div class="card-body" style="border: 1px solid #D9E9EE;">
-
-
+{{--                                        //aanschafprijs - aanbetaling - slottermijn / looptijd = aflossing per maand--}}
                                         <table class="table table-borderless table-sm" id="leaseForm">
                                             <tr>
                                                 <td colspan="2" class="text-center">
                                                     <img src="/img/leaseofferte-logo.png" alt="" class="img-fluid" style="height: 50px;">
                                                     <br>
                                                     <br>
-                                                    <h3 class="h3" style="color: #006A8E;">LEASE AANVRAAG</h3>
+                                                    <h3 class="h3" style="color: #006A8E;">FINANCIAL LEASE AANVRAAG</h3>
 
-                                                    <p style="color: #006A8E;">Leasebedrag per maand: <b style="color:#7FAF1B;">€519</b> of lager</p>
+                                                    <p style="color: #006A8E;">Leasebedrag per maand: <b style="color:#7FAF1B;" id="leasePrice">€519</b> of lager</p>
                                                 </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td style="margin-bottom: 200px !important;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="color: #006A8E;"><b>Uw leaseobject</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">Soort</td>
-                                                <td id="soort"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">Merk</td>
-                                                <td id="merk"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">Type</td>
-                                                <td id="type"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">Kenteken</td>
-                                                <td id="kenteken"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">Bouwjaar</td>
-                                                <td id="bouwjaar"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">Leverancier</td>
-                                                <td id="leverancier"></td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td style="margin-bottom: 200px !important;"></td>
                                             </tr>
 
                                             <tr>
@@ -130,34 +89,56 @@
                                             <tr>
                                                 <td style="margin-bottom: 200px !important;"></td>
                                             </tr>
+                                            <tr>
+                                                <td colspan="2" style="color: #006A8E;"><b>Uw leaseobject</b></td>
+                                            </tr>
+
+                                            @foreach($tableFieldsOne as $f)
+                                                <tr>
+                                                    <td style="width: 50%;">{!! ucfirst($f->field_name) !!}</td>
+                                                    <td id="{!! StripReplace($f->field_name) !!}"></td>
+                                                </tr>
+                                            @endforeach
+
+                                            <tr>
+                                                <td style="margin-bottom: 200px !important;"></td>
+                                            </tr>
 
                                             <tr>
                                                 <td colspan="2" style="color: #006A8E;"><b>Uw gegevens</b></td>
                                             </tr>
-                                            <tr>
-                                                <td style="width: 50%;">Bedrijfsnaam</td>
-                                                <td id="bedrijfsnaam"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">K.v.k. nummer</td>
-                                                <td id="kvk"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">T.a.v</td>
-                                                <td id="volledige_naam"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">Geboortedatum</td>
-                                                <td id="geboortedatum"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">E-mailadres</td>
-                                                <td id="email"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%;">Telefoonnummer</td>
-                                                <td id="telefoonnummer"></td>
-                                            </tr>
+
+                                            @foreach($tableFieldsTwo as $f)
+                                                <tr>
+                                                    <td style="width: 50%;">{!! ucfirst($f->field_name) !!}</td>
+                                                    <td id="{!! StripReplace($f->field_name) !!}"></td>
+                                                </tr>
+                                            @endforeach
+
+{{--                                            <tr>--}}
+{{--                                                <td style="width: 50%;">Bedrijfsnaam</td>--}}
+{{--                                                <td id="bedrijfsnaam"></td>--}}
+{{--                                            </tr>--}}
+{{--                                            <tr>--}}
+{{--                                                <td style="width: 50%;">K.v.k. nummer</td>--}}
+{{--                                                <td id="kvk"></td>--}}
+{{--                                            </tr>--}}
+{{--                                            <tr>--}}
+{{--                                                <td style="width: 50%;">T.a.v</td>--}}
+{{--                                                <td id="volledige_naam"></td>--}}
+{{--                                            </tr>--}}
+{{--                                            <tr>--}}
+{{--                                                <td style="width: 50%;">Geboortedatum</td>--}}
+{{--                                                <td id="geboortedatum"></td>--}}
+{{--                                            </tr>--}}
+{{--                                            <tr>--}}
+{{--                                                <td style="width: 50%;">E-mailadres</td>--}}
+{{--                                                <td id="email"></td>--}}
+{{--                                            </tr>--}}
+{{--                                            <tr>--}}
+{{--                                                <td style="width: 50%;">Telefoonnummer</td>--}}
+{{--                                                <td id="telefoonnummer"></td>--}}
+{{--                                            </tr>--}}
                                         </table>
 
                                         <a href="" class="btn btn-default btn-block" style="padding: 15px; ">Bereken uw lease</a>
@@ -181,19 +162,20 @@
 @push('js')
     <script>
         $(document).ready(function(){
-            $('.leaseAccordion input').on('keyup paste', function () {
-                var Obj = $(this);
+
+            function getForm($this){
+                var Obj = $($this);
                 var ObjId = Obj.attr('id');
                 var ObjValue = Obj.val();
-
-                console.log(Obj, ObjId, ObjValue);
-
-//                $('td#merk').html('changed value');
-
                 $('td#'+ObjId).html(ObjValue);
-//                $( ".leaseAccordion input" ).each(function( index ) {
-//                    console.log( index + ": " + $( this ).text() );
-//                });
+            }
+
+            $('.leaseAccordion .form-control').each(function(){
+                getForm(this);
+            });
+
+            $(' input, select').on('change keyup paste', function () {
+                getForm(this);
             });
         });
     </script>

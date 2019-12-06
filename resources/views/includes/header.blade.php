@@ -20,7 +20,7 @@
                     <a class="nav-link" href="{{ route('site.home') }}">home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('site.solution.index') }}">lease oplossingen</a>
+                    <a class="nav-link" href="{{ route('site.solution.index') }}">financial lease oplossingen</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('site.about') }}">info</a>
