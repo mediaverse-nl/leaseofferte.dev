@@ -48,14 +48,14 @@
                     lfm: LFMButton
                 },
                 callbacks: {
-                    onPaste: function (e) {
-                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-                        e.preventDefault();
-                        bufferText = bufferText.replace(/\r?\n/g, '<br>');
-                        document.execCommand('insertHtml', false, bufferText);
-                    }
+                    // onPaste: function (e) {
+                    //     var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                    //     e.preventDefault();
+                    //     bufferText = bufferText.replace(/\r?\n/g, '<br>');
+                    //     document.execCommand('insertHtml', false, bufferText);
+                    // }
                 },
-                fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '24', '36', '48' , '64', '82', '150'],
+                fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18','19','20', '24', '28', '32', '36', '48' , '64', '82', '150'],
                 hint: {
                     mentions: {!! !empty($option) ? $option : '[]' !!},
                     match: /\B@(\w*)$/,
@@ -82,7 +82,7 @@
                         }
                     });
                     $.ajax({
-                        url: '/api/text-editor-{!! $id !!}',
+                        url: '/text-editor-{!! $id !!}',
                         type: 'POST',
                         data: {  text:contents},
                         dataType: 'JSON',
@@ -95,5 +95,6 @@
 
             $('.dropdown-toggle').dropdown()
         });
+
     </script>
 @endpush

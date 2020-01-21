@@ -43,7 +43,7 @@
         body {
             background: #F1F7F9 !important;
             height: 100%;
-            font-family: 'Open Sans', sans-serif !important;
+            font-family: 'Roboto Light', sans-serif !important;
 
         }
         #page-content {
@@ -112,6 +112,18 @@
             background: #f78e0c !important;
             color: #FFFFFF;
         }
+
+        footer .light a,
+        footer .light h5{
+            color: #ffffff;
+        }
+
+        footer .blue a,
+        footer .footer-copyright,
+        footer .blue i,
+        footer .blue h5{
+            color: #006A8E;
+        }
     </style>
 
     {{--    @if(Auth::check() && Auth::user()->admin == 1)--}}
@@ -142,7 +154,6 @@
             }
         </style>
     @endif
-
 
     @stack("css")
 

@@ -13,11 +13,11 @@
                 <div class="col-12">
                     <h1 class="display-4">Lease Oplossingen</h1>
                     <br>
-                    <p class="lead">Dien bij ons uw aanvraag in, en u weet binnen enkele uren waar deze geaccepteerd word.</p>
+                    <p class="lead">Dien bij ons uw aanvraag in, en u weet binnen enkele uren waar deze geaccepteerd wordt.</p>
                     <br>
                     <div id="cover">
                         <div class="td" style="width:90%;">
-                            <input type="text" placeholder="ZOEKEN" class="quicksearch" required>
+                            <input type="text" placeholder="ZOEK HIER OP TREFWOORD" class="quicksearch" required>
                         </div>
                         <div class="td" id="s-cover">
                             <i class="fa fa-search float-right" ></i>
@@ -31,7 +31,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
+                <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important; margin-bottom: 120px !important;">
                     <div class="card-body">
                         <div id="filters" class="button-group" data-filter-group="choices">
 
@@ -59,12 +59,19 @@
                     <div class="card-body">
                         <div class="grid">
                             @foreach($solutions as $solution)
-                                <div class="grid-item category-{!! $solution->category_id !!}" style="padding: 10px;" >
-                                    <a href="{!! route('site.solution.show', [$solution->urlTitle, $solution->id]) !!}">
-                                        <div style="background-image: url('{!! $solution->thumbnail() !!}'); height: 100%; background-position: center center; background-size: cover !important;">
+                                <div class="grid-item category-{!! $solution->category_id !!}" style="padding: 10px;" onmouseover='$("#content-{!! $solution->id !!}").show();' onmouseout='$("#content-{!! $solution->id !!}").hide();'>
+                                    <a href="{!! route('site.solution.show', [$solution->urlTitle, $solution->id]) !!}" style="text-decoration: none;">
+                                        <div style="background-image: url('{!! $solution->thumbnail() !!}'); height: 100%; background-position: center center; background-repeat:no-repeat; background-size: contain !important;">
+
                                         </div>
-                                        <span>
-                                            <h2 style="font-size: 14px; padding: 7px 0px; margin-top: -25px; background: #fff; bottom: 0px;" class="text-center">{!! $solution->title !!}</h2>
+
+                                        <span style="margin-left: -10px;">
+                                            <div class="" id="content-{!! $solution->id !!}" style='margin-top: -25px; width:100%;display:none; background: #009FD6;'>
+                                                <p class="text-center font-weight-bold" style=" border: none; color: #FFFFFF;text-transform: uppercase; padding: 15px;" >bereken uw lease</p>
+                                            </div>
+                                            <h2 style=" font-size: 14px; padding: 15px 0px; margin-top: -25px; background: #fff; bottom: 0px;" class="text-center font-weight-bold">
+                                                {!! $solution->title !!}
+                                            </h2>
                                         </span>
                                     </a>
                                 </div>
@@ -113,7 +120,7 @@
             .grid-item {
                 width: 33.33%;
                 border: 1px solid gray;
-                height: 200px;
+                height: 250px;
             }
         }
 
@@ -122,7 +129,7 @@
             .grid-item {
                 width: 33.33%;
                 border: 1px solid gray;
-                height: 200px;
+                height: 250px;
             }
         }
         .grid-item span{
@@ -306,6 +313,20 @@
                     return searchResult && buttonResult;
                 }
             });
+
+            $('#filters input').each(function() {
+                if($(this).is(':checked') && $(this).val() != "*"){
+                    var $this = $(this);
+                    var $buttonGroup = $this.parents('.button-group');
+                    var filterGroup = $buttonGroup.attr('data-filter-group');
+                    // set filter for group
+                    buttonFilters[ filterGroup ] = this.value;
+                    // combine filters
+                    buttonFilter = concatValues( buttonFilters );
+                    // Isotope arrange
+                    $grid.isotope();
+                }
+            })
 
             // bind filter on radio button click
             $('#filters').on('click', 'input', function() {

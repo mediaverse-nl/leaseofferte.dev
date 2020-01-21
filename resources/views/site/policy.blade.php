@@ -21,7 +21,13 @@
                 <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
 
                     <div class="card-body" style="padding: 30px; padding-bottom: 60px;">
-                        <h1 class="h1" style="color:#006A8E;">Privacy Policy & Cookiebeleid</h1>
+                        <h1 class="h1" style="color:#006A8E;">Privacy Statement & Disclaimer</h1>
+
+                        <a download href="/file/Disclaimer LEASEOFFERTE.com.pdf"><i class="fa fa-file-pdf"></i> download het disclaimer pdf bestand hier</a>
+                        <br>
+
+                        <a download href="/file/Privacy Statement LO.pdf"><i class="fa fa-file-pdf"></i> download het privacy statement pdf bestand hier</a>
+                        <br>
 
                         {!! Editor('privacy_policy_paragraaf', 'richtext', false, "") !!}
 

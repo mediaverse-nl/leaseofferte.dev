@@ -1,0 +1,12 @@
+{
+  "name": "CAW",
+  "require": {
+    "yahnis-elsts/plugin-update-checker": "*"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/YahnisElsts/plugin-update-checker.git"
+    }
+  ]
+}

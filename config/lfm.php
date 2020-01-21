@@ -72,6 +72,7 @@ return [
                 'image/svg+xml',
                 'application/pdf',
                 'text/plain',
+                'pdf'  => 'Adobe Acrobat',
             ],
         ],
     ],

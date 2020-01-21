@@ -33,12 +33,17 @@ if (!function_exists('Editor')) {
                 'text' => $readableText
             ]
         );
+//        dd(Auth::check()
+//            , $hideEditorBtn
+//            , auth()->user()->admin );
+
 
 //        todo change admin role
         if(Auth::check()
             && $hideEditorBtn == false
-            && auth()->user()->admin != 1)
+            && auth()->user()->admin == 1)
         {
+
             return view('components.admin-text-tool')
                 ->with('text', $model);
         }

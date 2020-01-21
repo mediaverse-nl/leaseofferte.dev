@@ -23,6 +23,9 @@
                     <div class="card-body" style="padding: 30px; padding-bottom: 60px;">
                         <h1 class="h1" style="color:#006A8E;">Algemene Voorwaarden</h1>
 
+                        <a download href="/file/Algemene voorwaarden LEASEOFFERTE com.pdf"><i class="fa fa-file-pdf"></i> download het pdf bestand hier</a>
+                        <br>
+
                         {!! Editor('algemene_voorwaarden_paragraaf', 'richtext', false, "") !!}
 
                     </div>

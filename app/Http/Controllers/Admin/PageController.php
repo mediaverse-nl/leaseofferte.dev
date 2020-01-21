@@ -61,6 +61,11 @@ class PageController extends Controller
         $page->body = $request->body;
         $page->meta_description = $request->meta_description;
         $page->meta_title = $request->meta_title;
+        if ($request->status == "on"){
+            $page->restore();
+        }else{
+            $page->delete();
+        }
 
         $page->save();
 
@@ -79,6 +84,12 @@ class PageController extends Controller
         $page->meta_title = $request->meta_title;
 
         $page->save();
+
+        if ($request->status == "on"){
+            $page->restore();
+        }else{
+            $page->delete();
+        }
 
         return redirect()
             ->route('admin.pages.edit', $page->id);

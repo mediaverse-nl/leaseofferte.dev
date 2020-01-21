@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 */
 
 
+Route::get('/calculator-rates-{id}', 'Api\CalculatorController@get');
+Route::get('/text-editor-1', 'Api\TextEditorController@show');
 Route::post('/text-editor-{id}', 'Api\TextEditorController@edit');
 Route::get('/lease-calculator', 'Api\LeaseCalculatorController@show');
 

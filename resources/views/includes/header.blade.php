@@ -20,7 +20,13 @@
                     <a class="nav-link" href="{{ route('site.home') }}">home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('site.solution.index') }}">financial lease oplossingen</a>
+                    <a class="nav-link" href="{{ route('site.solution.index') }}">lease categorieen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('site.offer.index') }}">operational lease</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/test">test</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('site.about') }}">info</a>

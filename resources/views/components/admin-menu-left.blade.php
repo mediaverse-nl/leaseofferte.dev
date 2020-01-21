@@ -91,8 +91,26 @@
         </ul>
     </li>
 
-
-
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Components">
+        <a class="nav-link nav-link-collapse {{request()->is('admin/static-solution*') ? '' : 'collapsed'}}" data-toggle="collapse" href="#offerComponents" data-parent="#exampleAccordion" aria-expanded="false">
+            <i class="fa fa-fw fa-cube"></i>
+            <span class="nav-link-text">Static Object</span>
+        </a>
+        <ul class="sidenav-second-level collapse {{request()->is('admin/static-solution*') ? 'show' : ''}}" id="offerComponents" style="">
+            <li class="{{request()->is('admin/static-solution/create') ? '' : (request()->is('admin/static-solution*') ? 'active' : '')}}">
+                <a href="{{route('admin.static-solution.index')}}">
+                    <i class="fa fa-fw fa-list"></i>
+                    <span class="nav-link-text">index</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/static-solution/create') ? 'active' : ''}}">
+                <a href="{{route('admin.static-solution.create')}}">
+                    <i class="fa fa-fw fa-plus"></i>
+                    <span class="nav-link-text">create</span>
+                </a>
+            </li>
+        </ul>
+    </li>
 
     <li class="nav-item {{request()->is('admin/seo-manager*') ? 'active' : ''}}">
         <a class="nav-link" href="{{route('admin.seo-manager.index')}}">

@@ -24,8 +24,18 @@
                     </div>
 
                     <div class="form-group">
+                        {!! Form::label('sample', 'samples') !!}
+
+                        <div style="background: #009FD6; height: 40px; width: 40px;"></div>
+                        <div style="background: #006A8E; height: 40px; width: 40px;"></div>
+                        <div style="background: #F78E0C; height: 40px; width: 40px;"></div>
+                        <div style="background: #424242; height: 40px; width: 40px;"></div>
+                        <div style="background: #6c757d; height: 40px; width: 40px;"></div>
+                    </div>
+
+                    <div class="form-group">
                         {!! Form::label('description', 'description') !!}
-                        {!! Form::textarea('description', null, ['class' => 'form-control'.(!$errors->has('description') ? '': ' is-invalid '), 'rows' => '8']) !!}
+                        {!! Form::textarea('description', null, ['class' => 'summernote form-control'.(!$errors->has('description') ? '': ' is-invalid '), 'rows' => '12']) !!}
                         @include('components.error', ['field' => 'value'])
                     </div>
 
@@ -74,6 +84,9 @@
             </div>
         </div>
     </div>
+
+    @component('components.rich-textarea-editor')
+    @endcomponent
 
 @endsection
 

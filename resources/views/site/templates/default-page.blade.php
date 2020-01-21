@@ -24,7 +24,7 @@
                         <h1 class="h1" style="color:#006A8E;">{!! $page->title !!}</h1>
 
                         <p>{!! $page->body !!}</p>
-                        {!! Editor('over_ons_paragraaf', 'richtext', false, "") !!}
+{{--                        {!! Editor('over_ons_paragraaf', 'richtext', false, "") !!}--}}
 
                     </div>
                 </div>

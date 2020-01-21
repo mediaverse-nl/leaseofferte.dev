@@ -14,11 +14,8 @@
     </div>
 
     <div class="container">
-
         <div class="row">
-
             <div class="col-md-8" style="margin-bottom: 150px;">
-
                 <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
                     <div class="card-body" style="padding: 30px;">
                         <h1 class="h1" style="color: #006A8E">{!! $solution->title !!}</h1>
@@ -26,14 +23,13 @@
                         <p style="color: #006A8E">{!! $solution->description !!}</p>
                     </div>
                 </div>
-
             </div>
             <div class="col-md-4">
                 <div class="grid">
                     <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
                         <div class="card-body" style="padding: 0px;">
                             <div style="padding: 20px;">
-                                <h2 style="font-size: 32px;" class="text-center">Financial Lease Calculator <br> {!! $solution->category->value !!}</h2>
+                                <h2 style="color: #006A8E; font-size: 32px;" class="text-center">Lease Calculator</h2>
                             </div>
                             @include('components.lease-calculator', ['preselectedObject' => $solution->category->id])
                         </div>

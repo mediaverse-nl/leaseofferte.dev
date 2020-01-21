@@ -52,6 +52,22 @@ Breadcrumbs::for('admin.solution.create', function($breadcrumbs) use ($create_na
     $breadcrumbs->push($create_name, route('admin.solution.create'));
 });
 
+// dashboard > static solution
+Breadcrumbs::for('admin.static-solution.index', function($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push('Static Objects', route('admin.static-solution.index'));
+});
+// dashboard > solution > edit
+Breadcrumbs::for('admin.static-solution.edit', function($breadcrumbs, $model) use ($edit_name) {
+    $breadcrumbs->parent('admin.static-solution.index');
+    $breadcrumbs->push($edit_name, route('admin.static-solution.edit', $model->id));
+});
+// dashboard > solution > create
+Breadcrumbs::for('admin.static-solution.create', function($breadcrumbs) use ($create_name) {
+    $breadcrumbs->parent('admin.static-solution.index');
+    $breadcrumbs->push($create_name, route('admin.static-solution.create'));
+});
+
 // dashboard > event
 Breadcrumbs::for('admin.seo-manager.index', function($breadcrumbs) {
     $breadcrumbs->parent('admin.dashboard');

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Site;
 
 use App\Category;
+use App\Traits\SeoManager;
+use Artesaos\SEOTools\Traits\SEOTools;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class WelcomeController extends Controller
 {
+    use SEOTools, SeoManager;
+
     protected $category;
 
     public function __construct(Category $category)
@@ -17,21 +21,19 @@ class WelcomeController extends Controller
 
     public function __invoke()
     {
-        $category = $this->category;
+        //default seo
+        $this->seo()
+            ->setTitle($this->getPageSeo()->title)
+            ->setDescription($this->getPageSeo()->description);
+        //opengraph
+        $this->seo()
+            ->opengraph()
+            ->setUrl(url()->current())
+            ->addProperty('type', 'website');
+        //twitter
+        $this->seo()
+            ->twitter();
 
-        $formObj = !empty(session('formFields')) ? (object)decrypt(session('formFields')) : (object)[];
-        if (isset($formObj->objectgroep)){
-            $category_id = $formObj->objectgroep;
-            $tableFields = $category->where('id', '=', $category_id)->first();
-        }else{
-            $tableFields = $category->first();
-        }
-
-//        if ($tableFields->dynamicFields > 0){
-            $tableFieldsOne = $tableFields->dynamicFields()->where('form_part', '=', 2)->orderBy('field_order', 'ASC')->get();
-            $tableFieldsTwo = $tableFields->dynamicFields()->where('form_part', '=', 3)->orderBy('field_order', 'ASC')->get();
-//        }
-
-        return view('site.welcome', compact('tableFieldsOne', 'tableFieldsTwo'));
+        return view('site.welcome');
     }
 }
