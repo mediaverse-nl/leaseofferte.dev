@@ -21,6 +21,22 @@ class Solution extends Model
         return $this->belongsTo('App\Category','category_id', 'id');
     }
 
+    public function getFinancialRate($totalPrice){
+        $category = $this->category;
+
+        if ((0 <= $totalPrice) && ($totalPrice <= 24999)){
+            $interestRate = explode(",", $category->interest_rate)[0];
+        }elseif ((25000 <= $totalPrice) && ($totalPrice <= 49999)){
+            $interestRate = explode(",", $category->interest_rate)[1];
+        }elseif ((50000 <= $totalPrice) && ($totalPrice <= 74999)){
+            $interestRate = explode(",", $category->interest_rate)[2];
+        }elseif ((75000 <= $totalPrice)){
+            $interestRate = explode(",", $category->interest_rate)[2];
+        }
+
+        return $interestRate;
+    }
+
     public function getCategoriesAttribute()
     {
         $categories = new Category();

@@ -74,7 +74,108 @@
     </div>
 
     <div class="row">
-        {{--<div class="col-6">--}}
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="h2">Mail previews</h1>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-6 mb-6">
+                            <div class="card text-white bg-success o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-envelope"></i>
+                                    </div>
+                                    <div class="mr-5">Aanvraag mail</div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1" onClick="MyWindow=window.open('{!! route('admin.offerte') !!}','MyWindow','width=600,height=800'); return false;">
+                                    <span class="float-left">View Details</span>
+                                    <span class="float-right">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-sm-6 mb-6">
+                            <div class="card text-white bg-success o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-envelope"></i>
+                                    </div>
+                                    <div class="mr-5">Contact mail</div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1" onClick="MyWindow=window.open('{!! route('admin.contact') !!}','MyWindow','width=600,height=800'); return false;">
+                                    <span class="float-left">View Details</span>
+                                    <span class="float-right">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-sm-6 mb-6" style="margin-top: 20px;">
+                            <div class="card text-white bg-success o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-envelope"></i>
+                                    </div>
+                                    <div class="mr-5">Operational mail</div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1" onClick="MyWindow=window.open('{!! route('admin.operational') !!}','MyWindow','width=600,height=800'); return false;">
+                                    <span class="float-left">View Details</span>
+                                        <span class="float-right">
+                                        <i class="fa fa-angle-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="h2">PDF Preview</h1>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-6 mb-6">
+                            <div class="card text-white bg-success o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-file-pdf-o"></i>
+                                    </div>
+                                    <div class="mr-5">Operational PDF</div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1" onClick="MyWindow=window.open('{!! route('admin.pdf.operational') !!}','MyWindow','width=600,height=800'); return false;">
+                                    <span class="float-left">View Details</span>
+                                    <span class="float-right">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-sm-6 mb-6">
+                            <div class="card text-white bg-success o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-file-pdf-o"></i>
+                                    </div>
+                                    <div class="mr-5">Aanvraag PDF</div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1" onClick="MyWindow=window.open('{!! route('admin.pdf.order') !!}','MyWindow','width=600,height=800'); return false;">
+                                    <span class="float-left">View Details</span>
+                                    <span class="float-right">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {{--<div class="card mb-3">--}}
                 {{--<div class="card-header">--}}
                     {{--<i class="fas fa-chart-area"></i>--}}
@@ -87,7 +188,7 @@
                 {{--</div>--}}
                 {{--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>--}}
             {{--</div>--}}
-        {{--</div>--}}
+        </div>
         {{--<div class="col-6">--}}
             {{--<div class="card mb-3">--}}
                 {{--<div class="card-header">--}}

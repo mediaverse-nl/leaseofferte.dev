@@ -6,7 +6,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="padding: 5px 0px !important; margin-bottom: 0px !important;">
                     <li class="breadcrumb-item"><a href="{!! route('site.home') !!}">Home</a></li>
-                     <li class="breadcrumb-item active" aria-current="page">Over Ons </li>
+                     <li class="breadcrumb-item active" aria-current="page">Info </li>
                 </ol>
             </nav>
         </div>
@@ -16,20 +16,39 @@
 
         <div class="row">
 
-            <div class="col-md-12" style="margin-bottom: 150px;">
+            @include('components.info-menu')
 
-                <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
+                            <div class="card-body" style="padding: 30px; padding-bottom: 60px;">
+                                {!! Editor('info_paragraaf', 'richtext', false, "") !!}
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="card-body" style="padding: 30px; padding-bottom: 60px;">
-                        <h1 class="h1" style="color:#006A8E;">Over Ons</h1>
+                    <div class="col-md-6">
+                        <div class="card" style="margin-top:30px; border: none !important; background: #FFFFFF !important;">
+                            <div class="card-body" style="padding: 30px; padding-bottom: 60px;">
+                                {!! Editor('info_2_paragraaf', 'richtext', false, "") !!}
+                            </div>
+                        </div>
+                    </div>
 
-                        {!! Editor('over_ons_paragraaf', 'richtext', false, "") !!}
 
+                    <div class="col-md-6">
+                        <div class="card" style="margin-top:30px; border: none !important; background: #005774 !important;">
+                            <div class="card-body" style="padding: 30px; padding-bottom: 60px;">
+                                {!! Editor('info_3_paragraaf', 'richtext', false, "") !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <br>
+                <br>
             </div>
-
         </div>
     </div>
 @endsection
@@ -51,6 +70,9 @@
     }
     .card-header{
         border-radius: 0px !important;
+    }
+    .list-group-item{
+        /*padding: 12px 4px ;*/
     }
 </style>
 @endpush

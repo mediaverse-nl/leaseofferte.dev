@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Site;
 
 use App\Category;
 use App\Http\Requests\Site\CalculatorForm\StepOneRequest;
+use App\Mail\AdminOrderRequest;
+use App\Mail\OperationalOrderRequest;
+use App\Mail\OrderRequest;
 use App\Solution;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class CalculatorController extends Controller
@@ -16,8 +20,8 @@ class CalculatorController extends Controller
         if ( session('formSteps') == 1){
             $validator = Validator::make($request->all(), [
                 'aanschaf' => 'required|numeric',
-                'aanbetaling' => 'required|numeric',
-                'slottermijn' => 'required|numeric',
+                'aanbetaling' => '',
+                'slottermijn' => '',
                 'looptijd' => 'required',
                 'object' => 'required|numeric',
             ]);
@@ -62,11 +66,19 @@ class CalculatorController extends Controller
                 ->withInput();
         }
 
-        session(['formSteps' => $nextStep]);
-
-        if ($this->lastStep(session('formSteps')))
+        if ($this->lastStep($nextStep))
         {
-//            dd('send mail');
+            Mail::to($request->email)
+                ->send(new OrderRequest($request->except(['_token', 'g-recaptcha-response'])));
+
+            Mail::to(env('MAIL_ADMIN'))
+                ->send(new AdminOrderRequest($request->except(['_token', 'g-recaptcha-response'])));
+
+            session()->flash('orderStatus', 'success');
+
+            return redirect(url()->previous().'#stepsForm');
+        }else{
+            session(['formSteps' => $nextStep]);
         }
 
         return redirect(url()->previous().'#stepsForm')->withInput();
@@ -81,9 +93,48 @@ class CalculatorController extends Controller
     protected function lastStep($step){
         if ($step >= 5){
             session(['formFields' => null]);
-            session(['formSteps' => 1]);
+            session(['formSteps' => null]);
             return true;
         }
         return false;
+    }
+
+    public function operational(Request $request)
+    {
+//        dd($request['bestanden']);
+//        dd($request->except(['g-recaptcha-response']));
+        $validator = Validator::make($request->all(), [
+            'jaarkilometrage' => 'required|numeric',
+            'looptijd' => 'required',
+            'winterbanden' => 'required',
+            'vervangend_vervoer' => 'required',
+            'voornaam_en_achternaam' => 'required',
+            'bedrijfsnaam' => 'required',
+            'kvk_nummer' => 'required',
+            'adres' => 'required',
+            'postcode' => 'required',
+            'plaats' => 'required',
+            'email' => 'required',
+            'telefoonnummer' => 'required',
+            'bestanden.*' => 'mimes:mimes:jpg,jpeg,png,bmp,doc,docx,pdf|max:5000',
+            'g-recaptcha-response' => 'required|captcha',
+        ], [
+            'g-recaptcha-response.required' => 'recaptcha is verplicht.'
+        ]);
+        if ($validator->fails()) {
+            return redirect(url()->previous())
+                ->withErrors($validator)
+                ->withInput();
+        }else {
+            Mail::to($request->email)
+                ->send(new OperationalOrderRequest($request->except(['_token', 'g-recaptcha-response'])));
+
+//            Mail::to(env('MAIL_ADMIN'))
+//                ->send(new AdminOrderRequest($request->except(['_token', 'g-recaptcha-response'])));
+
+            session()->flash('orderStatus', 'success');
+
+            return redirect(url()->previous().'#stepsForm');
+        }
     }
 }

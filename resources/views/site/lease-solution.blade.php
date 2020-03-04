@@ -18,9 +18,15 @@
             <div class="col-md-8" style="margin-bottom: 150px;">
                 <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
                     <div class="card-body" style="padding: 30px;">
-                        <h1 class="h1" style="color: #006A8E">{!! $solution->title !!}</h1>
-                        <p><img src="{!! $solution->thumbnail() !!}" alt="" class="img-fluid"></p>
-                        <p style="color: #006A8E">{!! $solution->description !!}</p>
+                        <h1 class="h1" style="color: #006A8E">{!! $solution->title !!} leasen </h1>
+                        <div style="width:100%; height:600px; margin-top: 0px; overflow: hidden; background-image: url('{!! $solution->thumbnail() !!}'); background-position: center center; background-repeat:no-repeat; background-size: contain !important;">
+{{--                        <img src="{!! $solution->thumbnail() !!}" alt="" style="margin-top: 20%; width:100%;height:100%;object-fit:cover;" class="img-fluid">--}}
+                        </div>
+
+                        @include('components.collapse-text', [
+                            'description' => $solution->description
+                        ])
+
                     </div>
                 </div>
             </div>
@@ -73,7 +79,5 @@
 
 @push('js')
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-    <script>
 
-    </script>
 @endpush

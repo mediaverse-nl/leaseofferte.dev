@@ -11,10 +11,11 @@ if (!function_exists('getLeasePrice')) {
      * @return
      */
 
-    function getLeasePrice($aanschaf, $looptijd)
+    function getLeasePrice($objectId, $aanschaf, $looptijd, $slottermijn, $aanbetaling)
     {
-        $financeRate = 0.0599;
-        $total = ($aanschaf);
+        $total = ($aanschaf - $aanbetaling - $slottermijn);
+
+        $financeRate = \App\Solution::find($objectId)->getFinancialRate($total);
 
         $newTotal = null;
         $arr = [];
@@ -28,14 +29,15 @@ if (!function_exists('getLeasePrice')) {
             $arr[] = $newTotal;
         }
 
-        $test1 = 0;
+        $countUp = number_format(0, 4);
         for($ti = 0; $ti < count($arr); $ti++) {
-            $test1 += $arr[$ti] * $financeRate;
+            $countUp += $arr[$ti] * $financeRate + 0;
         }
-        $avg = $test1 / count($arr) / 12;
 
-        $total = ($total / $looptijd) + ($avg) + (0 * $financeRate / 12);
+        $avg = $countUp / count($arr) / 12;
 
-        return number_format($total, 0);
+        $total = ($total / $looptijd) + ($avg) + ($slottermijn * $financeRate / 12);
+//        dd($total, $avg, round($countUp));
+        return number_format($total, 2, ',','.');
     }
 }

@@ -40,27 +40,21 @@
                 buttons: {
                     lfm: LFMButton
                 },
-                toolbar: [
-                    ['style', ['style']],
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']],
-                    ['insert', ['link', 'lfm', 'hr']],
-                    ['table', ['table']]
+                colors: [
+                    ['black', 'white', 'gray'], //first line of colors
+                    ['#009FD6', '#006A8E', '#F78E0C', '#424242', '#6c757d'] //second line of colors
                 ],
+                toolbar: {!! json_encode(config('summernote')) !!},
                 callbacks: {
                     // callback for pasting text only (no formatting)
-                    onPaste: function (e) {
-                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-                        e.preventDefault();
-                        bufferText = bufferText.replace(/\r?\n/g, '<br>');
-                        document.execCommand('insertHtml', false, bufferText);
-                    }
+                    // onPaste: function (e) {
+                    //     var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                    //     e.preventDefault();
+                    //     bufferText = bufferText.replace(/\r?\n/g, '<br>');
+                    //     document.execCommand('insertHtml', false, bufferText);
+                    // }
                 },
-                fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '24', '36', '48' , '64', '82', '150'],
+                fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',  '23', '24', '25','26', '27','28','29','30','31','32','33','34','35', '36', '37','38','39','40','41','42', '43','44','45','46', '47', '48' , '64', '82', '150'],
                 hint: {
                     mentions: {!! !empty($option) ? $option : '[]' !!},
                     match: /\B@(\w*)$/,

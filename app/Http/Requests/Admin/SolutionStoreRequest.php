@@ -25,9 +25,7 @@ class SolutionStoreRequest extends FormRequest
      */
     public function rules()
     {
-        $solution = new Solution();
-
-        $categories = $solution->categories;
+        $categories = \App\Category::pluck('value', 'id')->toArray();
 
         $categories = array_keys($categories);
 

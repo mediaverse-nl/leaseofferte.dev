@@ -23,8 +23,8 @@ class LeaseSolutionController extends Controller
 
     public function index()
     {
-        $solutions = $this->solution->get();
-        $categories = $this->category->get();
+        $solutions = $this->solution->orderBy('title')->get();
+        $categories = $this->category->orderBy('value')->get();
 
         return view('site.lease-solutions', compact('solutions', 'categories'));
     }
@@ -35,11 +35,14 @@ class LeaseSolutionController extends Controller
 
         //default seo
         $this->seo()
+            ->setCanonical(url()->current())
             ->setTitle($solution->meta_title)
             ->setDescription($solution->meta_description);
         //opengraph
         $this->seo()
             ->opengraph()
+            ->addProperty('type', 'site')
+            ->addImage($solution->thumbnail())
             ->setTitle($solution->meta_title)
             ->setUrl(url()->current())
             ->addProperty('type', 'website');

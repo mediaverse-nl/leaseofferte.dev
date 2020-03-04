@@ -18,15 +18,16 @@
                 <tr class="">
                     <td>{!! $solution->id !!}</td>
                     <td>{!! $solution->title !!}</td>
-                    <td>{!! $solution->category->value !!}</td>
+{{--                    <td>{!! $solution->category !!}</td>--}}
+                    <td>{!! $solution->category ? $solution->category->value : '-- leeg --'  !!}</td>
                     <td>
                         @component('components.model', [
-                                   'id' => 'userTableBtn'.$solution->id,
-                                   'title' => 'Delete entry '.$solution->id,
-                                   'actionRoute' => route('admin.category.destroy', $solution->id),
-                                   'btnClass' => 'rounded-circle delete',
-                                   'btnIcon' => 'fa fa-trash'
-                               ])
+                               'id' => 'userTableBtn'.$solution->id,
+                               'title' => 'Delete entry '.$solution->id,
+                               'actionRoute' => route('admin.solution.destroy', $solution->id),
+                               'btnClass' => 'rounded-circle delete',
+                               'btnIcon' => 'fa fa-trash'
+                           ])
                             @slot('description')
                                 If u proceed u will <b>delete</b> all relations
                             @endslot

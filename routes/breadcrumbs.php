@@ -36,6 +36,38 @@ Breadcrumbs::for('admin.faq.create', function($breadcrumbs) use ($create_name) {
     $breadcrumbs->push($create_name, route('admin.faq.create'));
 });
 
+// dashboard > portfolio
+Breadcrumbs::for('admin.portfolio.index', function($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push('Portfolio', route('admin.portfolio.index'));
+});
+// dashboard > portfolio > edit
+Breadcrumbs::for('admin.portfolio.edit', function($breadcrumbs, $model) use ($edit_name) {
+    $breadcrumbs->parent('admin.portfolio.index');
+    $breadcrumbs->push($edit_name, route('admin.portfolio.edit', $model->id));
+});
+// dashboard > portfolio > create
+Breadcrumbs::for('admin.portfolio.create', function($breadcrumbs) use ($create_name) {
+    $breadcrumbs->parent('admin.portfolio.index');
+    $breadcrumbs->push($create_name, route('admin.portfolio.create'));
+});
+
+// dashboard > news
+Breadcrumbs::for('admin.news.index', function($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push('News', route('admin.news.index'));
+});
+// dashboard > news > edit
+Breadcrumbs::for('admin.news.edit', function($breadcrumbs, $model) use ($edit_name) {
+    $breadcrumbs->parent('admin.news.index');
+    $breadcrumbs->push($edit_name, route('admin.news.edit', $model->id));
+});
+// dashboard > news > create
+Breadcrumbs::for('admin.news.create', function($breadcrumbs) use ($create_name) {
+    $breadcrumbs->parent('admin.news.index');
+    $breadcrumbs->push($create_name, route('admin.news.create'));
+});
+
 // dashboard > solution
 Breadcrumbs::for('admin.solution.index', function($breadcrumbs) {
     $breadcrumbs->parent('admin.dashboard');

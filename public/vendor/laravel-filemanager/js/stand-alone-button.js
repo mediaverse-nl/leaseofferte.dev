@@ -7,7 +7,8 @@
       var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
       var target_input = $('#' + $(this).data('input'));
       var target_preview = $('#' + $(this).data('preview'));
-      window.open(route_prefix + '?type=' + type + '&multiple=true', 'FileManager', 'width=900,height=600');
+        // (options && options.multiple) ? options.multiple : 'true'
+      // window.open(route_prefix + '?type=' + type + '&multiple='+'false', 'FileManager', 'width=900,height=600');
       window.SetUrl = function (items) {
         var file_path = items.map(function (item) {
           return item.url;

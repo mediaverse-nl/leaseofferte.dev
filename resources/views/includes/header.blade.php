@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{--{{ config('app.name', 'Laravel') }}--}}
@@ -16,54 +16,31 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto main-menu-top">
-                <li class="nav-item">
+                <li class="nav-item {{request()->is('/') ? 'active' : ''}} {{request()->is('home') ? 'active' : ''}}">
                     <a class="nav-link" href="{{ route('site.home') }}">home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{request()->is('lease-oplossingen*') ? 'active' : ''}}">
                     <a class="nav-link" href="{{ route('site.solution.index') }}">lease categorieen</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('site.offer.index') }}">operational lease</a>
+                <li class="nav-item {{request()->is('autolease*') ? 'active' : ''}} {{request()->is('operational-lease*') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{ route('site.autolease') }}">autolease</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/test">test</a>
-                </li>
-                <li class="nav-item">
+                @php
+                    $activePages = \App\Page::get();
+                @endphp
+
+                <li class="nav-item
+                        {{request()->is('info*') ? 'active' : ''}}
+                        {{request()->is('info*') ? 'active' : ''}}
+                        @foreach($activePages as $x)
+                            {{request()->is($x->slug.'*') ? 'active' : ''}}
+                        @endforeach
+                    ">
                     <a class="nav-link" href="{{ route('site.about') }}">info</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('site.contact.index') }}">contact</a>
+                <li class="nav-item {{request()->is('contact*') ? 'active' : ''}}">
+                    <a class="nav-link " href="{{ route('site.contact.index') }}">contact</a>
                 </li>
-
-                <!-- Authentication Links -->
-                {{--@guest--}}
-                {{--<li class="nav-item">--}}
-                    {{--<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-                {{--</li>--}}
-                {{--@if (Route::has('register'))--}}
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
-                    {{--</li>--}}
-                {{--@endif--}}
-                {{--@else--}}
-                    {{--<li class="nav-item dropdown">--}}
-                        {{--<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-                            {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
-                        {{--</a>--}}
-
-                        {{--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-                            {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
-                               {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                                {{--{{ __('Logout') }}--}}
-                            {{--</a>--}}
-
-                            {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                {{--@csrf--}}
-                            {{--</form>--}}
-                        {{--</div>--}}
-                    {{--</li>--}}
-                    {{--@endguest--}}
             </ul>
         </div>
     </div>

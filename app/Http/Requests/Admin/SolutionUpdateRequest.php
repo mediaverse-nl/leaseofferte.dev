@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Solution;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SolutionUpdateRequest extends FormRequest
@@ -23,8 +24,21 @@ class SolutionUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        $categories = \App\Category::pluck('value', 'id')->toArray();
+
+        $categories = array_keys($categories);
+
+        unset($categories[0]);
+
+        $categories = implode(',', $categories);
+
         return [
-            //
+            'image' => 'nullable',
+            'title' => 'required|min:3|max:70',
+            'category_id' => 'required|in:'.$categories,
+            'description' => 'required',
+            'meta_title' => 'nullable',
+            'meta_description' => 'nullable',
         ];
     }
 }

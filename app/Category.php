@@ -39,43 +39,23 @@ class Category extends Model
         return $this->hasMany('App\DynamicField','category_id', 'id');
     }
 
+    public function dynamicFieldsExists($fieldName)
+    {
+        if (!is_array($fieldName)){
+            return $this->dynamicFields()
+                ->where('field_name', '=', $fieldName)
+                ->exists();
+        }else{
+            foreach ($fieldName as $item){
+                return $this->dynamicFields()
+                    ->where('field_name', '=', $item)
+                    ->exists();
+            }
+        }
+    }
+
     public function scopeParents($query)
     {
         $query->where('category_id', '=', null);
-    }
-
-    public function buildMenu($menu, $parentid = 0)
-    {
-        $result = null;
-
-        foreach ($menu as $item)
-        {
-            if ($item->category_id == $parentid)
-            {
-                $result .=
-                "<li class='dd-item nested-list-item' data-order='{$item->order}' data-id='{$item->id}'>
-                  <div class='dd-handle nested-list-handle'>
-                    <i class='fa fa-fw fa-arrows'></i>
-                  </div>
-                  <div class='nested-list-content'>{$item->value}
-                    <div class='pull-right'>
-                      <a href='".url("admin/menu/edit/{$item->id}")."'>Edit</a>
-                       |
-                      <a href='#' class='delete_toggle' rel='{$item->id}'>Delete</a>
-                    </div>
-                  </div>
-                  ".$this->buildMenu($menu, $item->id) .
-                "</li>";
-            }
-        }
-        return $result ? "\n<ol class=\"dd-list\">\n$result</ol>\n" : null;
-    }
-
-    // Getter for the HTML menu builder
-    public function renderMenu()
-    {
-        $items = $this->get(['id', 'value', 'category_id', 'order']);
-
-        return $this->buildMenu($items);
     }
 }

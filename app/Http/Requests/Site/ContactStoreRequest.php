@@ -31,4 +31,11 @@ class ContactStoreRequest extends FormRequest
             'bericht' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'g-recaptcha-response.required' => 'recaptcha is verplicht.'
+        ];
+    }
 }

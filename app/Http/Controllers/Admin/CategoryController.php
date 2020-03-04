@@ -35,6 +35,78 @@ class CategoryController extends Controller
             ->withTrashed()
             ->findOrFail($id);
 
+        $data = [];
+
+        if (!$category->dynamicFieldsExists('email')) {
+            $data[] = [
+                'field_name' => 'email',
+                'field_type' => 'text',
+                'form_part' => '3',
+                'field_validation' => 'required|email',
+                'field_order' => '1',
+                'category_id' => $category->id,
+            ];
+        }
+
+        if (!$category->dynamicFieldsExists('voorletter(s)')) {
+            $data[] = [
+                'field_name' => 'voorletter(s)',
+                'field_type' => 'text',
+                'form_part' => '3',
+                'field_validation' => 'required',
+                'field_order' => '2',
+                'category_id' => $category->id,
+            ];
+        }
+
+        if (!$category->dynamicFieldsExists('voornaam')) {
+            $data[] = [
+                'field_name' => 'voornaam',
+                'field_type' => 'text',
+                'form_part' => '3',
+                'field_validation' => 'required',
+                'field_order' => '3',
+                'category_id' => $category->id,
+            ];
+        }
+
+        if (!$category->dynamicFieldsExists('achternaam')) {
+            $data[] = [
+                'field_name' => 'achternaam',
+                'field_type' => 'text',
+                'form_part' => '3',
+                'field_validation' => 'required',
+                'field_order' => '4',
+                'category_id' => $category->id,
+            ];
+        }
+
+        if (!$category->dynamicFieldsExists('K.v.K. nummer')) {
+            $data[] = [
+                'field_name' => 'K.v.K. nummer',
+                'field_type' => 'text',
+                'form_part' => '3',
+                'field_validation' => 'required|numeric',
+                'field_order' => '5',
+                'category_id' => $category->id,
+            ];
+        }
+
+        if (!$category->dynamicFieldsExists('bedrijfsnaam')) {
+            $data[] = [
+                'field_name' => 'bedrijfsnaam',
+                'field_type' => 'text',
+                'form_part' => '3',
+                'field_validation' => 'required',
+                'field_order' => '6',
+                'category_id' => $category->id,
+            ];
+        }
+
+        if (!empty($data)) {
+            $this->dynamicField->insert($data);
+        }
+
         return view('admin.category.edit')
            ->with('category', $category);
     }
@@ -56,21 +128,9 @@ class CategoryController extends Controller
 
         if (isset($request->dynamicFields)){
             foreach ($request->dynamicFields as $i => $f){
-                $field_validation = '';
-                if (isset($f['rules'])){
-                    foreach ($f['rules'] as $ri => $rv){
-                        $field_validation .= (isset($f[$ri]) ? '':$rv).'|';
-                        if (in_array('required', $f['rules'])
-                            && $rv == 'nullable|regex:#^(((\+31|0|0031)6){1}[1-9]{1}[0-9]{7})$#i')
-                        {
-                            $field_validation = str_replace('nullable|', '', $field_validation);
-                        }
-                    }
-                    $field_validation = substr($field_validation, 0, -1);
-                }
 
                 $dynamicField = $this->dynamicField->find($i);
-                $dynamicField->field_validation = $field_validation;
+                $dynamicField->field_validation = isset($f['rules']) ? implode('|', array_keys($f['rules'])) : '';
                 $dynamicField->field_name = $f['field_name'];
                 $dynamicField->field_type = $f['field_type'];
                 $dynamicField->field_order = $f['field_order'];
@@ -102,7 +162,6 @@ class CategoryController extends Controller
     public function store(CategoryStoreRequest $request)
     {
         $category = new Category;
-
         $category->value = $request->value;
         $category->interest_rate = (string)implode(',', $request->rate);;
         $category->save();
@@ -112,8 +171,8 @@ class CategoryController extends Controller
             $dynamicField->field_name = $request->field_name;
             $dynamicField->field_type = $request->field_type;
             $dynamicField->form_part = $request->form_part;
-            $dynamicField->field_validation = $request->field_validation;
-            $dynamicField->field_order = isset($request->dynamicFields) ? count($request->dynamicFields) + 1 : 1;
+            $dynamicField->field_validation = isset($request->rules) ? implode('|', array_keys($request->rules)) : '';
+            $dynamicField->field_order = 3;
             $dynamicField->category_id = $category->id;
             $dynamicField->save();
         }

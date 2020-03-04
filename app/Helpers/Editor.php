@@ -16,11 +16,9 @@ if (!function_exists('Editor')) {
         $textType ? $textType : 'text';
         $findText = \App\Text::where('key_name', '=', $key)->first();
 
-        if(!empty($findText))
-        {
+        if(!empty($findText)) {
             $readableText = $findText->text;
-        }elseif(!empty($value))
-        {
+        }elseif(!empty($value)) {
             $readableText = $value;
         }
 
@@ -33,17 +31,11 @@ if (!function_exists('Editor')) {
                 'text' => $readableText
             ]
         );
-//        dd(Auth::check()
-//            , $hideEditorBtn
-//            , auth()->user()->admin );
 
-
-//        todo change admin role
         if(Auth::check()
             && $hideEditorBtn == false
             && auth()->user()->admin == 1)
         {
-
             return view('components.admin-text-tool')
                 ->with('text', $model);
         }
@@ -55,7 +47,6 @@ if (!function_exists('Editor')) {
                 $readableText = str_replace('@'.$key, $v, $readableText);
             }
         }
-
         return $readableText;
     }
 }

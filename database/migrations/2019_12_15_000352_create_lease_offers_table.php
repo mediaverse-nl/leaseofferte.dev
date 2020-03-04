@@ -18,20 +18,19 @@ class CreateLeaseOffersTable extends Migration
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('title');
-            $table->string('uitvoering')->nullable();
             $table->string('description')->nullable();
+            $table->string('uitvoering')->nullable();
             $table->string('images')->nullable();
             $table->string('merk')->nullable();
             $table->string('type')->nullable();
             $table->string('kleur')->nullable();
-//            $table->string('extra_opties')->nullable();
-//            $table->string('dealer')->nullable();
             $table->string('inbegrepen')->nullable();
-            $table->string('kilometrage')->nullable();
-            $table->string('looptijd')->nullable();
-//            $table->string('winterbanden')->nullable();
             $table->string('catalogusprijs')->nullable();
             $table->string('bijtelling')->nullable();
+            $table->string('auto_segment')->nullable();
+            $table->string('brandstof')->nullable();
+            $table->string('carrosserie')->nullable();
+            $table->string('aantal_deuren')->nullable();
             $table->timestamps();
         });
     }

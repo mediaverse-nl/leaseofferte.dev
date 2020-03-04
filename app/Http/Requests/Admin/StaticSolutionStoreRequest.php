@@ -26,15 +26,14 @@ class StaticSolutionStoreRequest extends FormRequest
     {
         return [
             'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'title' => 'required|min:3|max:70',
             'description' => 'required',
             'uitvoering' => 'required',
             'merk' => 'required',
             'type' => 'required',
             'kleur' => 'required',
-            'looptijd' => 'required|in:12,18,24,30,36,42,48,54,60,72|array|between:3,3',
-            'kilometrage' => 'required|numeric',
+//            'looptijd' => 'required|in:12,18,24,30,36,42,48,54,60,72|array|between:3,3',
+//            'kilometrage' => 'required|numeric',
             'catalogusprijs' => 'required|numeric',
             'bijtelling' => 'required|numeric',
             'inbegrepen' => 'nullable',

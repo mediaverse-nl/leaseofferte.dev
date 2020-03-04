@@ -35,8 +35,7 @@
 
 <div class="card" style="margin-top: 0px;" id="stepsForm">
 {{--<div class="card" style="margin-top: 60px;" id="stepsForm">--}}
-
-    <div class="card-header" style="height: 90px; background: #F0F6F9 !important;">
+    <div class="card-header" style="{!! isset($preselectedObject) ? 'border-radius: 4px !important;' : null !!}; height: 90px; background: #F0F6F9 !important;">
         <div class="steps is-horizontal">
             <div class="steps-segment is-inline has-gaps {!! (session('formSteps') == 2 || session('formSteps') == 3 || session('formSteps') == 4) ? '' : ' is-active' !!}">
                 <span class="steps-marker {!! (session('formSteps') >= 2 || session('formSteps') == 3) ? '' : 'is-hollow' !!}">1</span>
@@ -60,6 +59,8 @@
     </div>
     <div class="card-body">
         <div class="leaseAccordion">
+
+            @include('components.success-order-model')
 
             @if(isset($preselectedObject))
                 <p style="color: #006A8E;" class="text-center h3">Uw Leasebedrag per maand <b style="color:#7FAF1B;" id="leasePrice" class="leasePrice">&euro; 0</b></p>
@@ -117,30 +118,32 @@
                         </div>
 
                         <div class="form-group">
-{{--                            <label class="control-label">Aanschaf<b>*</b></label>--}}
-                            <div class="input-icon">
-                                {!! Form::number('aanschaf', null, ['placeholder' => 'aanschafprijs *', 'class' => 'withIcon form-control'.(!$errors->has('aanschaf') ? '': ' is-invalid '),'id' => 'aanschaf']) !!}
-                                <i>&euro;</i>
-                            </div>
+                            {!! Form::text('aanschaf', null, [
+                                'placeholder' => 'aanschafprijs *',
+                                'class' => 'moneyFormat withIcon form-control'.(!$errors->has('aanschaf') ? '': ' is-invalid '),
+                                'id' => 'aanschaf'
+                            ]) !!}
                             @include('components.error', ['field' => 'aanschaf'])
                         </div>
 
                         <div class="form-group">
-                            <div class="input-icon">
-                            {!! Form::text('aanbetaling', null, ['placeholder' => 'aanbetaling *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
-                                <i>&euro;</i>
+                            {!! Form::text('aanbetaling', null, [
+                                'placeholder' => 'aanbetaling ',
+                                'class' => 'moneyFormat withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),
+                                'id' => 'aanbetaling'
+                            ]) !!}
 
-                            </div>
                             @include('components.error', ['field' => 'aanbetaling'])
                         </div>
 
                         <div class="form-group">
-                            <div class="input-icon">
-                            {!! Form::text('slottermijn', null, ['placeholder' => 'slottermijn *', 'class' => 'withIcon form-control'.(!$errors->has('slottermijn') ? '': ' is-invalid '),'id' => 'slottermijn']) !!}
+                            {!! Form::text('slottermijn', null, [
+                                'placeholder' => 'slottermijn ',
+                                'class' => 'moneyFormat withIcon form-control'.(!$errors->has('slottermijn') ? '': ' is-invalid '),
+                                'id' => 'slottermijn'
+                            ]) !!}
 
-                            <i>&euro;</i>
-                        </div>
-                        @include('components.error', ['field' => 'slottermijn'])
+                            @include('components.error', ['field' => 'slottermijn'])
                         </div>
                         <div class="form-group">
                              {!! Form::select('looptijd', [
@@ -154,6 +157,7 @@
                                 '54 maanden' => '54 maanden',
                                 '60 maanden' => '60 maanden',
                                 '72 maanden' => '72 maanden',
+                                '84 maanden' => '84 maanden',
                             ], null, [
                                 'data-style="btn dropdown-toggle btn-light bs-placeholder'.(!$errors->has('looptijd') ? '': ' show-error-line').'"',
                                 'placeholder' => '--- looptijd * ---',
@@ -178,19 +182,20 @@
                      <div class="col-md-12">
                         <div class="formPartTwo">
                             @if(isset($category))
-                                @foreach($category->dynamicFields()->where('form_part', '=', 2)->orderBy('field_order', 'DESC')->get() as $f)
+                                @foreach($category->dynamicFields()->where('form_part', '=', 2)->orderBy('field_order', 'ASC')->get() as $f)
                                     <div class="form-group">
-{{--                                        {!!dd( $errors->all()) !!}--}}
-{{--                                        <label class="control-label">{!! ucfirst($f->field_name) !!}{!! str_contains($f->field_validation, 'required') ? "<b>*</b>" : ''!!}</label>--}}
+                                        @php
+                                            $fieldRequired = str_contains($f->field_validation, "required") ?  "*": "";
+                                        @endphp
                                         @switch($f->field_type)
                                             @case('text')
-                                                {!! Form::text(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name), 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                                {!! Form::text(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                             @break
                                             @case('textarea')
-                                                {!! Form::textarea(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name), 'rows="4"', 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                                {!! Form::textarea(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'rows="4"', 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                             @break
                                             @case('number')
-                                                {!! Form::number(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name), 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                                {!! Form::number(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                             @break
                                         @endswitch
                                         @include('components.error', ['field' => StripReplace($f->field_name)])
@@ -214,18 +219,20 @@
                 <div class="row setup-content {!! (session('formSteps') != 3) ? 'd-none' : '' !!}" id="step-3">
                     <div class="col-md-12">
                         @if(isset($category))
-                            @foreach($category->dynamicFields()->where('form_part', '=', 3)->orderBy('field_order', 'DESC')->get() as $f)
+                            @foreach($category->dynamicFields()->where('form_part', '=', 3)->orderBy('field_order', 'ASC')->get() as $f)
                                 <div class="form-group">
-{{--                                    <label class="control-label">{!! ucfirst($f->field_name) !!}{!! str_contains($f->field_validation, 'required') ? "<b>*</b>" : ''!!}</label>--}}
+                                    @php
+                                        $fieldRequired = str_contains($f->field_validation, "required") ?  "*": "";
+                                    @endphp
                                     @switch($f->field_type)
                                         @case('text')
-                                            {!! Form::text(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name), 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                            {!! Form::text(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                         @break
                                         @case('textarea')
-                                            {!! Form::textarea(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name), 'rows="4"', 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                            {!! Form::textarea(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'rows="4"', 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                         @break
                                         @case('number')
-                                            {!! Form::number(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name), 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                            {!! Form::number(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                         @break
                                     @endswitch
                                     @include('components.error', ['field' => StripReplace($f->field_name)])
@@ -266,8 +273,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" style="overflow: hidden !important;" >
-
+                                <div class="modal-body" style="overflow: hidden !important;">
                                     @component('components.info-checker', ['edit' => true])
                                     @endcomponent
                                 </div>
@@ -290,7 +296,7 @@
                     </button>
                     <br>
                     <div class="form-group">
-                        <small>Door verder te gaan naar de volgende stap bevestig je akkoord te gaan met de
+                        <small style="color: #6c757d;">Door verder te gaan bevestig je akkoord te gaan met de
                             <a href="{!! route('site.terms') !!}">algemene voorwaarden</a>.
                         </small>
                     </div>
@@ -303,6 +309,8 @@
             <input type='hidden' id="to-previous" name="step" />
         {!! Form::close() !!}
 
+{{--        <a class="btn btn-back nextBtn btn-lg btn-block pull-left" onClick='submitForm(2)'>vorige</a>--}}
+
     </div>
 
 </div>
@@ -310,6 +318,7 @@
 @push('js')
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
     <script language="javascript" type="text/javascript">
 
         function submitForm(step) {
@@ -328,63 +337,35 @@
             var looptijd = parseFloat($("#looptijd").val().substr(0, 2));
             var obj = $('#object option:selected').val()
 
+            if(!$("#aanbetaling").val()){
+                aanbetaling = 0
+            }
+            if(!$("#slottermijn").val()){
+                slottermijn = 0
+            }
+
             var total = (aanschaf - aanbetaling - slottermijn);
 
             if((total || total === 0)
                 && (obj || obj === 0)
                 && (looptijd || looptijd === 0)) {
-                var financeRate;
-
                 $.ajax({
-                    url: "/api/calculator-rates-"+obj,
+                    url: "/api/calculator-rates-"+obj
+                            +"?aanschaf="+aanschaf
+                            +"&aanbetaling="+aanbetaling
+                            +"&slottermijn="+slottermijn
+                            +"&looptijd="+looptijd,
                     type: 'GET',
                     dataType: 'json', // added data type
-                    async: false,
                     success: function(res) {
-                        $.each(res['rates'], function( i, k ) {
-                            if(aanschaf >= parseInt(k['from']) && aanschaf < parseInt(k['to'])
-                                || aanschaf >= 100000 && parseInt(k['to']) == 100000
-                            ) {
-                                financeRate = parseFloat(k['rate']).toFixed(4);
-                            }
-                        })
+                        $(".leasePrice").html("&euro; " + res['leasePrice']);
                     }
                 });
-
-                var newTotal;
-                var arr = [];
-
-                for (var i = 0; i < looptijd; i++) {
-                    if(i == 0){
-                        newTotal = total;
-                    }else{
-                        newTotal = newTotal - total / looptijd;
-                    }
-                    arr.push(parseInt(newTotal).toFixed(2));
-                }
-
-                var test1 = 0;
-
-                for(var ti = 0; ti < arr.length; ti++) {
-                    test1 += arr[ti] * financeRate;
-                }
-                var avg = test1 / arr.length / 12;
-
-                var maandBedragRente = (total / looptijd) + (avg) + (slottermijn * financeRate / 12)
-
-                $(".leasePrice").html("&euro;" + parseInt(maandBedragRente).toFixed(2));
-
-                return maandBedragRente;
             }
-
-            return null;
         }
 
         $('.form-control').on('change keyup paste', function () {
-            var maandBedragRente = calculation();
-            if(maandBedragRente){
-                $(".leasePrice").html("&euro;" + parseInt(maandBedragRente).toFixed(2));
-            }
+            calculation();
         });
     </script>
 @endpush

@@ -41,7 +41,6 @@
             <br>
         </div>
     </div>
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -50,7 +49,7 @@
 {{--                        <h2 class="h2" style="color: #006A8E;">Lease Calculator</h2>--}}
                         <div class="row">
                             <div class="col-md-6">
-
+{{--                                {!! getLeasePrice(29, 28000, 60, 0, 0) !!}--}}
 {{--                                <p>Dien bij ons uw aanvraag in, en u weet binnen enkele uren waar deze geaccepteerd wordt, en wat het optimale lease tarief en de optimale voorwaarden zijn.</p>--}}
 
                                 @component('components.lease-calculator')

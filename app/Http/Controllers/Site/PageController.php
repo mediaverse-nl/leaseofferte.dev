@@ -29,8 +29,7 @@ class PageController extends Controller
             'default-page',
         ];
 
-        if (in_array($slug, $this->page->pluck('slug')->toArray()))
-        {
+        if (in_array($slug, $this->page->pluck('slug')->toArray())) {
             $page = $this->page->where('slug', '=', $slug)->first();
 
             //default seo
@@ -51,10 +50,38 @@ class PageController extends Controller
 
             $template = 'default-page';
 
-
             return view('site.templates.'.$template, compact('page'));
+        }else{
+            //todo SEO redirects
+            $oldUrls = [
+                '/' => 'index.php',
+                'operational-lease' => 'auto-leasen-maak-uw-offerte-operational-lease.php',
+                '' => 'offerte-financial-lease-truck-trailer-oplegger.php',
+                '' => 'bouwmachine-leasen-lease-offerte-aanvragen.php',
+                '' => 'landbouw-machine-leasen-scherpe-leaseofferte.php',
+                '' => 'heftrucklease-direct-uw-lease-offerte.php',
+                '' => 'leasing-van-apparatuur-lease-offerte-aanvragen.php',
+                'autos' => 'autos.php',
+                '' => 'aanbiedingen-operational-lease.php',
+                '' => 'machine-leasen-equipment-lease.php',
+                '' => 'auto-leasen-financial-lease.php',
+                '' => 'auto-leasen-operational-lease.php',
+                '' => 'maak-offerte-mkb-bedrijfsfinanciering-bij-30-financiers.php',
+                'contact' => 'contact.php',
+                'werkwijze' => 'werkwijze.php',
+                '' => 'deze-objecten-hebben-klanten-bij-leaseofferte-com-geleased.php',
+                '' => 'plaats-uw-voorraad.php',
+                '' => 'lease-calculator-in-uw-website.php',
+                '' => 'handleiding-kopen-of-leasen-van-een-auto.php',
+                '' => 'nieuws-leasemaatschappij-leaseofferte-com.php',
+                'financial-lease-belgie' => 'financial-lease-belgie.php',
+            ];
+
+            if (in_array($slug, $oldUrls)){
+                return redirect()->to( array_search($slug, $oldUrls), 301);
+            }
+
+            abort(404);
         }
-//        exit;
-//        return 'asdasd';
     }
 }

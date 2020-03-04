@@ -19,19 +19,11 @@
 
                     <div class="form-group">
                         {!! Form::label('category_id', 'category_id') !!}
-                        {!! Form::select('category_id', $solution->categories, null, ['class' => 'form-control'.(!$errors->has('category_id') ? '': ' is-invalid ')]) !!}
+                        {!! Form::select('category_id', App\Category::pluck('value', 'id'), null, ['class' => 'form-control'.(!$errors->has('category_id') ? '': ' is-invalid ')]) !!}
                         @include('components.error', ['field' => 'category_id'])
                     </div>
 
-                    <div class="form-group">
-                        {!! Form::label('sample', 'samples') !!}
-
-                        <div style="background: #009FD6; height: 40px; width: 40px;"></div>
-                        <div style="background: #006A8E; height: 40px; width: 40px;"></div>
-                        <div style="background: #F78E0C; height: 40px; width: 40px;"></div>
-                        <div style="background: #424242; height: 40px; width: 40px;"></div>
-                        <div style="background: #6c757d; height: 40px; width: 40px;"></div>
-                    </div>
+                    @include('components.color-samples')
 
                     <div class="form-group">
                         {!! Form::label('description', 'description') !!}
@@ -85,8 +77,8 @@
         </div>
     </div>
 
-    @component('components.rich-textarea-editor')
-    @endcomponent
+    @include('components.rich-textarea-editor')
+{{--    @endcomponent--}}
 
 @endsection
 

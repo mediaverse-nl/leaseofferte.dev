@@ -14,13 +14,7 @@ class TextUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-//        $user = Auth::user();
-////        dd( );
-//        return $user;
-//        if (auth()->check() && Auth::user()->admin == 1){
-            return true;
-//        }
-//        return false;
+        return true;
     }
 
     /**
@@ -31,7 +25,7 @@ class TextUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required|max:80000|min:1'
+            'text' => 'max:80000'
         ];
     }
 }

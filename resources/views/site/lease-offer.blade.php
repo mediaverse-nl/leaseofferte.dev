@@ -6,6 +6,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="padding: 5px 0px !important; margin-bottom: 0px !important;">
                     <li class="breadcrumb-item"><a href="{!! route('site.home') !!}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{!! route('site.autolease') !!}">Autolease</a></li>
                     <li class="breadcrumb-item "><a href="{!! route('site.offer.index') !!}">Lease operational</a> </li>
                     <li class="breadcrumb-item active">{!! $offer->title !!}</li>
                 </ol>
@@ -22,7 +23,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8" style="margin-bottom:120px;">
+            <div class="col-md-12 col-lg-8" style="margin-bottom:120px;">
                 <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
                     <div class="card-body" style="padding: 30px;">
                         <h1 class="h1" style="color: #006A8E">{!! $offer->merk !!} {!! $offer->type !!}</h1>
@@ -36,7 +37,7 @@
                             @endif
                          </div>
                         <hr >
-                        <div style="padding: 25px;">
+                        <div style="padding: 25px;" class="{!! isset($offer->images) ? (count(explode(',', $offer->images)) == 1 ? 'd-none' : '') : null !!}">
                             <div class="slider-nav">
                                 @if(isset($offer->images))
                                     @foreach(explode(',', $offer->images) as $img)
@@ -46,41 +47,33 @@
                              </div>
                         </div>
 
-                        {!! $offer->description !!}
+                        @include('components.collapse-text', [
+                            'description' => $offer->description
+                        ])
+
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 ">
                 <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
-                    <div class="card-body" style="padding: 30px;">
+                    <div class="card-body" style="color: #6F777A !important; padding: 30px;">
+                        @include('components.success-order-model')
+
                         <h1 class="h1" style="color: #006A8E">{!! $offer->merk !!}</h1>
 
                         <table >
-                            <tr>
-                                <td  >{!! $offer->kilometrage !!} km <span style="padding: 3px;">|</span> </td>
-                                <td>{!! explode(',', $offer->looptijd)[2] !!} mnd <span style="padding: 3px;">|</span> </td>
-                                <td id="bedrag3">
-                                    <span style="font-size: 105%; color: #f78e0c;">
-                                        <b>€ {!! getLeasePrice($offer->catalogusprijs, explode(',', $offer->looptijd)[2]) !!} per maand</b>
-                                    </span>
-                                </td>                            </tr>
-                            <tr>
-                                <td>{!! $offer->kilometrage !!} km <span style="padding: 3px;">|</span> </td>
-                                <td>{!! explode(',', $offer->looptijd)[1] !!} mnd <span style="padding: 3px;">|</span>  </td>
-                                <td id="bedrag2">
-                                    <span style="font-size: 105%; color: #f78e0c;">
-                                        <b>€ {!! getLeasePrice($offer->catalogusprijs, explode(',', $offer->looptijd)[1]) !!} per maand</b>
-                                    </span>
-                                </td>                            </tr>
-                            <tr>
-                                <td>{!! $offer->kilometrage !!} km <span style="padding: 3px;">|</span>  </td>
-                                <td>{!! explode(',', $offer->looptijd)[0] !!} mnd <span style="padding: 3px;">|</span>  </td>
-                                <td id="bedrag1">
-                                    <span style="font-size: 105%; color: #f78e0c;">
-                                        <b>€ {!! getLeasePrice($offer->catalogusprijs, explode(',', $offer->looptijd)[0]) !!} per maand</b>
-                                    </span>
-                                </td>
-                            </tr>
+                            @foreach($offer->operationalLeasePrices as $i)
+                                <tr style="font-size: 0.9rem;">
+                                    <td class="text-right">{!! $i->km_per_jaar !!} km </td>
+                                    <td><small class="text-right" style="padding: 3px;">|</small> {!! $i->looptijd !!} mnd</td>
+                                    <td id="bedrag3">
+                                        <small class="text-right" style="padding: 3px;">|</small>
+                                        <span style="font-size: 105%; color: #f78e0c;">
+                                            <b>€ {!! $i->leaseprijs_per_maand  !!} p.m.</b>
+                                        </span>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
                         <small class="text-muted">Prijzen onder voorbehoud *</small>
 
@@ -101,109 +94,135 @@
                         <br>
                         {!! Editor('usp_paragraaf', 'richtext', false, "asdasdas") !!}
 
-                        {!! Form::open(['route' => 'site.calculator.formStep', 'id' => 'previousForm', 'enctype="multipart/form-data"']) !!}
+                        {!! Form::open(['route' => 'site.calculator.operational', 'id' => 'previousForm', 'enctype="multipart/form-data"']) !!}
+                            {!! Form::hidden('operational_id', $offer->id) !!}
                             <h3 class="h5">Vraag uw lease offerte aan</h3>
                             <div class="form-group">
                                 <div class="input-icon">
-                                    {!! Form::text('jaarkilometrage', null, ['placeholder' => 'jaarkilometrage *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
+                                    {!! Form::text('jaarkilometrage', null, ['placeholder' => 'jaarkilometrage *', 'class' => 'withIcon form-control'.(!$errors->has('jaarkilometrage') ? '': ' is-invalid '),'id' => 'jaarkilometrage']) !!}
                                     <i>km</i>
                                 </div>
+                                @include('components.error', ['field' => 'jaarkilometrage'])
                             </div>
                             <div class="form-group">
                                 {!! Form::select('looptijd', [
-                                 '12 maanden' => '12 maanden',
-                                 '18 maanden' => '18 maanden',
-                                 '24 maanden' => '24 maanden',
-                                 '30 maanden' => '30 maanden',
-                                 '36 maanden' => '36 maanden',
-                                 '42 maanden' => '42 maanden',
-                                 '48 maanden' => '48 maanden',
-                                 '54 maanden' => '54 maanden',
-                                 '60 maanden' => '60 maanden',
-                             ], null, [
-                                 'data-style="btn dropdown-toggle btn-light bs-placeholder'.(!$errors->has('looptijd') ? '': ' show-error-line').'"',
-                                 'placeholder' => '--- looptijd * ---',
-                                 'class' => 'selectpicker form-control'.(!$errors->has('looptijd') ? '': ' is-invalid '),
-                                 'id' => 'looptijd'
-                             ]) !!}
+                                     '12 maanden' => '12 maanden',
+                                     '18 maanden' => '18 maanden',
+                                     '24 maanden' => '24 maanden',
+                                     '30 maanden' => '30 maanden',
+                                     '36 maanden' => '36 maanden',
+                                     '42 maanden' => '42 maanden',
+                                     '48 maanden' => '48 maanden',
+                                     '54 maanden' => '54 maanden',
+                                     '60 maanden' => '60 maanden',
+                                ], null, [
+                                     'data-style="btn dropdown-toggle btn-light bs-placeholder'.(!$errors->has('looptijd') ? '': ' show-error-line').'"',
+                                     'placeholder' => '--- looptijd * ---',
+                                     'class' => 'selectpicker form-control'.(!$errors->has('looptijd') ? '': ' is-invalid '),
+                                     'id' => 'looptijd'
+                                ]) !!}
+                                @include('components.error', ['field' => 'looptijd'])
                             </div>
 
                             <div class="form-group">
-                                {!! Form::select('looptijd', [
-                                 'ja' => 'ja',
-                                 'nee' => 'nee',
-                             ], null, [
-                                 'data-style="btn dropdown-toggle btn-light bs-placeholder'.(!$errors->has('looptijd') ? '': ' show-error-line').'"',
-                                 'placeholder' => '--- met winterbanden * ---',
-                                 'class' => 'selectpicker form-control'.(!$errors->has('looptijd') ? '': ' is-invalid '),
-                                 'id' => 'looptijd'
-                             ]) !!}
+                                {!! Form::select('winterbanden', [
+                                     'ja' => 'ja',
+                                     'nee' => 'nee',
+                                ], null, [
+                                     'data-style="btn dropdown-toggle btn-light bs-placeholder'.(!$errors->has('winterbanden') ? '': ' show-error-line').'"',
+                                     'placeholder' => '--- met winterbanden * ---',
+                                     'class' => 'selectpicker form-control'.(!$errors->has('winterbanden') ? '': ' is-invalid '),
+                                     'id' => 'winterbanden'
+                                ]) !!}
+                                @include('components.error', ['field' => 'winterbanden'])
+
                             </div>
                             <div class="form-group">
-                                {!! Form::select('looptijd', [
+                                {!! Form::select('vervangend_vervoer', [
                                  'ja' => 'ja',
                                  'nee' => 'nee',
                                  ], null, [
-                                     'data-style="btn dropdown-toggle btn-light bs-placeholder'.(!$errors->has('looptijd') ? '': ' show-error-line').'"',
+                                     'data-style="btn dropdown-toggle btn-light bs-placeholder'.(!$errors->has('vervangend_vervoer') ? '': ' show-error-line').'"',
                                      'placeholder' => '--- Vervangend vervoer na 24 uur bij schade of onderhoud * ---',
-                                     'class' => 'selectpicker form-control'.(!$errors->has('looptijd') ? '': ' is-invalid '),
-                                     'id' => 'looptijd'
+                                     'class' => 'selectpicker form-control'.(!$errors->has('vervangend_vervoer') ? '': ' is-invalid '),
+                                     'id' => 'vervangend_vervoer'
                                  ]) !!}
+                                @include('components.error', ['field' => 'vervangend_vervoer'])
                             </div>
-
+                        <br>
                             <h3 class="h5">Uw gegevens</h3>
                             <div class="form-group">
-                                {!! Form::text('voornaam_en_achternaam', null, ['placeholder' => 'Voor- en achternaam *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
+                                {!! Form::text('voornaam_en_achternaam', null, ['placeholder' => 'Voor- en achternaam *', 'class' => 'withIcon form-control'.(!$errors->has('voornaam_en_achternaam') ? '': ' is-invalid '),'id' => 'voornaam_en_achternaam']) !!}
+                                @include('components.error', ['field' => 'voornaam_en_achternaam'])
                             </div>
                             <div class="form-group">
-                                {!! Form::text('bedrijfsnaam', null, ['placeholder' => 'Bedrijfsnaam *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
+                                {!! Form::text('bedrijfsnaam', null, ['placeholder' => 'Bedrijfsnaam *', 'class' => 'withIcon form-control'.(!$errors->has('bedrijfsnaam') ? '': ' is-invalid '),'id' => 'bedrijfsnaam']) !!}
+                                @include('components.error', ['field' => 'bedrijfsnaam'])
                             </div>
                             <div class="form-group">
-                                {!! Form::text('kvk_nummer', null, ['placeholder' => 'K.v.k. nummer *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
+                                {!! Form::text('kvk_nummer', null, ['placeholder' => 'K.v.k. nummer *', 'class' => 'withIcon form-control'.(!$errors->has('kvk_nummer') ? '': ' is-invalid '),'id' => 'kvk_nummer']) !!}
+                                @include('components.error', ['field' => 'kvk_nummer'])
                             </div>
                             <div class="form-group">
-                                {!! Form::text('adres', null, ['placeholder' => 'Adres *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
+                                {!! Form::text('adres', null, ['placeholder' => 'Adres *', 'class' => 'withIcon form-control'.(!$errors->has('adres') ? '': ' is-invalid '),'id' => 'adres']) !!}
+                                @include('components.error', ['field' => 'adres'])
                             </div>
                             <div class="form-group">
-                                {!! Form::text('postcode', null, ['placeholder' => 'Postcode *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
+                                {!! Form::text('postcode', null, ['placeholder' => 'Postcode *', 'class' => 'withIcon form-control'.(!$errors->has('postcode') ? '': ' is-invalid '),'id' => 'postcode']) !!}
+                                @include('components.error', ['field' => 'postcode'])
                             </div>
                             <div class="form-group">
-                                {!! Form::text('plaats', null, ['placeholder' => 'Plaats *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
+                                {!! Form::text('plaats', null, ['placeholder' => 'Plaats *', 'class' => 'withIcon form-control'.(!$errors->has('plaats') ? '': ' is-invalid '),'id' => 'plaats']) !!}
+                                @include('components.error', ['field' => 'plaats'])
                             </div>
                             <div class="form-group">
-                                {!! Form::text('email', null, ['placeholder' => 'E-mailadres *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
+                                {!! Form::text('email', null, ['placeholder' => 'E-mailadres *', 'class' => 'withIcon form-control'.(!$errors->has('email') ? '': ' is-invalid '),'id' => 'email']) !!}
+                                @include('components.error', ['field' => 'email'])
                             </div>
                             <div class="form-group">
-                                {!! Form::text('telefoonnummer', null, ['placeholder' => 'Telefoonnummer *', 'class' => 'withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),'id' => 'aanbetaling']) !!}
+                                {!! Form::text('telefoonnummer', null, ['placeholder' => 'Telefoonnummer *', 'class' => 'withIcon form-control'.(!$errors->has('telefoonnummer') ? '': ' is-invalid '),'id' => 'telefoonnummer']) !!}
+                                @include('components.error', ['field' => 'telefoonnummer'])
                             </div>
                             <div class="form-group">
-                                <div class="input-group mt-3">
-                                    <div class="custom-file">
-                                        <input id="inputGroupFile02" type="file" multiple class="custom-file-input">
+                                <div class="input-group mt-3" >
+                                    <div class="custom-file" style="border-color: #D9E9EE !important;">
+                                        <input id="inputGroupFile02" type="file" multiple class="custom-file-input {!! (!$errors->has('bestanden') ? '': ' is-invalid ') !!}" name="bestanden[]">
                                         <label class="custom-file-label" for="inputGroupFile02">Upload hier uw offerte</label>
                                     </div>
                                 </div>
+                                @include('components.error', ['field' => 'bestanden'])
                             </div>
                         <br>
 
 
                         {!! NoCaptcha::display() !!}
-                        @include('components.error', ['field' => 'g-recaptcha-response'])
 
-                        <small class="text-muted">Alle velden met een * zijn verplicht</small>
+                        @if($errors->has('g-recaptcha-response'))
+                            <div style="margin-top: -15px !important;">
+                                @include('components.error', ['field' => 'g-recaptcha-response'])
+                            </div>
+                            <br>
+                        @endif
+
 
                         <button class="btn btn-default btn-block">Aanvraag versturen</button>
-                            <br>
 
-                         {!! Form::close() !!}
+                        <small class="text-muted">Alle velden met een * zijn verplicht</small>
+                        <br>
+                        <br>
 
-
+                        {!! Form::close() !!}
 
                         {!! Editor('usp_paragraaf_2', 'richtext', false, "✔ Wij gaan direct uw offerte maken.") !!}
 
                      </div>
                 </div>
+
+                <br>
+                <br>
+                <br>
             </div>
+
         </div>
 
     </div>
@@ -213,6 +232,9 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <style>
+       .custom-file-label{
+            overflow: hidden;
+        }
         .form-group {
             margin-bottom: 0.5em !important;
         }
@@ -349,15 +371,17 @@
         .card-header{
             border-radius: 0px !important;
         }
+        .slick-track img{
+            padding: 20px;
+            /*height: ;*/
+        }
     </style>
 @endpush
 
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
-
     <script>
         $(document).ready(function () {
-
             bsCustomFileInput.init()
         })
     </script>
@@ -378,7 +402,32 @@
             dots: true,
             arrows: true,
             centerMode: true,
-            focusOnSelect: true
+            focusOnSelect: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
     </script>
 @endpush

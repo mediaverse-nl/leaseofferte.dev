@@ -122,7 +122,7 @@
             @php
                 $ftrSolutions = \App\Category::has('solutions')->get();
                 $ftrObjs = \App\LeaseOffer::all();
-                $ftrPages = \App\Page::all();
+                $ftrPages = \App\Page::where('options', '=', 1)->get();
             @endphp
             <div class="row">
                 <!-- Grid column -->
@@ -162,7 +162,7 @@
                     <hr class="clearfix w-100 d-md-none">
                 @endforeach
 
-                @foreach($ftrSolutions->chunk($ftrSolutions->count() / 2) as $ftrCateGroup)
+                @foreach($ftrSolutions->chunk(ceil($ftrSolutions->count() / 2), true) as $ftrCateGroup)
                     <!-- Grid column -->
                     <div class="col-md-3 mx-auto">
                         <!-- Links -->

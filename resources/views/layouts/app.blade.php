@@ -14,18 +14,30 @@
 
     <!-- Fonts -->
     {{--<link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
+{{--    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Light&display=swap" rel="stylesheet">--}}
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
+        .form-control{
+            border-color: #D9E9EE;
+            border-radius: 4px;
+        }
+        .btn.dropdown-toggle.btn-light{
+            border-color: #D9E9EE !important;
+        }
+        .slick-slide {
+            outline: none
+        }
         .btn-default{
             background: #f78e0c !important;
             color: #FFFFFF;
         }
         .btn{
-            border-radius: 0px;
+            border-radius: 4px !important;
         }
         .breadcrumb{
             background: none;
@@ -36,15 +48,20 @@
         .nav-item a{
             /*color: black !important;*/
         }
-    </style>
-
-    <style>
+        .note-editable {
+            /*font-family: 'Roboto Light', sans-serif !important;*/
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+            background-color: transparent;
+        }
         html,
         body {
             background: #F1F7F9 !important;
             height: 100%;
-            font-family: 'Roboto Light', sans-serif !important;
-
+            font-style: inherit;
+            font-family: "Roboto Light", sans-serif;
         }
         #page-content {
             flex: 1 0 auto;
@@ -76,24 +93,35 @@
             color: #000000 !important;
             font-size: 16px;
             text-transform: uppercase;
-            font-weight: bold;
+            /*font-weight: bold;*/
+        }
+
+        .nav-item.active > .nav-link{
+            border-radius: 4px;
+            background: #006486;
+            padding-right: 0.5rem;
+            padding-left: 0.5rem;
+        }
+        .nav-item.active a{
+            color: white !important;
         }
 
         .cookie-consent {
             position: fixed;
-            bottom: 40px;
-            left: 10%;
-            right: 10%;
-            width: 80%;
+            bottom: 0px;
+            left: 0;
+            right: 0;
+            width: 100%;
             padding: 30px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: #eee;
-            border-radius: 5px;
+            background-color: #fff;
+            /*border-radius: 5px;*/
             box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
             z-index: 999;
         }
+
         .js-cookie-consent-agree {
             display: block;
             font-weight: 400;
@@ -160,13 +188,11 @@
 </head>
 <body class="d-flex flex-column" id="app">
     <div id="page-content">
-
         @include('includes.header')
 
-        <main class="py-4">
+        <main style="margin-top: 20px;">
             @yield('content')
         </main>
-
     </div>
 
     @include('includes.footer')
@@ -175,21 +201,55 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"  ></script>
-    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}}
 
-{{--    @if(Auth::check() && Auth::user()->admin == 1)--}}
     @if(Auth::check())
         <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
     @endif
 
     @stack("js")
 
-    <script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/bindings/inputmask.binding.min.js"></script>
+    <script language="javascript" type="text/javascript">
+
+        $(".moneyFormat").inputmask({
+            radixPoint:",",
+            // mask: "99999999",
+            clearMaskOnLostFocus: "false",
+            autoUnmask:true,
+            unmaskAsNumber:true,
+            alias:"currency",
+            // groupSeparator:".",
+            // autoGroup:true,
+            // digits:2,
+            // integerDigits: 8,
+            prefix:"\u20ac ",
+            rightAlign:false,
+            removeMaskOnSubmit:true,
+            clearIncomplete: true
+        });
+
         $('.scrollTo').click(function() {
             var sectionTo = $(this).attr('href');
             $('html, body').animate({
                 scrollTop: $(sectionTo).offset().top
             }, 1500);
+        });
+
+        $(document).ready(function () {
+            setInterval(keepTokenAlive, 1000 * 60 * 1); // every 15 mins
+
+            function keepTokenAlive() {
+                $.ajax({
+                    url: '/refresh-csrf',
+                    method: 'post',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                }).then(function (res) {
+                    $('meta[name="csrf-token"]').attr('content', res);
+                });
+            };
         });
     </script>
 </body>

@@ -6,6 +6,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" style="padding: 5px 0px !important; margin-bottom: 0px !important;">
                     <li class="breadcrumb-item"><a href="{!! route('site.home') !!}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{!! route('site.about') !!}">Info</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{!!  ucfirst($page->title) !!}</li>
                 </ol>
             </nav>
@@ -16,16 +17,14 @@
 
         <div class="row">
 
-            <div class="col-md-12" style="margin-bottom: 150px;">
+            @include('components.info-menu')
 
-                <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
+            <div class="col-md-9" style="margin-bottom: 150px;">
+
+                 <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
 
                     <div class="card-body" style="padding: 30px; padding-bottom: 60px;">
-                        <h1 class="h1" style="color:#006A8E;">{!! $page->title !!}</h1>
-
-                        <p>{!! $page->body !!}</p>
-{{--                        {!! Editor('over_ons_paragraaf', 'richtext', false, "") !!}--}}
-
+                        {!! $page->body !!}
                     </div>
                 </div>
 

@@ -18,8 +18,8 @@
 @endphp
 
 <div class="card" id="calculator" style="border: 1px solid rgba(0, 0, 0, 0.125); background: #FFFFFF !important; ">
-    <div class="card-header" style="height: 90px; max-height:150px; border: 0px; border-bottom: 1px solid rgba(0, 0, 0, 0.125); background: #F0F6F9 !important;">
-        <p class="h3 text-center" style="padding: 0.5rem; color: #006A8E;">Uw Leasebedrag per maand <b style="color:#7FAF1B;" id="leasePrice" class="leasePrice">&euro; 0</b></p>
+    <div class="card-header" style="clear: both; max-height:250px; border: 0px; border-bottom: 1px solid rgba(0, 0, 0, 0.125); background: #F0F6F9 !important;">
+        <p class="h3 text-center" style="padding-bottom: 0px !important; padding: 0.5rem; color: #006A8E;">Uw Leasebedrag per maand <span style="white-space: nowrap"><b style="color:#7FAF1B;" id="leasePrice" class="leasePrice">&euro; 0</b></span></h2>
     </div>
     <div class="card-body" style="">
         <h2 id="object" class="text-center" style="color: #6c757d;"></h2>
@@ -79,13 +79,13 @@
             @endforeach
             <tr>
                 <td colspan="2" style="color: #006A8E;">
-{{--                    @if(isset($edit) && $edit == true)--}}
+                    @if(isset($tableFieldsOne) && $tableFieldsOne->count() >= 1)
                     <span class="">
                         <a class="btn btn-block btn-orange btn-sm btn-block" onClick='submitForm(2)' style="color: white;">
                            <i class="fas fa-edit"></i> wijzig stap 2
                         </a>
                     </span>
-{{--                    @endif--}}
+                    @endif
                 </td>
             </tr>
             <tr>
@@ -106,13 +106,13 @@
             @endforeach
             <tr>
                 <td colspan="2" style="color: #006A8E;">
-{{--                    @if(isset($edit) && $edit == true)--}}
-                    <span class="">
-                        <a class="btn btn-block btn-orange btn-sm btn-block" onClick='submitForm(3)' style="color: white;">
-                            <i class="fas fa-edit"></i> wijzig stap 3
-                        </a>
-                    </span>
-{{--                    @endif--}}
+                    @if(isset($tableFieldsTwo) && $tableFieldsTwo->count() >= 1)
+                        <span class="">
+                            <a class="btn btn-block btn-orange btn-sm btn-block" onClick='submitForm(3)' style="color: white;">
+                                <i class="fas fa-edit"></i> wijzig stap 3
+                            </a>
+                        </span>
+                    @endif
                 </td>
             </tr>
         </table>

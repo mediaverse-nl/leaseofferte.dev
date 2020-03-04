@@ -30,8 +30,9 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
+                    <h2>Category</h2>
                     <div class="form-group">
-                        {!! Form::label('value', 'value') !!}
+                        {!! Form::label('value', 'title') !!}
                         {!! Form::text('value', null, ['class' => 'form-control'.(!$errors->has('value') ? '': ' is-invalid ')]) !!}
                         @include('components.error', ['field' => 'value'])
                     </div>
@@ -72,6 +73,534 @@
 
             <div class="card">
                 <div class="card-body">
+                    <h1>New field</h1>
+                    <table>
+                        <thead>
+
+
+                        <tr>
+                            <th class="rotate">
+                                <div><span>required</span></div>
+                            </th>
+                            <th class="rotate">
+                                <div><span>email</span></div>
+                            </th>
+                            <th class="rotate">
+                                <div><span>numeric</span></div>
+                            </th>
+
+
+
+
+
+
+
+
+
+                            <th class="rotate">
+                                <div><span>active_url</span></div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" class="text-center">rules</th>
+                            <th class="">
+                                field name
+                            </th>
+                            <th class="">
+                                field type
+                            </th>
+{{--                            <th class="">--}}
+{{--                                form part--}}
+{{--                            </th>--}}
+{{--                            <th class="" colspan="2">--}}
+{{--                             </th>--}}
+                        </tr>
+                        </thead>
+                        <tbody id="sortable" class="ui-sortable">
+
+{{--                        <tr class="ui-state-highlight ui-sortable-handle">--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input checked="checked" name="dynamicFields[4][rules][required]" type="checkbox" value="required">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[4][rules][email]" type="checkbox" value="email">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[4][rules][numeric]" type="checkbox" value="numeric">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[4][rules][active_url]" type="checkbox" value="url">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <input id="sortable_order" name="dynamicFields[4][field_order]" type="hidden" value="4">--}}
+
+{{--                                <input class="form-control" name="dynamicFields[4][field_name]" type="text" value="Type (uitvoering)">--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[4][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>--}}
+
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[4][form_part]"><option value="2" selected="selected">2</option><option value="3">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+
+{{--                        <tr class="ui-state-highlight ui-sortable-handle">--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[23][rules][required]" type="checkbox" value="required">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[23][rules][email]" type="checkbox" value="email">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[23][rules][numeric]" type="checkbox" value="numeric">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[23][rules][active_url]" type="checkbox" value="url">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <input id="sortable_order" name="dynamicFields[23][field_order]" type="hidden" value="23">--}}
+
+{{--                                <input class="form-control" name="dynamicFields[23][field_name]" type="text" value="Website URL link">--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[23][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>--}}
+
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[23][form_part]"><option value="2" selected="selected">2</option><option value="3">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+
+{{--                        <tr class="ui-state-highlight ui-sortable-handle">--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input checked="checked" name="dynamicFields[14][rules][required]" type="checkbox" value="required">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[14][rules][email]" type="checkbox" value="email">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[14][rules][numeric]" type="checkbox" value="numeric">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[14][rules][active_url]" type="checkbox" value="url">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <input id="sortable_order" name="dynamicFields[14][field_order]" type="hidden" value="14">--}}
+
+{{--                                <input class="form-control" name="dynamicFields[14][field_name]" type="text" value="Telefoon mobiel">--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[14][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>--}}
+
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[14][form_part]"><option value="2">2</option><option value="3" selected="selected">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+
+
+{{--                        <tr class="ui-state-highlight ui-sortable-handle">--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input checked="checked" name="dynamicFields[16][rules][required]" type="checkbox" value="required">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[16][rules][email]" type="checkbox" value="email">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[16][rules][numeric]" type="checkbox" value="numeric">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[16][rules][active_url]" type="checkbox" value="url">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <input id="sortable_order" name="dynamicFields[16][field_order]" type="hidden" value="16">--}}
+
+{{--                                <input class="form-control" name="dynamicFields[16][field_name]" type="text" value="Geboortedatum">--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[16][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>--}}
+
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[16][form_part]"><option value="2">2</option><option value="3" selected="selected">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+
+
+{{--                        <tr class="ui-state-highlight ui-sortable-handle">--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[20][rules][required]" type="checkbox" value="required">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[20][rules][email]" type="checkbox" value="email">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[20][rules][numeric]" type="checkbox" value="numeric">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">--}}
+{{--                                    <input name="dynamicFields[20][rules][active_url]" type="checkbox" value="url">--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <input id="sortable_order" name="dynamicFields[20][field_order]" type="hidden" value="20">--}}
+
+{{--                                <input class="form-control" name="dynamicFields[20][field_name]" type="text" value="Telefoon vast">--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[20][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>--}}
+
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[20][form_part]"><option value="2">2</option><option value="3" selected="selected">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+
+
+                        <tr class="ui-state-highlight ui-sortable-handle">
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" checked="checked" name="dynamicFields[76][rules][required]" type="checkbox" value="required">
+                                    <input style="display:none;" checked="checked" name="dynamicFields[76][rules][required]" type="checkbox" value="required">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" checked="checked" name="dynamicFields[76][rules][email]" type="checkbox" value="email">
+                                    <input style="display:none;" checked="checked" name="dynamicFields[76][rules][email]" type="checkbox" value="email">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[76][rules][numeric]" type="checkbox" value="numeric">
+                                    <input style="display:none;" name="dynamicFields[76][rules][numeric]" type="checkbox" value="numeric">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[76][rules][active_url]" type="checkbox" value="url">
+                                    <input style="display:none;" name="dynamicFields[76][rules][active_url]" type="checkbox" value="url">
+                                </div>
+                            </td>
+                            <td>
+                                <input id="sortable_order" name="dynamicFields[76][field_order]" type="hidden" value="76">
+
+                                <input disabled="" class="form-control" name="dynamicFields[76][field_name]" type="text" value="email">
+                                <input name="dynamicFields[76][field_name]" type="hidden" value="email">
+                            </td>
+                            <td>
+                                <select disabled="" class="form-control" name="dynamicFields[76][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>
+                                <input name="dynamicFields[76][field_type]" type="hidden" value="text">
+
+
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[76][form_part]"><option value="2">2</option><option value="3" selected="selected">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                            </td>--}}
+                        </tr>
+
+
+                        <tr class="ui-state-highlight ui-sortable-handle">
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" checked="checked" name="dynamicFields[77][rules][required]" type="checkbox" value="required">
+                                    <input style="display:none;" checked="checked" name="dynamicFields[77][rules][required]" type="checkbox" value="required">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[77][rules][email]" type="checkbox" value="email">
+                                    <input style="display:none;" name="dynamicFields[77][rules][email]" type="checkbox" value="email">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[77][rules][numeric]" type="checkbox" value="numeric">
+                                    <input style="display:none;" name="dynamicFields[77][rules][numeric]" type="checkbox" value="numeric">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[77][rules][active_url]" type="checkbox" value="url">
+                                    <input style="display:none;" name="dynamicFields[77][rules][active_url]" type="checkbox" value="url">
+                                </div>
+                            </td>
+                            <td>
+                                <input id="sortable_order" name="dynamicFields[77][field_order]" type="hidden" value="77">
+
+                                <input disabled="" class="form-control" name="dynamicFields[77][field_name]" type="text" value="voorletter(s)">
+                                <input name="dynamicFields[77][field_name]" type="hidden" value="voorletter(s)">
+                            </td>
+                            <td>
+                                <select disabled="" class="form-control" name="dynamicFields[77][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>
+                                <input name="dynamicFields[77][field_type]" type="hidden" value="text">
+
+
+                            </td>
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[77][form_part]"><option value="2">2</option><option value="3" selected="selected">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                            </td>--}}
+                        </tr>
+
+
+                        <tr class="ui-state-highlight ui-sortable-handle">
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" checked="checked" name="dynamicFields[78][rules][required]" type="checkbox" value="required">
+                                    <input style="display:none;" checked="checked" name="dynamicFields[78][rules][required]" type="checkbox" value="required">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[78][rules][email]" type="checkbox" value="email">
+                                    <input style="display:none;" name="dynamicFields[78][rules][email]" type="checkbox" value="email">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[78][rules][numeric]" type="checkbox" value="numeric">
+                                    <input style="display:none;" name="dynamicFields[78][rules][numeric]" type="checkbox" value="numeric">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[78][rules][active_url]" type="checkbox" value="url">
+                                    <input style="display:none;" name="dynamicFields[78][rules][active_url]" type="checkbox" value="url">
+                                </div>
+                            </td>
+                            <td>
+                                <input id="sortable_order" name="dynamicFields[78][field_order]" type="hidden" value="78">
+
+                                <input disabled="" class="form-control" name="dynamicFields[78][field_name]" type="text" value="voornaam">
+                                <input name="dynamicFields[78][field_name]" type="hidden" value="voornaam">
+                            </td>
+                            <td>
+                                <select disabled="" class="form-control" name="dynamicFields[78][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>
+                                <input name="dynamicFields[78][field_type]" type="hidden" value="text">
+
+
+                            </td>
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[78][form_part]"><option value="2">2</option><option value="3" selected="selected">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                            </td>--}}
+                        </tr>
+
+
+                        <tr class="ui-state-highlight ui-sortable-handle">
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" checked="checked" name="dynamicFields[79][rules][required]" type="checkbox" value="required">
+                                    <input style="display:none;" checked="checked" name="dynamicFields[79][rules][required]" type="checkbox" value="required">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[79][rules][email]" type="checkbox" value="email">
+                                    <input style="display:none;" name="dynamicFields[79][rules][email]" type="checkbox" value="email">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[79][rules][numeric]" type="checkbox" value="numeric">
+                                    <input style="display:none;" name="dynamicFields[79][rules][numeric]" type="checkbox" value="numeric">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[79][rules][active_url]" type="checkbox" value="url">
+                                    <input style="display:none;" name="dynamicFields[79][rules][active_url]" type="checkbox" value="url">
+                                </div>
+                            </td>
+                            <td>
+                                <input id="sortable_order" name="dynamicFields[79][field_order]" type="hidden" value="79">
+
+                                <input disabled="" class="form-control" name="dynamicFields[79][field_name]" type="text" value="achternaam">
+                                <input name="dynamicFields[79][field_name]" type="hidden" value="achternaam">
+                            </td>
+                            <td>
+                                <select disabled="" class="form-control" name="dynamicFields[79][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>
+                                <input name="dynamicFields[79][field_type]" type="hidden" value="text">
+
+
+                            </td>
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[79][form_part]"><option value="2">2</option><option value="3" selected="selected">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                            </td>--}}
+                        </tr>
+
+
+                        <tr class="ui-state-highlight ui-sortable-handle">
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" checked="checked" name="dynamicFields[80][rules][required]" type="checkbox" value="required">
+                                    <input style="display:none;" checked="checked" name="dynamicFields[80][rules][required]" type="checkbox" value="required">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[80][rules][email]" type="checkbox" value="email">
+                                    <input style="display:none;" name="dynamicFields[80][rules][email]" type="checkbox" value="email">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" checked="checked" name="dynamicFields[80][rules][numeric]" type="checkbox" value="numeric">
+                                    <input style="display:none;" checked="checked" name="dynamicFields[80][rules][numeric]" type="checkbox" value="numeric">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[80][rules][active_url]" type="checkbox" value="url">
+                                    <input style="display:none;" name="dynamicFields[80][rules][active_url]" type="checkbox" value="url">
+                                </div>
+                            </td>
+                            <td>
+                                <input id="sortable_order" name="dynamicFields[80][field_order]" type="hidden" value="80">
+
+                                <input disabled="" class="form-control" name="dynamicFields[80][field_name]" type="text" value="K.v.K. nummer">
+                                <input name="dynamicFields[80][field_name]" type="hidden" value="K.v.K. nummer">
+                            </td>
+                            <td>
+                                <select disabled="" class="form-control" name="dynamicFields[80][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>
+                                <input name="dynamicFields[80][field_type]" type="hidden" value="text">
+
+
+                            </td>
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[80][form_part]"><option value="2">2</option><option value="3" selected="selected">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                            </td>--}}
+                        </tr>
+
+
+                        <tr class="ui-state-highlight ui-sortable-handle">
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" checked="checked" name="dynamicFields[81][rules][required]" type="checkbox" value="required">
+                                    <input style="display:none;" checked="checked" name="dynamicFields[81][rules][required]" type="checkbox" value="required">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[81][rules][email]" type="checkbox" value="email">
+                                    <input style="display:none;" name="dynamicFields[81][rules][email]" type="checkbox" value="email">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[81][rules][numeric]" type="checkbox" value="numeric">
+                                    <input style="display:none;" name="dynamicFields[81][rules][numeric]" type="checkbox" value="numeric">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                    <input disabled="" name="dynamicFields[81][rules][active_url]" type="checkbox" value="url">
+                                    <input style="display:none;" name="dynamicFields[81][rules][active_url]" type="checkbox" value="url">
+                                </div>
+                            </td>
+                            <td>
+                                <input id="sortable_order" name="dynamicFields[81][field_order]" type="hidden" value="81">
+
+                                <input disabled="" class="form-control" name="dynamicFields[81][field_name]" type="text" value="bedrijfsnaam">
+                                <input name="dynamicFields[81][field_name]" type="hidden" value="bedrijfsnaam">
+                            </td>
+                            <td>
+                                <select disabled="" class="form-control" name="dynamicFields[81][field_type]"><option value="text" selected="selected">text</option><option value="textarea">textarea</option><option value="number">number</option></select>
+                                <input name="dynamicFields[81][field_type]" type="hidden" value="text">
+
+
+                            </td>
+{{--                            <td>--}}
+{{--                                <select class="form-control" name="dynamicFields[81][form_part]"><option value="2">2</option><option value="3" selected="selected">3</option></select>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                            </td>--}}
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <hr>
                     <h2>New field</h2>
                     <div class="row">
                         <div class="col-6">

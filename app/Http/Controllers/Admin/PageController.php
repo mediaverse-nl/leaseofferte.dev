@@ -66,6 +66,11 @@ class PageController extends Controller
         }else{
             $page->delete();
         }
+        if ($request->options == "on"){
+            $page->options = 1;
+        }else{
+            $page->options = 0;
+        }
 
         $page->save();
 

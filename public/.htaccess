@@ -22,8 +22,24 @@
     #301 Redirect Old File
     Redirect 301 /trucks http://localhost:8000
 
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # Remove index.php
+    RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+    RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,NE,L]
+
+    <FilesMatch "\.(ttf|ttc|otf|eot|woff?|font.css|css)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+
+    RewriteRule ^autos/(.*)$ /autos.php [NC,L]
+    RewriteRule ^autos$ /autos/$1 [L]
 </IfModule>

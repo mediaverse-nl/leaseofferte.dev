@@ -27,4 +27,12 @@ class CategoryUpdateRequest extends FormRequest
             'value' => 'required|unique:category,id,'.$this->id.',id,value,'.$this->value
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'value.required' => 'title is verplicht.',
+            'value.unique' => 'title is al in gebruik.',
+        ];
+    }
 }

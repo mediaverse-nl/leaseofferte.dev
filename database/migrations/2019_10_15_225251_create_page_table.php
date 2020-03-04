@@ -20,6 +20,7 @@ class CreatePageTable extends Migration
             $table->longText('body');
             $table->longText('meta_description')->nullable();
             $table->longText('meta_title')->nullable();
+            $table->longText('options')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -5,20 +5,56 @@
 @endsection
 
 @section('content')
+    {!! Form::model($page, ['route' => ['admin.pages.update', $page->id], 'method' => 'PATCH']) !!}
+
     <div class="row">
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    @component('components.model', [
+                       'id' => 'CreateCategory',
+                       'title' => 'Edit entry ',
+                       'actionRoute' => route('admin.pages.update', $page->id),
+                       'btnClass' => 'btn btn-warning',
+                       'btnIcon' => null,
+                       'btnTitle' => 'Save',
+                   ])
+                        @slot('description')
+                            If u proceed u will <b>update</b> this entry
+                        @endslot
+                    @endcomponent
+                    <span class="float-right">updated at: {!! isset($page->updated_at) ? $page->updated_at->format('d-m-Y H:i') : 'nvt' !!}</span>
+
+                </div>
+            </div>
+        </div>
+
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
 
-                    {!! Form::model($page, ['route' => ['admin.pages.update', $page->id], 'method' => 'PATCH']) !!}
                     {!! Form::hidden('id', null) !!}
-
-                    <div class="form-group" style="padding-left: 20px;">
-                        {!! Form::label('status', 'live page', ['style' => 'margin-left: -20px;']) !!}
-                        <div class="checkbox">
-                            <label>
-                                {!! Form::checkbox('status', null, null, ['data-toggle' => 'toggle']) !!}
-                            </label>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group" style="padding-left: 20px;">
+                                {!! Form::label('status', 'live page', ['style' => 'margin-left: -20px;']) !!}
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('status', null, null, ['data-toggle' => 'toggle']) !!}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group" style="padding-left: 20px;">
+                                {!! Form::label('options', 'show link in footer', ['style' => 'margin-left: -20px;']) !!}
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('options', null, null, ['data-toggle' => 'toggle']) !!}
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -69,25 +105,15 @@
                     {{--<div id="imgHolder" style="margin-top:15px;max-height:100px;"></div>--}}
                     {{--</div>--}}
 
-                    @component('components.model', [
-                        'id' => 'CreateCategory',
-                        'title' => 'Edit entry ',
-                        'actionRoute' => route('admin.pages.update', $page->id),
-                        'btnClass' => 'btn btn-warning',
-                        'btnIcon' => null,
-                        'btnTitle' => 'Save',
-                    ])
-                        @slot('description')
-                            If u proceed u will <b>update</b> this entry
-                        @endslot
-                    @endcomponent
 
-                    {!! Form::close() !!}
+
 
                 </div>
             </div>
         </div>
     </div>
+
+    {!! Form::close() !!}
 
     @component('components.rich-textarea-editor')
     @endcomponent

@@ -89,4 +89,21 @@ class SiteController extends Controller
         return view('site.faq')
             ->with('faqs', $faqs);
     }
+    public function autolease()
+    {
+        //default seo
+        $this->seo()
+            ->setTitle($this->getPageSeo()->title)
+            ->setDescription($this->getPageSeo()->description);
+        //opengraph
+        $this->seo()
+            ->opengraph()
+            ->setUrl(url()->current())
+            ->addProperty('type', 'website');
+        //twitter
+        $this->seo()
+            ->twitter();
+
+        return view('site.autolease');
+    }
 }

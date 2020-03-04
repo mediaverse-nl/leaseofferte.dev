@@ -151,6 +151,48 @@
             </li>
         </ul>
     </li>
+
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Components">
+        <a class="nav-link nav-link-collapse {{request()->is('admin/news*') ? '' : 'collapsed'}}" data-toggle="collapse" href="#newsComponents" data-parent="#exampleAccordion" aria-expanded="false">
+            <i class="fa fa-fw fa-newspaper-o"></i>
+            <span class="nav-link-text">News</span>
+        </a>
+        <ul class="sidenav-second-level collapse {{request()->is('admin/news*') ? 'show' : ''}}" id="newsComponents" style="">
+            <li class="{{request()->is('admin/news/create') ? '' : (request()->is('admin/news*') ? 'active' : '')}}">
+                <a href="{{route('admin.news.index')}}">
+                    <i class="fa fa-fw fa-list"></i>
+                    <span class="nav-link-text">index</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/news/create') ? 'active' : ''}}">
+                <a href="{{route('admin.news.create')}}">
+                    <i class="fa fa-fw fa-plus"></i>
+                    <span class="nav-link-text">create</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Components">
+        <a class="nav-link nav-link-collapse {{request()->is('admin/portfolio*') ? '' : 'collapsed'}}" data-toggle="collapse" href="#portfolioComponents" data-parent="#exampleAccordion" aria-expanded="false">
+            <i class="fa fa-fw fa-briefcase"></i>
+            <span class="nav-link-text">Portfolio</span>
+        </a>
+        <ul class="sidenav-second-level collapse {{request()->is('admin/portfolio*') ? 'show' : ''}}" id="portfolioComponents" style="">
+            <li class="{{request()->is('admin/portfolio/create') ? '' : (request()->is('admin/portfolio*') ? 'active' : '')}}">
+                <a href="{{route('admin.portfolio.index')}}">
+                    <i class="fa fa-fw fa-list"></i>
+                    <span class="nav-link-text">index</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/portfolio/create') ? 'active' : ''}}">
+                <a href="{{route('admin.portfolio.create')}}">
+                    <i class="fa fa-fw fa-plus"></i>
+                    <span class="nav-link-text">create</span>
+                </a>
+            </li>
+        </ul>
+    </li>
 </ul>
 
 <ul class="navbar-nav sidenav-toggler">

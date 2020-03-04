@@ -25,7 +25,14 @@ class CategoryStoreRequest extends FormRequest
     {
         return [
             'value' => 'required|unique:category,value',
+        ];
+    }
 
+    public function messages()
+    {
+        return [
+            'value.required' => 'title is verplicht.',
+            'value.unique' => 'title is al in gebruik.',
         ];
     }
 }

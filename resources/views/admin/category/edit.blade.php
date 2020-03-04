@@ -30,8 +30,9 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
+                    <h2>Category</h2>
                     <div class="form-group">
-                        {!! Form::label('value', 'value') !!}
+                        {!! Form::label('value', 'title') !!}
                         {!! Form::text('value', null, ['class' => 'form-control'.(!$errors->has('value') ? '': ' is-invalid ')]) !!}
                         @include('components.error', ['field' => 'value'])
                     </div>
@@ -117,33 +118,115 @@
                             </tr>
                         </thead>
                         <tbody id="sortable">
-                            @foreach($category->dynamicFields()->orderByRaw('form_part ASC, field_order ASC')->get() as $field)
+                            @php
+                                $dynamicFields = $category->dynamicFields()->orderByRaw('form_part ASC, field_order ASC')->get();
+
+                                [
+                                "id" => 4,
+                                "category_id" => 3,
+                                "field_name" => "voornaam",
+                                "field_type" => "text",
+                                "field_validation" => "required",
+                                "form_part" => "2",
+                                "field_order" => 4,
+                                "created_at" => "",
+                                "updated_at" => "",
+                                ];
+                                 //dd($dynamicFields);
+                            @endphp
+
+                            <tr class="ui-state-highlight">
+
+{{--                                @foreach($items as $i => $v)--}}
+{{--                                    <td>--}}
+{{--                                        @if($checkFields)--}}
+{{--                                            <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">{!! null; //dd( $items[$i], str_replace('nullabl e|', '', $field->field_validation)) !!}--}}
+{{--                                                {!! Form::checkbox('dynamicFields['.$field->id.'][rules]['.$i.']', $v,  str_contains($field->field_validation, str_replace('nullable|', '', $items[$i])) ? true:false) !!}--}}
+{{--                                            </div>--}}
+{{--                                        @else--}}
+{{--                                            @if($i !== 'numeric' && $i !== 'active_url')--}}
+{{--                                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">{!! null; //dd( $items[$i], str_replace('nullabl e|', '', $field->field_validation)) !!}--}}
+{{--                                                    {!! Form::checkbox('dynamicFields['.$field->id.'][rules]['.$i.']', $v,  str_contains($field->field_validation, str_replace('nullable|', '', $items[$i])) ? true:false) !!}--}}
+{{--                                                </div>--}}
+{{--                                            @else--}}
+{{--                                                {!! Form::hidden('dynamicFields['.$field->id.'][rules]['.$i.']', $v) !!}--}}
+{{--                                            @endif--}}
+{{--                                        @endif--}}
+{{--                                    </td>--}}
+{{--                                @endforeach--}}
+                                <td>
+{{--                                    {!! Form::hidden('dynamicFields['.$field->id.'][field_order]', $field->id, ['id' => 'sortable_order']) !!}--}}
+
+{{--                                    {!! Form::text('dynamicFields['.$field->id.'][field_name]', $field->field_name, ['disabled', 'class' => 'form-control']) !!}--}}
+{{--                                    {!! Form::hidden('dynamicFields['.$field->id.'][field_name]', $field->field_name) !!}--}}
+{{--                                </td>--}}
+{{--                                <td>--}}
+{{--                                    {!! Form::select('dynamicFields['.$field->id.'][field_type]', array_combine(['text', 'textarea', 'number'], ['text', 'textarea', 'number']), $field->field_type, ['disabled', 'class' => 'form-control'.(!$errors->has('value') ? '': ' is-invalid ')]) !!}--}}
+{{--                                    {!! Form::hidden('dynamicFields['.$field->id.'][field_type]', $field->field_type) !!}--}}
+{{--                                </td>--}}
+{{--                                <td>--}}
+{{--                                    {!! Form::select('dynamicFields['.$field->id.'][form_part]', ['2' => 2, '3' => 3], $field->form_part, ['class' => 'form-control'.(!$errors->has('form_part') ? '': ' is-invalid ')]) !!}--}}
+{{--                                </td>--}}
+{{--                                <td>--}}
+{{--                                    <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>--}}
+{{--                                </td>--}}
+{{--                                <td>--}}
+{{--                                    <div class="bg-danger" style="border-radius:4px; border: 1px solid #dc3545; padding: .375rem .75rem; ">{!! null; //dd( $items[$i], str_replace('nullabl e|', '', $field->field_validation)) !!}--}}
+{{--                                        {!! Form::checkbox('dynamicFields['.$field->id.'][delete]', null, null)!!}--}}
+{{--                                    </div>--}}
+                                </td>
+                            </tr>
+                            @foreach($dynamicFields as $field)
+{{--                                {!! dd($dynamicFields) !!}--}}
                                 <tr class="ui-state-highlight">
                                     @php
                                         $items = [
                                             'required' => 'required',
                                             'email' => 'email',
                                             'numeric' => 'numeric',
-                                            //'postcode' => 'nullable|regex:/^[1-9][0-9]{3}[\s]?[A-Za-z]{2}$/i',
-                                            //'telefoonnummer_vast' => 'nullable|regex:#^(((0)[1-9]{2}[0-9][-]?[1-9][0-9]{5})|((\+31|0|0031)[1-9][0-9][-]?[1-9][0-9]{6}))$#',
-                                            //'telefoonnummer_mobiel' => 'nullable|regex:#^(((\+31|0|0031)6){1}[1-9]{1}[0-9]{7})$#i',
                                             'active_url' => 'url',
                                         ];
+                                        $checkFields = strtolower($field->field_name) !== 'email'
+                                            && strtolower($field->field_name) !== 'voorletter(s)'
+                                            && strtolower($field->field_name) !== 'voornaam'
+                                            && strtolower($field->field_name) !== 'achternaam'
+                                            && strtolower($field->field_name) !== 'k.v.k. nummer'
+                                            && strtolower($field->field_name) !== 'bedrijfsnaam';
+
                                     @endphp
                                     @foreach($items as $i => $v)
                                         <td>
-                                            <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">{!! null; //dd( $items[$i], str_replace('nullabl e|', '', $field->field_validation)) !!}
-                                             {!! Form::checkbox('dynamicFields['.$field->id.'][rules]['.$i.']', $v,  str_contains($field->field_validation, str_replace('nullable|', '', $items[$i])) ? true:false) !!}
-                                            </div>
+                                            @if($checkFields)
+                                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; ">{!! null; //dd( $items[$i], str_replace('nullabl e|', '', $field->field_validation)) !!}
+                                                    {!! Form::checkbox('dynamicFields['.$field->id.'][rules]['.$i.']', $v,  str_contains($field->field_validation, str_replace('nullable|', '', $items[$i])) ? true:false) !!}
+                                                </div>
+                                            @else
+                                                <div style="border: 1px solid #ced4da; padding: .375rem .75rem; background-color: #e9ecef;">
+                                                    {!! Form::checkbox('dynamicFields['.$field->id.'][rules]['.$i.']', $v, str_contains($field->field_validation, str_replace('nullable|', '', $items[$i])) ? true:false, ['disabled']) !!}
+                                                    {!! Form::checkbox('dynamicFields['.$field->id.'][rules]['.$i.']', $v, str_contains($field->field_validation, str_replace('nullable|', '', $items[$i])) ? true:false , ['style="display:none;"']) !!}
+                                                </div>
+                                            @endif
                                         </td>
                                     @endforeach
                                     <td>
-                                        {!! Form::hidden('dynamicFields['.$field->id.'][field_order]', $field->id, ['id' => 'sortable_order']) !!}
-                                        {!! Form::text('dynamicFields['.$field->id.'][field_name]', $field->field_name, ['class' => 'form-control'.(!$errors->has('field_name') ? '': ' is-invalid ')]) !!}
+                                        {!! Form::hidden('dynamicFields['.$field->id.'][field_order]', $field->field_order, ['id' => 'sortable_order']) !!}
+
+                                        @if($checkFields)
+                                            {!! Form::text('dynamicFields['.$field->id.'][field_name]', $field->field_name, ['class' => 'form-control'.(!$errors->has('field_name') ? '': ' is-invalid ')]) !!}
+                                        @else
+                                            {!! Form::text('dynamicFields['.$field->id.'][field_name]', $field->field_name, ['disabled', 'class' => 'form-control']) !!}
+                                            {!! Form::hidden('dynamicFields['.$field->id.'][field_name]', $field->field_name) !!}
+                                        @endif
                                     </td>
                                     <td>
-                                        {!! Form::select('dynamicFields['.$field->id.'][field_type]', array_combine(['text', 'textarea', 'number'], ['text', 'textarea', 'number']), $field->field_type, ['class' => 'form-control'.(!$errors->has('value') ? '': ' is-invalid ')]) !!}
-{{--                                        {!! Form::select('dynamicFields['.$field->id.'][field_type]', array_combine(['text', 'textarea', 'number', 'dropdown'], ['text', 'textarea', 'number', 'dropdown']), $field->field_type, ['class' => 'form-control'.(!$errors->has('value') ? '': ' is-invalid ')]) !!}--}}
+                                        @if($checkFields)
+                                            {!! Form::select('dynamicFields['.$field->id.'][field_type]', array_combine(['text', 'textarea', 'number'], ['text', 'textarea', 'number']), $field->field_type, ['class' => 'form-control'.(!$errors->has('value') ? '': ' is-invalid ')]) !!}
+                                        @else
+                                            {!! Form::select('dynamicFields['.$field->id.'][field_type]', array_combine(['text', 'textarea', 'number'], ['text', 'textarea', 'number']), $field->field_type, ['disabled', 'class' => 'form-control'.(!$errors->has('value') ? '': ' is-invalid ')]) !!}
+                                            {!! Form::hidden('dynamicFields['.$field->id.'][field_type]', $field->field_type) !!}
+
+                                        @endif
+
                                     </td>
                                     <td>
                                         {!! Form::select('dynamicFields['.$field->id.'][form_part]', ['2' => 2, '3' => 3], $field->form_part, ['class' => 'form-control'.(!$errors->has('form_part') ? '': ' is-invalid ')]) !!}
@@ -152,9 +235,11 @@
                                         <a href="" class="btn btn-success btn-block"><i class="fa fa-arrows-alt"></i></a>
                                     </td>
                                     <td>
-                                        <div class="bg-danger" style="border: 1px solid #ced4da; padding: .375rem .75rem; ">{!! null; //dd( $items[$i], str_replace('nullabl e|', '', $field->field_validation)) !!}
-                                            {!! Form::checkbox('dynamicFields['.$field->id.'][delete]', null, null)!!}
-                                        </div>
+                                        @if($checkFields)
+                                            <div class="bg-danger" style="border-radius:4px; border: 1px solid #dc3545; padding: .375rem .75rem; ">{!! null; //dd( $items[$i], str_replace('nullabl e|', '', $field->field_validation)) !!}
+                                                {!! Form::checkbox('dynamicFields['.$field->id.'][delete]', null, null)!!}
+                                            </div>
+                                        @endif
                                     </td>
                                 </tr>
 

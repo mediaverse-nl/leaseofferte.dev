@@ -51,7 +51,7 @@ class TextController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $text = $this->text->findOrFail($id);
+        $text = $this->text->where('key_name', '=', $id)->first();
 
         $text->update([
             'text' => $request->text,

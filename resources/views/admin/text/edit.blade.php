@@ -11,7 +11,7 @@
             editing text <b>{!! $text->key_name !!}</b>
         </div>
         <div class="card-body">
-            {{--{!! Form::open(['route' => ['admin.text-editor.update', $text->commentable->key_name], 'method' => 'PATCH']) !!}--}}
+            {!! Form::open(['route' => ['admin.text-editor.update', $text->key_name], 'method' => 'PATCH']) !!}
 
             @if(json_decode($text->option, true)['mentions'] !== null)
                 <label for="">Use "@" to use these tags in the text. <br><small>Example; Dear @name, do u like chips.</small></label>
@@ -50,13 +50,13 @@
                                 @endif
                             </div>
 
-{{--                            {!! Form::submit('Update', ['class' => 'btn btn-sm btn-success']) !!}--}}
+                            {!! Form::submit('Update', ['class' => 'btn btn-warning']) !!}
 
                         {{--</div>--}}
                     {{--@endforeach--}}
                 {{--</div>--}}
 
-            {{--{{ Form::close() }}--}}
+            {{ Form::close() }}
 
             <hr>
 

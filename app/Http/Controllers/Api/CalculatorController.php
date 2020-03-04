@@ -15,36 +15,16 @@ class CalculatorController extends Controller
         $this->objects = $solution;
     }
 
-    public function get($object)
+    public function get(Request $request, $objectId)
     {
-        $object = $this->objects->findOrFail($object);
+        $object = $this->objects->findOrFail($objectId);
 
-        $category = $object->category;
+        $leasePrice = getLeasePrice($objectId, $request->aanschaf, $request->looptijd, $request->slottermijn, $request->aanbetaling);
 
         return response()
             ->json([
-                'rates' => [
-                    [
-                        'from' => '0',
-                        'to' => '24999',
-                        'rate' => !empty(explode(",", $category->interest_rate)[0]) ? explode(",", $category->interest_rate)[0] : null,
-                    ],
-                    [
-                        'from' => '25000',
-                        'to' => '49999',
-                        'rate' => !empty(explode(",", $category->interest_rate)[1]) ? explode(",", $category->interest_rate)[1] : null,
-                    ],
-                    [
-                        'from' => '50000',
-                        'to' => '74999',
-                        'rate' => !empty(explode(",", $category->interest_rate)[2]) ? explode(",", $category->interest_rate)[2] : null,
-                    ],
-                    [
-                        'from' => '75000',
-                        'to' => '100000',
-                        'rate' => !empty(explode(",", $category->interest_rate)[2]) ? explode(",", $category->interest_rate)[2] : null,
-                    ],
-                ],
+                'rate' => $object->getFinancialRate($request->aanschaf - $request->aanbetaling),
+                'leasePrice' => $leasePrice,
             ], 200);
     }
 }
