@@ -52,10 +52,21 @@
 
                     @include('components.color-samples')
 
+                    <label for="">Use "@" to use these tags in the text. <br><small>Example; Dear @name, do u like chips.</small></label>
+                    <br>
+                    @foreach(["id","meta_title","meta_description","title","description","uitvoering","images","merk","type","kleur","inbegrepen","catalogusprijs","bijtelling","auto_segment","brandstof","carrosserie","aantal_deuren","created_at","updated_at","operational_lease_prices"] as $key )
+                        <small class="badge badge-warning"><b>{!! '@'.$key !!}</b></small>
+                    @endforeach
+                    <br>
+
+
                     <div class="form-group">
                         {!! Form::label('description', 'description') !!}
+
+                        {{--                        <textarea class="summernote" name="text" style="border-radius: 0px">{!! $text->text !!}</textarea>--}}
+
                         {!! Form::textarea('description', null, ['class' => 'summernote form-control'.(!$errors->has('description') ? '': ' is-invalid '), 'rows' => '8']) !!}
-                        @include('components.error', ['field' => 'description'])
+                        @include('components.error', ['field' => 'value'])
                     </div>
 
                     <div class="form-group">
@@ -92,6 +103,13 @@
                                 {!! Form::label('number_of_doors', 'number_of_doors') !!}
                                 {!! Form::select('number_of_doors', array_combine(\App\LeaseOffer::amountOfDoors(), \App\LeaseOffer::amountOfDoors()), null, ['placeholder="-- select --"', 'class' => 'form-control'.(!$errors->has('number_of_doors') ? '': ' is-invalid ')]) !!}
                                 @include('components.error', ['field' => 'number_of_doors'])
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('transmission', 'Transmission') !!}
+                                {!! Form::select('transmission', array_combine(\App\LeaseOffer::transmission(), \App\LeaseOffer::transmission()), null, ['placeholder="-- select --"', 'class' => 'form-control'.(!$errors->has('transmission') ? '': ' is-invalid ')]) !!}
+                                @include('components.error', ['field' => 'transmission'])
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -344,7 +362,7 @@
 
     {!! Form::close() !!}
 
-    @component('components.rich-textarea-editor')
+    @component('components.rich-textarea-editor', ['option' => collect(["id","meta_title","meta_description","title","description","uitvoering","images","merk","type","kleur","inbegrepen","catalogusprijs","bijtelling","auto_segment","brandstof","carrosserie","aantal_deuren","created_at","updated_at","operational_lease_prices"])])
     @endcomponent
 
 @endsection

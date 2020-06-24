@@ -87,7 +87,7 @@
                                     <div class="card-body-icon">
                                         <i class="fa fa-fw fa-envelope"></i>
                                     </div>
-                                    <div class="mr-5">Aanvraag mail</div>
+                                    <div class="mr-5">Aanvraag objecten mail</div>
                                 </div>
                                 <a class="card-footer text-white clearfix small z-1" onClick="MyWindow=window.open('{!! route('admin.offerte') !!}','MyWindow','width=600,height=800'); return false;">
                                     <span class="float-left">View Details</span>
@@ -120,7 +120,7 @@
                                     <div class="card-body-icon">
                                         <i class="fa fa-fw fa-envelope"></i>
                                     </div>
-                                    <div class="mr-5">Operational mail</div>
+                                    <div class="mr-5">Operational lease mail</div>
                                 </div>
                                 <a class="card-footer text-white clearfix small z-1" onClick="MyWindow=window.open('{!! route('admin.operational') !!}','MyWindow','width=600,height=800'); return false;">
                                     <span class="float-left">View Details</span>
@@ -137,7 +137,7 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="h2">PDF Preview</h1>
+                    <h1 class="h2">PDF previews</h1>
                     <hr>
                     <div class="row">
                         <div class="col-xl-6 col-sm-6 mb-6">
@@ -146,7 +146,7 @@
                                     <div class="card-body-icon">
                                         <i class="fa fa-fw fa-file-pdf-o"></i>
                                     </div>
-                                    <div class="mr-5">Operational PDF</div>
+                                    <div class="mr-5">Operational lease PDF</div>
                                 </div>
                                 <a class="card-footer text-white clearfix small z-1" onClick="MyWindow=window.open('{!! route('admin.pdf.operational') !!}','MyWindow','width=600,height=800'); return false;">
                                     <span class="float-left">View Details</span>
@@ -162,7 +162,7 @@
                                     <div class="card-body-icon">
                                         <i class="fa fa-fw fa-file-pdf-o"></i>
                                     </div>
-                                    <div class="mr-5">Aanvraag PDF</div>
+                                    <div class="mr-5">Aanvraag objecten PDF</div>
                                 </div>
                                 <a class="card-footer text-white clearfix small z-1" onClick="MyWindow=window.open('{!! route('admin.pdf.order') !!}','MyWindow','width=600,height=800'); return false;">
                                     <span class="float-left">View Details</span>

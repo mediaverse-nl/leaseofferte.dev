@@ -29,10 +29,10 @@
 {{--    @endforeach--}}
 {{--</table>--}}
 
-<table class="table table-borderless table-sm">
+<table class="table table-borderless table-sm" style="width: 600px !important;">
     <tbody>
         <tr>
-            <td colspan="2" style="color: #006A8E; background: #F0F6F9 !important;">
+            <td colspan="2" style="color: #006A8E; background: #F0F6F9 !important; padding: 10px; font-size: 20px;">
                 <b>Lease bedrag</b>
             </td>
         </tr>
@@ -49,45 +49,40 @@
             <td>loc{!! str_replace('.', '', $objectName->getFinancialRate($aanschaf - $aanbetaling) ) !!}</td>
         </tr>
     </tbody>
-</table>
-<table class="table table-borderless table-sm">
     <tbody>
-    <tr>
-        <td colspan="2" style="color: #006A8E; background: #F0F6F9 !important;">
-            <b>Leasecondities</b>
-        </td>
-    </tr>
-    <tr>
-        <td style="width: 50%;">Aanschaf excl. BTW </td>
-        <td id="aanschaf" style="">€ {!! number_format($aanschaf, 2, ',', '.') !!} </td>
-    </tr>
-
-    <tr>
-        <td style="width: 50%;">Aanbetaling</td>
-        <td id="aanbetaling" style="">€&nbsp;{!! number_format($aanbetaling, 2, ',', '.')  !!}</td>
-    </tr>
-    <tr>
-        <td style="width: 50%;">Te financieren </td>
-        <td id="aanschaf" style="font-weight: bold">€ {!! number_format($aanschaf - $aanbetaling, 2, ',', '.') !!} </td>
-    </tr>
-    <tr>
-        <td style="width: 50%;">Slottermijn</td>
-        <td id="slottermijn">€&nbsp;{!! number_format($slottermijn, 2, ',', '.')  !!}</td>
-    </tr>
-    <tr>
-        <td style="width: 50%;">Looptijd</td>
-        <td id="looptijd">{!! $looptijd !!} maanden</td>
-    </tr>
-    <tr>
-        <td style="width: 50%;">Object</td>
-        <td id="object">{!! $objectName->title !!}</td>
-    </tr>
+        <tr>
+            <td colspan="2" style="color: #006A8E; background: #F0F6F9 !important; padding: 10px; font-size: 20px;">
+                <b>Leasecondities</b>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 50%;">Aanschaf excl. BTW </td>
+            <td id="aanschaf" style="">€ {!! number_format($aanschaf, 2, ',', '.') !!} </td>
+        </tr>
+        <tr>
+            <td style="width: 50%;">Aanbetaling</td>
+            <td id="aanbetaling" style="">€&nbsp;{!! number_format($aanbetaling, 2, ',', '.')  !!}</td>
+        </tr>
+        <tr>
+            <td style="width: 50%;">Te financieren </td>
+            <td id="aanschaf" style="font-weight: bold">€ {!! number_format($aanschaf - $aanbetaling, 2, ',', '.') !!} </td>
+        </tr>
+        <tr>
+            <td style="width: 50%;">Slottermijn</td>
+            <td id="slottermijn">€&nbsp;{!! number_format($slottermijn, 2, ',', '.')  !!}</td>
+        </tr>
+        <tr>
+            <td style="width: 50%;">Looptijd</td>
+            <td id="looptijd">{!! $looptijd !!} maanden</td>
+        </tr>
+        <tr>
+            <td style="width: 50%;">Object</td>
+            <td id="object">{!! $objectName->title !!}</td>
+        </tr>
     </tbody>
-</table>
-<table class="table table-borderless table-sm" id="leaseForm" style=" ">
     <tbody>
     <tr>
-        <td colspan="2" style="color: #006A8E; background: #F0F6F9 !important;">
+        <td colspan="2" style="color: #006A8E; background: #F0F6F9 !important; padding: 10px; font-size: 20px;">
             <b>Leaseobject</b>
         </td>
     </tr>
@@ -100,11 +95,9 @@
         </tr>
     @endforeach
     </tbody>
-</table>
-<table class="table table-borderless table-sm" id="leaseForm" style=" ">
     <tbody>
     <tr>
-        <td colspan="2" style="color: #006A8E; background: #F0F6F9 !important;">
+        <td colspan="2" style="color: #006A8E; background: #F0F6F9 !important; padding: 10px; font-size: 20px;">
             <b>Klant gegevens</b>
         </td>
     </tr>

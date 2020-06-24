@@ -16,7 +16,7 @@
         @slot('table')
             @foreach($seo as $i)
                 <tr>
-                    <td>{!! $i->route_name !!}</td>
+                    <td>{!! route($i->route_name) !!}</td>
                     <td>{!! $i->title ? $i->title : 'leeg' !!}</td>
                     <td>
                         <a href="{{route('admin.seo-manager.edit', $i->id)}}" class="rounded-circle edit">

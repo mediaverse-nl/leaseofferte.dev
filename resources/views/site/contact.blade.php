@@ -1,6 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('components.success-order-model')
+
+    @if(session()->exists('sended'))
+        <div class="modal fade in" id="lastNoteModel" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="fas fa-times" style="color: #006A8E; font-size: 20px;"></i>
+                        </button>
+
+                        <span class="h3" style="color: #006A81; font-weight: bold">
+                         <i class="fas fa-thumbs-up" style="color: #006A8E; font-size: 30px;"></i>
+                            Uw <span style="color: #009FD6">bericht</span> is in goede orde ontvangen en bevestiging hiervan zit in uw e-mailbox <span style="color: #009FD6">
+                        </span>
+                    </span>
+                        <br>
+                        <br>
+                        <span style="color: #6c757d;">
+                        Wij zullen zo spoedig mogelijk contact met u opnemen. <br><br>
+                        <span class="h5" style="font-weight: bold">Direct contact met een van onze lease specialisten</span>
+                        <br>
+                        <br>
+                        ☎ (030) 227 16 19
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
     <div class="jumbotron" style="height: 220px;">
         <div class="container">
             <nav aria-label="breadcrumb">
@@ -70,7 +103,7 @@
                             @endif
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-default" style="background: #006486 !important;" value="Submit">verzend bericht</button>
+                            <button type="submit" class="btn btn-default" style="background: #006486 !important;" value="Submit">Verzend bericht</button>
                             <br>
                             <small class="text-muted">Alle velden met een * zijn verplicht</small>
                         </div>
@@ -84,38 +117,44 @@
                         <br>
                         <br>
                         <div class="row">
-                            <div class="col-md-3 text-center" style="margin-bottom: 20px;">
-                                <div style="height: 160px; width: 100%; margin-bottom: 5px;">
-                                    <img src="https://uilove.in/realestate/listo/preview/img/profile-placeholder.jpg"
+                            <div class="col-md-6 col-6 col-lg-3 text-center">
+                                <div style="height: 190px; width: 100%; margin-bottom: 5px;">
+                                    <img src="/storage/files/shares/team/thumbs/ginger.jpg"
                                          class="img-fl uid"
                                          style="object-fit: cover !important; height: 100%; width: 100%;">
                                 </div>
                                 <span class="h5" style="color: #006A8E !important; font-weight: 500;">Ginger</span>
                             </div>
-                            <div class="col-md-3 text-center">
-                                <div style="height: 160px; width: 100%; margin-bottom: 5px;">
-                                    <img src="https://uilove.in/realestate/listo/preview/img/profile-placeholder.jpg"
+                            <div class="col-md-6 col-6 col-lg-3 text-center">
+                                <div style="height: 190px; width: 100%; margin-bottom: 5px;">
+                                    <img src="/storage/files/shares/team/thumbs/dion.jpg"
                                          class="img-fl uid"
                                          style="object-fit: cover !important; height: 100%; width: 100%;">
+{{--                                    <picture class="img-fl uid" style="object-fit: cover !important; height: 100%; width: 100%;">--}}
+{{--                                        <source srcset="photo.jxr" type="image/vnd.ms-photo">--}}
+{{--                                        <source srcset="photo.jp2" type="image/jp2">--}}
+{{--                                        <source srcset="/img/profiles/c3d0adf2-7baa-40c2-a468-af943ffedce0.webp" type="image/webp">--}}
+{{--                                        <img srcset="photo.jpg" alt="My beautiful face">--}}
+{{--                                    </picture>--}}
                                 </div>
                                 <span class="h5" style="color: #006A8E !important; font-weight: 500;">Dion</span>
                             </div>
-                            <div class="col-md-3 text-center">
-                                <div style="height: 160px; width: 100%; margin-bottom: 5px;">
-                                    <img src="https://uilove.in/realestate/listo/preview/img/profile-placeholder.jpg"
+                            <div class="col-md-6 col-6 col-lg-3 text-center">
+                                <div style="height: 190px; width: 100%; margin-bottom: 5px;">
+                                    <img src="/storage/files/shares/team/thumbs/danielle.jpg"
                                          class="img-fl uid"
                                          style="object-fit: cover !important; height: 100%; width: 100%;">
                                 </div>
-                                <span class="h5" style="color: #006A8E !important; font-weight: 500;">Ray</span>
+                                <span class="h5" style="color: #006A8E !important; font-weight: 500;">Daniëlle</span>
                             </div>
-                            <div class="col-md-3 text-center">
-                                <div style="height: 160px; width: 100%; margin-bottom: 5px;">
-                                    <img src="https://uilove.in/realestate/listo/preview/img/profile-placeholder.jpg"
-                                         class="img-fl uid"
-                                         style="object-fit: cover !important; height: 100%; width: 100%;">
-                                </div>
-                                <span class="h5" style="color: #006A8E !important; font-weight: 500;">Jan</span>
-                            </div>
+{{--                            <div class="col-md-6 col-6 col-lg-3 text-center">--}}
+{{--                                <div style="height: 190px; width: 100%; margin-bottom: 5px;">--}}
+{{--                                    <img src="https://uilove.in/realestate/listo/preview/img/profile-placeholder.jpg"--}}
+{{--                                         class="img-fl uid"--}}
+{{--                                         style="object-fit: cover !important; height: 100%; width: 100%;">--}}
+{{--                                </div>--}}
+{{--                                <span class="h5" style="color: #006A8E !important; font-weight: 500;">Jan</span>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>
@@ -151,33 +190,9 @@
 @endsection
 
 @push('css')
-<style>
-    .g-recaptcha {
-        transform:scale(0.77);
-        transform-origin:0 0;
-    }
-    h1, h2{
-        color: #006A8E !important;
-    }
-    .jumbotron {
-        background-color: #009FD6;
-        background-size: cover;
-        background-position: center center;
-        border-radius: 0px;
-        color: #FFFFFF;
-    }
-    .img-thumbnail{
-        border: none !important;
-    }
-    .card-header{
-        border-radius: 0px !important;
-    }
-</style>
+    <link rel="stylesheet" href="/css/contact.css">
 @endpush
 
 @push('js')
-{!! NoCaptcha::renderJs() !!}
-
-<script>
-</script>
+    {!! NoCaptcha::renderJs() !!}
 @endpush

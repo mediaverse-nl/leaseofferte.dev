@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Solution;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -31,10 +32,12 @@ class AdminOrderRequest extends Mailable
      */
     public function build()
     {
+        $solution = (new Solution)->findOrFail($this->request['object']);
+
         return $this
             ->from(env('MAIL_NOREPLY'), 'Leaseofferte.com')
             ->replyTo($this->request['email'], $this->request['voornaam'])
-            ->subject('Lease aanvraag')
+            ->subject('Lease aanvraag: ' . $this->request['bedrijfsnaam'] . " | " . $solution->title)
             ->view('mails.order-admin');
     }
 }

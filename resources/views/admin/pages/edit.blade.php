@@ -36,7 +36,7 @@
 
                     {!! Form::hidden('id', null) !!}
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group" style="padding-left: 20px;">
                                 {!! Form::label('status', 'live page', ['style' => 'margin-left: -20px;']) !!}
                                 <div class="checkbox">
@@ -46,12 +46,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group" style="padding-left: 20px;">
                                 {!! Form::label('options', 'show link in footer', ['style' => 'margin-left: -20px;']) !!}
                                 <div class="checkbox">
                                     <label>
                                         {!! Form::checkbox('options', null, null, ['data-toggle' => 'toggle']) !!}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group" style="padding-left: 20px;">
+                                {!! Form::label('options_2', 'show link in menu', ['style' => 'margin-left: -20px;']) !!}
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('options_2', null, null, ['data-toggle' => 'toggle']) !!}
                                     </label>
                                 </div>
                             </div>

@@ -15,7 +15,7 @@
                             <a href="{!! route('site.home') !!}">Home</a>
                         </li>
                         <li>
-                            <a href="{!! route('site.solution.index') !!}">Lease Oplossingen</a>
+                            <a href="{!! route('site.solution.index') !!}">Lease Categorieën</a>
                         </li>
                         {{--<li>--}}
                             {{--<a href="#!">Voordelen</a>--}}
@@ -114,14 +114,12 @@
         <!-- Grid row -->
     </div>
     <!-- Footer Links -->
-    {{--    #006A8E--}}
     <div class="container-fluid text-center text-md-left" style="background: #D9E9EE; padding: 0px 0;">
-
         <div class="container blue py-4" >
             <!-- Grid row -->
             @php
-                $ftrSolutions = \App\Category::has('solutions')->get();
-                $ftrObjs = \App\LeaseOffer::all();
+                $ftrSolutions = \App\Category::has('solutions')->orderBy('value')->get();
+                 $ftrObjs = \App\LeaseOffer::groupBy('merk')->orderBy('merk')->get();
                 $ftrPages = \App\Page::where('options', '=', 1)->get();
             @endphp
             <div class="row">
@@ -152,7 +150,7 @@
                         <ul class="list-unstyled">
                             @foreach($ftrObjGroup as $ftrObj)
                                 <li>
-                                    <a href="{!! route('site.offer.show', [$ftrObj->urlTitle, $ftrObj->id])  !!}">{!! ($ftrObj->title) !!}</a>
+                                    <a href="{!! route('site.offer.index')."?brands[]=".$ftrObj->merk  !!}">{!! ($ftrObj->merk) !!}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -171,7 +169,7 @@
                         <ul class="list-unstyled">
                             @foreach($ftrCateGroup as $ftrCate)
                                 <li>
-                                    <a href="{!! route('site.solution.show', [$ftrCate->solutions()->first()['urlTitle'], $ftrCate->solutions()->first()['id']]) !!}">{!! ($ftrCate->value) !!}</a>
+                                    <a href="{!! route('site.solution.index', ['category' => $ftrCate->id]) !!}">{!! ($ftrCate->value) !!}</a>
                                  </li>
                             @endforeach
                         </ul>

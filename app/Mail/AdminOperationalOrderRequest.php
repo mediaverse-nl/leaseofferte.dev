@@ -2,6 +2,8 @@
 
 namespace App\Mail;
 
+use App\LeaseOffer;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -30,10 +32,17 @@ class AdminOperationalOrderRequest extends Mailable
      */
     public function build()
     {
+        $operation = (new LeaseOffer)->findOrFail($this->request['operational_id']);
+
+        $pdf = PDF::loadView('pdf.order-operational', [
+            'data' => $this->request,
+        ]);
+
         $mail = $this
             ->from(env('MAIL_NOREPLY'), 'Leaseofferte.com')
             ->replyTo($this->request['email'], $this->request['voornaam_en_achternaam'])
-            ->subject('Operational lease aanvraag')
+            ->subject('Operational lease aanvraag: '. $this->request['bedrijfsnaam'] ." | ". $operation->merk." | ". $operation->type)
+            ->attachData($pdf->output(), $this->request['bedrijfsnaam']."-operational-lease-aanvraag.pdf")
             ->view('mails.order-operational');
 
         if (isset($this->request['bestanden'])){

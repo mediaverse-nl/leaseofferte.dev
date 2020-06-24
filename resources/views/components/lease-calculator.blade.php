@@ -10,7 +10,10 @@
         $fields = (object)[];
     }
 
-    $solutions = (new \App\Solution())->orderBy('title', 'asc')->get();
+    $solutions = (new \App\Solution())
+        ->with('category.solutions')
+        ->orderBy('title', 'asc')
+        ->get();
 
     $objectgroep = null;
     $objects = [];
@@ -30,7 +33,6 @@
     }
 
     $solutions = $solutions->pluck('title', 'id');
-
 @endphp
 
 <div class="card" style="margin-top: 0px;" id="stepsForm">
@@ -119,7 +121,7 @@
 
                         <div class="form-group">
                             {!! Form::text('aanschaf', null, [
-                                'placeholder' => 'aanschafprijs *',
+                                'placeholder' => 'Aanschafprijs *',
                                 'class' => 'moneyFormat withIcon form-control'.(!$errors->has('aanschaf') ? '': ' is-invalid '),
                                 'id' => 'aanschaf'
                             ]) !!}
@@ -128,7 +130,7 @@
 
                         <div class="form-group">
                             {!! Form::text('aanbetaling', null, [
-                                'placeholder' => 'aanbetaling ',
+                                'placeholder' => 'Aanbetaling ',
                                 'class' => 'moneyFormat withIcon form-control'.(!$errors->has('aanbetaling') ? '': ' is-invalid '),
                                 'id' => 'aanbetaling'
                             ]) !!}
@@ -138,7 +140,7 @@
 
                         <div class="form-group">
                             {!! Form::text('slottermijn', null, [
-                                'placeholder' => 'slottermijn ',
+                                'placeholder' => 'Slottermijn ',
                                 'class' => 'moneyFormat withIcon form-control'.(!$errors->has('slottermijn') ? '': ' is-invalid '),
                                 'id' => 'slottermijn'
                             ]) !!}
@@ -166,7 +168,6 @@
                             ]) !!}
                             @include('components.error', ['field' => 'looptijd'])
                         </div>
-{{--                        {!! request('id') !!}--}}
 
                         <small class="text-muted"> Alle velden met een * zijn verplicht.</small>
                         <br>
@@ -185,17 +186,19 @@
                                 @foreach($category->dynamicFields()->where('form_part', '=', 2)->orderBy('field_order', 'ASC')->get() as $f)
                                     <div class="form-group">
                                         @php
-                                            $fieldRequired = str_contains($f->field_validation, "required") ?  "*": "";
+                                            //$fieldRequired = "*";
+                                            $fieldRequired = isset($f->field_validation) ? (str_contains($f->field_validation, "required") ?  "*": "") : "";
+                                            $placeholder = ucfirst($f->field_name == 'email' ? 'E-mail' : $f->field_name);
                                         @endphp
                                         @switch($f->field_type)
                                             @case('text')
-                                                {!! Form::text(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                                {!! Form::text(StripReplace($f->field_name), null, ['placeholder' => $placeholder." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                             @break
                                             @case('textarea')
-                                                {!! Form::textarea(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'rows="4"', 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                                {!! Form::textarea(StripReplace($f->field_name), null, ['placeholder' => $placeholder." ".$fieldRequired, 'rows="4"', 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                             @break
                                             @case('number')
-                                                {!! Form::number(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                                {!! Form::number(StripReplace($f->field_name), null, ['placeholder' => $placeholder." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                             @break
                                         @endswitch
                                         @include('components.error', ['field' => StripReplace($f->field_name)])
@@ -222,17 +225,19 @@
                             @foreach($category->dynamicFields()->where('form_part', '=', 3)->orderBy('field_order', 'ASC')->get() as $f)
                                 <div class="form-group">
                                     @php
-                                        $fieldRequired = str_contains($f->field_validation, "required") ?  "*": "";
+                                        $fieldRequired = isset($f->field_validation) ? (str_contains($f->field_validation, "required") ?  "*": "") : "";
+                                        //$fieldRequired = str_contains($f->field_validation, "required") ?  "*": "";
+                                        $placeholder = ucfirst($f->field_name == 'email' ? 'E-mail' : $f->field_name);
                                     @endphp
                                     @switch($f->field_type)
                                         @case('text')
-                                            {!! Form::text(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                            {!! Form::text(StripReplace($f->field_name), null, ['placeholder' => $placeholder." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                         @break
                                         @case('textarea')
-                                            {!! Form::textarea(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'rows="4"', 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                            {!! Form::textarea(StripReplace($f->field_name), null, ['placeholder' => $placeholder." ".$fieldRequired, 'rows="4"', 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                         @break
                                         @case('number')
-                                            {!! Form::number(StripReplace($f->field_name), null, ['placeholder' => ucfirst($f->field_name)." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
+                                            {!! Form::number(StripReplace($f->field_name), null, ['placeholder' => $placeholder." ".$fieldRequired, 'class' => 'form-control'.(!$errors->has(StripReplace($f->field_name)) ? '': ' is-invalid '),'id' => StripReplace($f->field_name)]) !!}
                                         @break
                                     @endswitch
                                     @include('components.error', ['field' => StripReplace($f->field_name)])
@@ -283,13 +288,9 @@
                             </div>
                         </div>
                     </div>
-
                     <br>
                     <br>
-
                     {!! Editor('calculator_bericht', 'richtext', false, "uw formulier is verzonden..") !!}
-{{--                    <br>--}}
-{{--                    <br>--}}
                     <button class="btn btn-orange btn-lg btn-block pull-right" type="submit">
                         <i class="fas fa- fa-envelope" style="color: #ffffff;"></i>
                         verzenden
@@ -301,263 +302,29 @@
                         </small>
                     </div>
                 @endif
-
             {!! Form::close() !!}
         </div>
-
         {!! Form::open(['route' => 'site.calculator.formStep', 'id' => 'previousForm']) !!}
             <input type='hidden' id="to-previous" name="step" />
         {!! Form::close() !!}
-
-{{--        <a class="btn btn-back nextBtn btn-lg btn-block pull-left" onClick='submitForm(2)'>vorige</a>--}}
-
     </div>
-
 </div>
 
 @push('js')
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
-
-    <script language="javascript" type="text/javascript">
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/bindings/inputmask.binding.min.js"></script>
+    <script type="text/javascript" src="/js/calculator.js"></script>
+    <script type="text/javascript">
         function submitForm(step) {
             $("#to-previous").val(step);
-
             $("#previousForm").submit();
         }
-
-        calculation();
-
-        function calculation()
-        {
-            var aanschaf = parseFloat($("#aanschaf").val())
-            var aanbetaling = parseFloat($("#aanbetaling").val())
-            var slottermijn = parseFloat($("#slottermijn").val())
-            var looptijd = parseFloat($("#looptijd").val().substr(0, 2));
-            var obj = $('#object option:selected').val()
-
-            if(!$("#aanbetaling").val()){
-                aanbetaling = 0
-            }
-            if(!$("#slottermijn").val()){
-                slottermijn = 0
-            }
-
-            var total = (aanschaf - aanbetaling - slottermijn);
-
-            if((total || total === 0)
-                && (obj || obj === 0)
-                && (looptijd || looptijd === 0)) {
-                $.ajax({
-                    url: "/api/calculator-rates-"+obj
-                            +"?aanschaf="+aanschaf
-                            +"&aanbetaling="+aanbetaling
-                            +"&slottermijn="+slottermijn
-                            +"&looptijd="+looptijd,
-                    type: 'GET',
-                    dataType: 'json', // added data type
-                    success: function(res) {
-                        $(".leasePrice").html("&euro; " + res['leasePrice']);
-                    }
-                });
-            }
-        }
-
-        $('.form-control').on('change keyup paste', function () {
-            calculation();
-        });
     </script>
 @endpush
 
 @push('css')
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/octoshrimpy/bulma-o-steps/master/bulma-steps.css">
-    <style>
-        .modal-body .card-header{
-            margin: 0px !important;
-        }
-        .input-icon {
-            position: relative;
-        }
-
-        .input-icon > i {
-            color: #6c757d;
-            position: absolute;
-            display: block;
-            transform: translate(0, -50%);
-            top: 50%;
-            pointer-events: none;
-            width: 25px;
-            text-align: center;
-            font-style: normal;
-        }
-
-        .input-icon > input {
-            padding-left: 25px;
-            padding-right: 0;
-        }
-
-        .input-icon-right > i {
-            right: 0;
-        }
-
-        .input-icon-right > input {
-            padding-left: 0;
-            padding-right: 25px;
-            text-align: right;
-        }
-        .btn-light.show-error-line{
-            border-color: #e3342f !important;
-            background-size: calc(0.8em + 0.375rem) calc(0.8em + 0.375rem) !important;
-        }
-
-        .steps-segment{
-            color: #009FD6 !important;
-        }
-        .steps:not(.is-hollow) .steps-marker:not(.is-hollow) {
-            background-color: #009FD6;
-            color: #fff;
-        }
-        .steps-segment:after {
-            background-color: #009FD6;
-        }
-        .steps.is-hollow .is-active .steps-marker, .steps .is-active .steps-marker.is-hollow {
-            border-color: #009FD6;
-        }
-        .steps{
-            font-size: inherit !important;
-        }
-        .steps .my-step-style{
-            margin-bottom: 0px !important;
-        }
-        .iconRow{
-            font-size: 30px;
-            color: #DAE9ED !important;
-            margin: 0px;
-        }
-        .iconRow > div{
-            margin: 0px !important;
-            /*display: table-cell;*/
-            padding: 0px;
-            height: 55px;
-            vertical-align: middle;
-            text-align:center;
-        }
-
-        .iconRow img{
-            display:block;
-            height: 100% !important;
-            padding: 5px;
-            /*width: 100%;*/
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-             /*background: black;*/
-        }
-        .btn-orange{
-            background: #f78e0c !important;
-            color: white;
-        }
-        .btn-back{
-            background: #F0F6F9  !important;
-        }
-        .iconRow div i {
-            text-align:center;
-        }
-
-        .btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show > .btn-light.dropdown-toggle {
-            color: #495057 !important;
-            background-color: #fff !important;
-            border-color: #ced4da !important;
-        }
-
-        .btn-light {
-            color: #495057 !important;
-            background-color: #fff !important;
-            border-color: #ced4da !important;
-            border-radius: 0.25rem !important;
-        }
-
-        .steps.is-hollow .steps-marker, .steps-marker.is-hollow {
-            border: 1px solid !important;
-        }
-        .steps.is-horizontal .steps-segment:not(:last-child):after {
-            height: 1px !important;
-        }
-
-        .steps.is-horizontal{
-            margin-top: 6px;
-        }
-        .form-control,
-        .filter-option-inner-inner,
-        .bootstrap-select .dropdown-menu li a {
-            color: #6c757d;
-        }
-        .form-control{
-            color: #6c757d;
-        }
-        .form-group {
-            margin-bottom: 0.50rem !important;
-        }
-        #stepsForm label {
-            display: inline-block;
-            margin-bottom: 0.2rem !important;
-        }
-        .steps{
-            padding: 0 !important;
-        }
-        .steps-content{
-            text-align: left;
-            margin: 0px !important;
-        }
-        .steps-segment{
-            list-style: none;
-        }
-        body {
-            margin-top:40px;
-        }
-        .stepwizard-step p {
-            margin-top: 10px;
-        }
-        .stepwizard-row {
-            display: table-row;
-        }
-        .stepwizard {
-            display: table;
-            width: 100%;
-            position: relative;
-        }
-        .stepwizard-step button[disabled] {
-            opacity: 1 !important;
-            filter: alpha(opacity=100) !important;
-        }
-        .stepwizard-step:after {
-            top: 14px;
-            left: 0px;
-            bottom: 0;
-            position: absolute;
-            content: " ";
-            width: 100%;
-            height: 3px;
-            background-color: #111;
-            /*z-index: -1;*/
-        }
-        .stepwizard-step {
-            display: table-cell;
-            text-align: center;
-            position: relative;
-        }
-        .btn-circle {
-            width: 30px;
-            height: 30px;
-            text-align: center;
-            padding: 6px 0;
-            font-size: 12px;
-            line-height: 1.428571429;
-            border-radius: 15px;
-            z-index: 999;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/octoshrimpy/bulma-o-steps/master/bulma-steps.min.css">
+    <link rel="stylesheet" href="/css/calculator.css">
 @endpush

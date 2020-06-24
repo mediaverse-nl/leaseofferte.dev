@@ -48,21 +48,35 @@
                 <div class="card-body">
                     <h2>algemene informatie</h2>
                     <div class="form-group">
-                        {!! Form::label('title', 'title') !!}
+                        {!! Form::label('title', 'title') !!} <small>index naam</small>
                         {!! Form::text('title', null, ['class' => 'form-control'.(!$errors->has('title') ? '': ' is-invalid ')]) !!}
                         @include('components.error', ['field' => 'value'])
                     </div>
 
                     @include('components.color-samples')
 
+{{--                    {!! dd(json_decode($solution)) !!}--}}
+                    @if(json_decode($solution) !== null)
+                        <label for="">Use "@" to use these tags in the text. <br><small>Example; Dear @name, do u like chips.</small></label>
+                        <br>
+                        @foreach(json_decode($solution) as $key => $v)
+                            <small class="badge badge-warning"><b>{!! '@'.$key !!}</b></small>
+                        @endforeach
+                        <br>
+                        <br>
+                    @endif
+
                     <div class="form-group">
                         {!! Form::label('description', 'description') !!}
+
+{{--                        <textarea class="summernote" name="text" style="border-radius: 0px">{!! $text->text !!}</textarea>--}}
+
                         {!! Form::textarea('description', null, ['class' => 'summernote form-control'.(!$errors->has('description') ? '': ' is-invalid '), 'rows' => '8']) !!}
                         @include('components.error', ['field' => 'value'])
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('uitvoering', 'uitvoering') !!}
+                        {!! Form::label('uitvoering', 'uitvoering') !!} <small>h2</small>
                         {!! Form::text('uitvoering', null, ['class' => 'form-control'.(!$errors->has('uitvoering') ? '': ' is-invalid ')]) !!}
                         @include('components.error', ['field' => 'uitvoering'])
                     </div>
@@ -97,6 +111,14 @@
                                 @include('components.error', ['field' => 'number_of_doors'])
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('transmission', 'Transmission') !!}
+                                {!! Form::select('transmission', array_combine(\App\LeaseOffer::transmission(), \App\LeaseOffer::transmission()), null, ['placeholder="-- select --"', 'class' => 'form-control'.(!$errors->has('transmission') ? '': ' is-invalid ')]) !!}
+                                @include('components.error', ['field' => 'transmission'])
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('auto_segment', 'auto_segment') !!}
@@ -113,7 +135,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('type', 'type') !!}
+                                {!! Form::label('type', 'model/type') !!} <small>h1</small>
                                 {!! Form::text('type', null, ['id="types"', 'placeholder="-- select --"', 'class' => 'form-control'.(!$errors->has('type') ? '': ' is-invalid ')]) !!}
                                 @include('components.error', ['field' => 'type'])
                             </div>
@@ -127,7 +149,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('merk', 'merk') !!}
+                                {!! Form::label('merk', 'merk') !!} <small>h1</small>
                                 {!! Form::text('merk', null, ['id="brand"', 'placeholder="-- select --"', 'class' => 'form-control'.(!$errors->has('merk') ? '': ' is-invalid ')]) !!}
                                 @include('components.error', ['field' => 'merk'])
                             </div>
@@ -355,7 +377,7 @@
 
     {!! Form::close() !!}
 
-    @component('components.rich-textarea-editor')
+    @component('components.rich-textarea-editor', ['option' => collect($solution)->keys()])
     @endcomponent
 
 @endsection

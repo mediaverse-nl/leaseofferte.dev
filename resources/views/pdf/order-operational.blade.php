@@ -60,7 +60,7 @@
     <table class="table" cellpadding="0" cellspacing="0">
         <tr style="width: 100%;">
             <td class="text-center" style="width: 100%; border: none !important;">
-                <img src="https://mediaverse-dev.nl/img/leaseofferte-logo.png" style="width:270px; ">
+                <img src="https://leaseofferte.com/img/leaseofferte-logo.png" style="width:270px; ">
             </td>
         </tr>
     </table>
@@ -70,7 +70,7 @@
             <table style="width: 100%;">
                 <tr>
                     <td>
-                        <b>Leaseofferte.nl</b> <br>
+                        <b>Leaseofferte.com</b> <br>
                         Hoofdveste 32b,<br>
                         3992 DG Houten,<br>
                         Nederland<br>
@@ -88,9 +88,9 @@
                             BTW: <br>KvK:</b>
                     </td>
                     <td style="text-align: left">
-                        www.leaseofferte.nl <br>
+                        www.leaseofferte.com <br>
                         +31 30 227 16 19<br>
-                        info@leaseofferte.nl<br>
+                        info@leaseofferte.com<br>
                         NL8173.47.811B01<br>
                         30220695
                     </td>
@@ -101,8 +101,7 @@
 
     <div style="margin-top: -80px;">
         <p class="text-center" style="font-weight: bold; font-size: 32px; font-family: 'Roboto Light', sans-serif; padding-bottom: 0px !important; color: #006A8E;">
-            Uw lease aanvraag voor <b style="color:#7FAF1B;">{!! $leaseOffer['title'] !!}</b><br>
-            <small class="text-muted">{!! $leaseOffer['uitvoering'] !!}</small>
+            Uw lease aanvraag voor <br> <b style="color:#7FAF1B;">{!! $leaseOffer['merk'] . ' ' .  $leaseOffer['type']  . ' ' . $leaseOffer['uitvoering'] !!}</b><br>
         </p>
         <div class="card-body">
             <table class="table table-borderless table-sm" id="leaseForm" style=" ">
@@ -113,18 +112,20 @@
                         </td>
                     </tr>
                     @foreach($leaseSpecs as $k => $v)
-                        <tr>
-                            <td style="width: 50%;">
-                                @if($k == 'title')
-                                    {!! ucfirst(str_replace('_', ' ', 'auto'))!!}
-                                @else
-                                    {!! ucfirst(str_replace('_', ' ', $k)) !!}
-                                @endif
-                            </td>
-                            <td style="">
-                                {!! $v !!}
-                            </td>
-                        </tr>
+                        @if($k !== 'title')
+                            <tr>
+                                <td style="width: 50%;">
+                                    @if($k == 'title')
+                                        {!! ucfirst(str_replace('_', ' ', 'auto'))!!}
+                                    @else
+                                        {!! ucfirst(str_replace('_', ' ', $k)) !!}
+                                    @endif
+                                </td>
+                                <td style="">
+                                    {!! $v !!}
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
@@ -142,6 +143,8 @@
                                     {!! $k == 'winterbanden' ? ucfirst(str_replace('_', ' ', 'met '.$k)) :  ucfirst(str_replace('_', ' ', $k))!!}
                                 @elseif($k == 'vervangend_vervoer')
                                     {!! ucfirst(str_replace('_', ' ', $k.' na 24 uur'))!!}
+                                @elseif($k == 'email')
+                                    {!! ucfirst('E-mail')!!}
                                 @else
                                     {!! ucfirst(str_replace('_', ' ', $k)) !!}
                                 @endif
@@ -163,8 +166,13 @@
                     </tr>
                     @foreach($leaseGegevens as $k => $v)
                         <tr>
-                            <td style="width: 50%;">{!! ucfirst(str_replace('_', ' ', $k)) !!}</td>
-                            <td style="">  {!! $v !!}
+                            @if($k == 'email')
+                                <td style="width: 50%;"> {!! ucfirst('E-mail')!!}</td>
+                            @else
+                                <td style="width: 50%;">{!! ucfirst(str_replace('_', ' ', $k)) !!}</td>
+                            @endif
+                            <td style="">
+                                {!! $v !!}
                             </td>
                         </tr>
                     @endforeach
@@ -174,12 +182,12 @@
     </div>
 
     <small class="text-muted">
-        Op onze dienstverlening zijn de algemene voorwaarden LEASEOFFERTE.com welke zijn gedeponeerd bij de Kamer van Koophandel onder nummer 30220695.
+        Op onze dienstverlening zijn de algemene voorwaarden van LEASEOFFERTE.com van toepassing, welke zijn gedeponeerd bij de Kamer van Koophandel onder nummer 30220695.
+        Dit voorstel betreft een indicatief leasevoorstel.
+        <br>
+        <br>
         Druk en zetfouten voorbehouden en kunnen geen rechten aan worden ontleend.
     </small>
-
-
-
 
 </div>
 </body>

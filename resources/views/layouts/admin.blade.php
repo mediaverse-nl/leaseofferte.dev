@@ -17,7 +17,13 @@
     <!-- Custom styles for this template-->
     <link href="/css/admin/sb-admin.css" rel="stylesheet">
 
+{{-- todo remove on deployment of this website   --}}
+    <meta name="robots" content="noindex" />
+
     <style>
+        .textContainer ul{
+            padding:15px !important;
+        }
         body{
             font-family: 'K2D', sans-serif !important;
         }
@@ -145,8 +151,6 @@
             height: 12px;
             border-radius: 50%;
             background:#f8204f;
-
-
         }
 
         /* The check */

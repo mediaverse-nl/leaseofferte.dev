@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="mediaver" preserveTimestamps="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="leaseofferte" preserveTimestamps="false">
     <serverData>
-      <paths name="mediaver">
+      <paths name="bedrijfs website">
         <serverdata>
           <mappings>
             <mapping deploy="/private_html" local="$PROJECT_DIR$/public" web="/" />
             <mapping deploy="/laravel-leaseofferte" local="$PROJECT_DIR$" web="" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="hostnet leaseofferte">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="leaseofferte">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/private_html" local="$PROJECT_DIR$/public" web="/" />
+            <mapping deploy="/laravel-leaseofferte" local="$PROJECT_DIR$" web="" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="panel">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="tst">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/private_html" local="$PROJECT_DIR$/public" web="/" />
+            <mapping deploy="/laravel-leaseofferte" local="$PROJECT_DIR$" web="" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="wned">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

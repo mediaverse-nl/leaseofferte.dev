@@ -24,7 +24,7 @@
                 <ol class="breadcrumb" style="padding: 5px 0px !important; margin-bottom: 0px !important;">
                     <li class="breadcrumb-item"><a href="{!! route('site.home') !!}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{!! route('site.autolease') !!}">Autolease</a></li>
-                    <li class="breadcrumb-item active">Lease operational</li>
+                    <li class="breadcrumb-item active">Operational lease </li>
                 </ol>
             </nav>
             <div class="row" style="padding: 30px 0px 50px 0px;">
@@ -74,7 +74,7 @@
                         @endforeach
                         <hr >
 
-                        <span class="font-weight-bold" style="color: #006A8E;">Auto merken</span>
+                        <span class="font-weight-bold" style="color: #006A8E;">Auto merk</span>
                         <ul class="checkboxes {{count($brands) > 5 ? '' : 'active'}}" id="brandChecks" style="height: 165px; list-style: none; margin-bottom: 0px; padding: 0px !important;">
                             @foreach($brands as $brand)
                                 <li>
@@ -148,6 +148,16 @@
                         </div>
                         <hr >
 
+                        <span class="font-weight-bold" style="color: #006A8E;">Transmissie</span>
+                        @foreach($baseOffers->transmission() as $i)
+                            <label class="checkbox"> {!! $i !!}
+                                <input type="checkbox" name="transmission[]" value="{!! $i !!}"
+                                    {!! !empty($filter['transmission']) ? (in_array($i, $filter['transmission']) ? 'checked' : '') : '' !!}>
+                                <span class="checkmark checkbox-square"></span>
+                            </label>
+                        @endforeach
+                        <hr >
+
                         <span class="font-weight-bold" style="color: #006A8E;">Aantal deuren</span>
                         @foreach($baseOffers->amountOfDoors() as $i)
                             <label class="checkbox"> {!! $i !!}
@@ -160,6 +170,7 @@
 
                         <span class="font-weight-bold" style="color: #006A8E;">Kleuren</span>
                         <ul class="checkboxes {{count($colors) > 5 ? '' : 'active'}}" id="colorChecks" style="list-style: none; margin-bottom: 0px; padding: 0px !important;">
+
                             @foreach($colors as $color)
                                 <li>
                                     <label for="color{!! $color !!}" class="checkboxLabel checkbox" style="text-transform:capitalize;">
@@ -188,7 +199,7 @@
                             @foreach($offers as $offer)
                                 <div class="grid-item category-{!!  $offer->id !!}" style="padding: 10px;" onmouseover='$("#content-{!! $offer->id !!}").show();' onmouseout='$("#content-{!! $offer->id !!}").hide();'>
                                     <a href="{!! route('site.offer.show', [$offer->urlTitle, $offer->id]) !!}" style="text-decoration: none;">
-                                        <div style="background-image: url('{!! $offer->thumbnail() !!}'); height: 100%; background-position: center center; background-repeat:no-repeat; background-size: contain !important;"></div>
+                                        <div role="img" aria-label="{!! $offer->title !!}" style="background-image: url('{!! str_replace('https://mediaverse-dev.nl/', '/', $offer->thumbnail()) !!}'); height: 100%; background-position: center center; background-repeat:no-repeat; background-size: contain !important;"></div>
 
                                         <span style="margin-left: -10px;">
                                     <div class="" id="content-{!! $offer->id !!}" style='margin-top: -25px; width:100%;display:none; background: #009FD6;'>
@@ -212,390 +223,11 @@
 
 @push('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.1/css/bootstrap-slider.min.css">
-    <style>
-        .show_more{
-            color: #006A8E;
-            font-size: 12px;
-        }
-        .checkboxes.active {
-            height: auto !important;
-        }
-        .checkboxes {
-            height: 100px;
-            overflow: hidden;
-        }
-        .slider.slider-horizontal .slider-track {
-            height: 5px;
-            margin-top: -3px;
-        }
-        .slider-selection{
-            background-color: #009FD6 !important;
-            background-image: none !important;
-        }
-
-        .slider-handle{
-            background-color: #009FD6 !important;
-            background-image: none !important;
-        }
-        .slider.slider-horizontal{
-            width: 90%;
-            margin-left: 5%;
-            margin-right: 5%;
-        }
-
-        /*// Extra small devices (portrait phones, less than 576px)*/
-        @media (max-width: 575.98px) {
-            .grid-item {
-                width: 100%;
-                border: 1px solid gray;
-                height: 200px;
-            }
-        }
-
-        /*// Small devices (landscape phones, 576px and up)*/
-        @media (min-width: 576px) and (max-width: 767.98px) {
-            .grid-item {
-                width: 33.33%;
-                border: 1px solid gray;
-                height: 200px;
-            }
-        }
-
-        /*// Medium devices (tablets, 768px and up)*/
-        @media (min-width: 768px) and (max-width: 991.98px) {
-            .grid-item {
-                width: 25%;
-                border: 1px solid gray;
-                height: 200px;
-            }
-        }
-
-        /*// Large devices (desktops, 992px and up)*/
-        @media (min-width: 992px) and (max-width: 1199.98px) {
-            .grid-item {
-                width: 25%;
-                border: 1px solid gray;
-                height: 200px;
-            }
-        }
-
-        /*// Extra large devices (large desktops, 1200px and up)*/
-        @media (min-width: 1200px) {
-            .grid-item {
-                width: 25%;
-                border: 1px solid gray;
-                height: 200px;
-            }
-        }
-        .grid-item span{
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            margin: 0 auto;
-        }
-        .grid-item{
-            overflow: hidden;
-            background-position: center center;
-            background-size: cover !important;
-            border: 1px solid transparent !important;
-            padding-bottom: 20px;
-        }
-        .grid-item:hover{
-            border-radius: 4px;
-            border: 1px solid #D9E9EE !important;
-        }
-        .grid-item--width2 {
-            width: 50%;
-        }
-        #stepsForm{
-            margin-top: 0px !important;
-            border-radius: 0px !important;
-            border: none !important;
-        }
-        #stepsForm .card-header{
-            margin-left: 20px;
-            margin-right: 20px;
-            margin-top: 0px !important;
-            border-radius: 0px !important;
-            border: 1px solid rgba(0, 0, 0, 0.125);
-        }
-        .jumbotron {
-            background-color: #009FD6;
-            background-size: cover;
-            background-position: center center;
-            border-radius: 0px;
-            color: #FFFFFF;
-        }
-        .img-thumbnail{
-            border: none !important;
-        }
-        .card-header{
-            border-radius: 0px !important;
-        }
-        /* Hide the browser's default checkbox */
-        .checkbox {
-            color: #000;
-            /*color: #009FD6;*/
-            display: block;
-            padding-top: 3px;
-            position: relative;
-            padding-left: 35px;
-            /*margin-bottom: 12px;*/
-            cursor: pointer;
-            font-size: 14px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        /* Hide the browser's default radio button */
-        .checkbox input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-        }
-
-        /* Create a custom radio button */
-        .checkmark {
-            /*margin-top: 5px;*/
-            position: absolute;
-            margin-top: 4px;
-            top: 0;
-            left: 0;
-            height: 20px;
-            width: 20px;
-            background-color: #eee;
-            border-radius: 50%;
-        }
-
-        .checkbox-square {
-        /*    !*margin-top: 5px;*!*/
-        /*    position: absolute;*/
-        /*    margin-top: 4px;*/
-        /*    top: 0;*/
-        /*    left: 0;*/
-        /*    height: 20px;*/
-        /*    width: 20px;*/
-        /*    background-color: #eee;*/
-            border-radius: 0% !important;
-        }
-
-        /* On mouse-over, add a grey background color */
-        .checkbox:hover input ~ .checkmark {
-            background-color: #ccc;
-        }
-
-        /* When the radio button is checked, add a blue background */
-        .checkbox input:checked ~ .checkmark {
-            background-color: #009FD6;
-        }
-
-        /* Create the indicator (the dot/circle - hidden when not checked) */
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-
-        /* Show the indicator (dot/circle) when checked */
-        .checkbox input:checked ~ .checkmark:after {
-            display: block;
-        }
-
-        /* Style the indicator (dot/circle) */
-        .checkbox .checkmark:after {
-            left: 7px;
-            top: 3px;
-            width: 6px;
-            height: 12px;
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-    </style>
+    <link rel="stylesheet" href="/css/lease-offers.css">
 @endpush
 
 @push('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.1/bootstrap-slider.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-    <script>
-        $(document).ready(function(){
-
-            function priceRange(value){
-                var val = value.split(",");
-                var minPrice = val[0];
-                var maxPrice = val[1];
-                $("#maxPrice").html(maxPrice);
-                $("#minPrice").html(minPrice);
-            }
-            priceRange($('#priceRange').val());
-
-            $('#priceRange').bind('change', function() {
-                priceRange($('#priceRange').val());
-            });
-
-            var timer;
-            function intervalTimer() {
-                if (timer) clearInterval(timer);
-                timer = setInterval(function() {
-                    clearInterval(timer);
-                    submitForm();
-                }, 1500);
-            }
-            function submitForm(){
-                $( "#filterForm" ).submit();
-            }
-            $('#datetimepicker1').change(function() {
-                intervalTimer();
-            });
-
-            $('#filterForm').change(function() {
-                intervalTimer();
-            });
-
-            var allRadios = document.getElementById('fuel');
-            var booRadio;
-            var x = 0;
-            for(x = 0; x < allRadios.length; x++){
-                allRadios[x].onclick = function() {
-                    if(booRadio == this){
-                        this.checked = false;
-                        booRadio = null;
-                    } else {
-                        booRadio = this;
-                    }
-                };
-            }
-            // store filter for each group
-            var buttonFilters = {};
-            var buttonFilter;
-            // quick search regex
-            var qsRegex;
-
-            // init Isotope
-            var $grid = $('.grid').isotope({
-                itemSelector: '.grid-item',
-                layoutMode: 'fitRows',
-                animationOptions: {
-                    duration: 750,
-                    easing: 'easein',
-                    queue: true
-                },
-                getSortData: {
-                    name: '.name',
-                    symbol: '.symbol',
-                    number: '.number parseInt',
-                    category: '[data-category]',
-                    weight: function( itemElem ) {
-                        var weight = $( itemElem ).find('.weight').text();
-                        return parseFloat( weight.replace( /[\(\)]/g, '') );
-                    }
-                },
-                filter: function() {
-                    var $this = $(this);
-                    var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
-                    var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
-                    return searchResult && buttonResult;
-                }
-            });
-
-            // bind filter on radio button click
-            $('#filters').on('click', 'input', function() {
-                // get filter value from input value
-                var $this = $(this);
-                var $buttonGroup = $this.parents('.button-group');
-                var filterGroup = $buttonGroup.attr('data-filter-group');
-                // set filter for group
-                buttonFilters[ filterGroup ] = this.value;
-                // combine filters
-                buttonFilter = concatValues( buttonFilters );
-                // Isotope arrange
-                $grid.isotope();
-            });
-
-            // change is-checked class on buttons
-            $('.button-group').each( function( i, buttonGroup ) {
-                var $buttonGroup = $( buttonGroup );
-                $buttonGroup.on( 'click', 'button', function() {
-                    $buttonGroup.find('.is-checked').removeClass('is-checked');
-                    $( this ).addClass('is-checked');
-                });
-            });
-
-            // debounce so filtering doesn't happen every millisecond
-            function debounce( fn, threshold ) {
-                var timeout;
-                threshold = threshold || 100;
-                return function debounced() {
-                    clearTimeout( timeout );
-                    var args = arguments;
-                    var _this = this;
-                    function delayed() {
-                        fn.apply( _this, args );
-                    }
-                    timeout = setTimeout( delayed, threshold );
-                };
-            }
-
-            // flatten object by concatting values
-            function concatValues( obj ) {
-                var value = '';
-                for ( var prop in obj ) {
-                    value += obj[ prop ];
-                }
-                return value;
-            }
-
-            if($('.checkboxes li').length)
-            {
-                var boxes = $('.checkboxes li');
-
-                boxes.each(function()
-                {
-                    var box = $(this);
-
-                    box.on('click', function()
-                    {
-                        if(box.hasClass('active'))
-                        {
-                            box.find('i').removeClass('fa-square');
-                            box.find('i').addClass('fa-square-o');
-                            box.toggleClass('active');
-                        }
-                        else
-                        {
-                            box.find('i').removeClass('fa-square-o');
-                            box.find('i').addClass('fa-square');
-                            box.toggleClass('active');
-                        }
-                        // box.toggleClass('active');
-                    });
-                });
-
-                if($('.show_more').length)
-                {
-                    $('.show_more').on('click', function(e)
-                    {
-                        var checkboxes = $('.checkboxes#'+this.getAttribute('data-id'));
-                        var checkboxesActive = $('.checkboxes.active#'+this.getAttribute('data-id'));
-
-                        var contentName = $(this);
-
-                        if(checkboxesActive.length >= 1){
-                            contentName.html('<b><span>+</span> laat meer zien</b>')
-                        }else {
-                            contentName.html('<b><span>-</span> laat minder zien</b>')
-                        }
-
-                        checkboxes.toggleClass('active');
-                    });
-                }
-            };
-        });
-    </script>
+    <script src="/js/lease-offers.js"></script>
 @endpush

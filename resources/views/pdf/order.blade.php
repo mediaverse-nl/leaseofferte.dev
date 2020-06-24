@@ -41,7 +41,7 @@
     <table class="table" cellpadding="0" cellspacing="0">
         <tr style="width: 100%;">
             <td class="text-center" style="width: 100%; border: none !important;">
-                <img src="https://mediaverse-dev.nl/img/leaseofferte-logo.png" style="width:270px; ">
+                <img src="https://leaseofferte.com/img/leaseofferte-logo.png" style="width:270px; ">
             </td>
         </tr>
     </table>
@@ -126,7 +126,7 @@
                     </tr>
                     @foreach($tableFieldsOne as $f)
                         <tr>
-                            <td style="width: 50%;">{!! ucfirst($f->field_name) !!}</td>
+                            <td style="width: 50%;">{!! ucfirst($f->field_name == 'email' ? 'E-mail' : $f->field_name) !!}</td>
                             <td style="">
                                 {!! isset($data[StripReplace($f->field_name)]) ? $data[StripReplace($f->field_name)] : '' !!}
                             </td>
@@ -143,7 +143,7 @@
                     </tr>
                     @foreach($tableFieldsTwo as $f)
                         <tr>
-                            <td style="width: 50%;">{!! ucfirst($f->field_name) !!}</td>
+                            <td style="width: 50%;">{!! ucfirst($f->field_name == 'email' ? 'E-mail' : $f->field_name) !!}</td>
                             <td id="type_uitvoering" style="">
                                 {!! isset($data[StripReplace($f->field_name)]) ? $data[StripReplace($f->field_name)] : '' !!}
                             </td>
@@ -154,9 +154,11 @@
         </div>
     </div>
 
-
     <small class="text-muted">
-        Op onze dienstverlening zijn de algemene voorwaarden LEASEOFFERTE.com welke zijn gedeponeerd bij de Kamer van Koophandel onder nummer 30220695.
+        Op onze dienstverlening zijn de algemene voorwaarden van LEASEOFFERTE.com van toepassing, welke zijn gedeponeerd bij de Kamer van Koophandel onder nummer 30220695.
+        Dit voorstel betreft een indicatief leasevoorstel.
+        <br>
+        <br>
         Druk en zetfouten voorbehouden en kunnen geen rechten aan worden ontleend.
     </small>
 

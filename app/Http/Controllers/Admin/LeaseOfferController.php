@@ -61,6 +61,7 @@ class LeaseOfferController extends Controller
         $solution->title = $request->title;
         $solution->description = $request->description;
         $solution->uitvoering = $request->uitvoering;
+        $solution->transmission = $request->transmission;
         $solution->merk = $request->merk;
         $solution->type = $request->type;
         $solution->aantal_deuren = $request->number_of_doors;
@@ -122,6 +123,7 @@ class LeaseOfferController extends Controller
         $solution->images = $request->images;
         $solution->title = $request->title;
         $solution->description = $request->description;
+        $solution->transmission = $request->transmission;
         $solution->uitvoering = $request->uitvoering;
         $solution->merk = $request->merk;
         $solution->type = $request->type;
@@ -167,7 +169,7 @@ class LeaseOfferController extends Controller
     public function destroy($id)
     {
         $solution = $this->solution->findOrFail($id);
-
+//        dd($solution);
         $solution->delete();
 
         return redirect()

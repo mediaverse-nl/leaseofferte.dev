@@ -26,13 +26,21 @@ class LeaseOffer extends Model
 
     public function getUrlTitleAttribute()
     {
-        $url = preg_replace('~[^\\pL0-9_]+~u', '-', $this->title);
+        $url = preg_replace('~[^\\pL0-9_]+~u', '-', $this->merk." ". $this->type);
         $url = trim($url, "-");
         $url = iconv("utf-8", "us-ascii//TRANSLIT", $url);
         $url = strtolower($url);
         $url = preg_replace('~[^-a-z0-9_]+~', '', $url);
 
         return $url;
+    }
+
+    public function getFuelAttribute(){
+        return $this->brandstof;
+    }
+
+    public function getNumberOfDoorsAttribute(){
+        return $this->aantal_deuren;
     }
 
     public function images($amount = '*')
@@ -67,6 +75,14 @@ class LeaseOffer extends Model
             3,
             4,
             5
+        ];
+    }
+
+    public static function transmission()
+    {
+        return [
+            'Handgeschakeld',
+            'Automaat',
         ];
     }
 

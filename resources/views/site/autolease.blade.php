@@ -77,13 +77,5 @@
 @endsection
 
 @push('css')
-    <style>
-        .jumbotron {
-            background-color: #009FD6;
-            background-size: cover;
-            background-position: center center;
-            border-radius: 0px;
-            color: #FFFFFF;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/autolease.css">
 @endpush

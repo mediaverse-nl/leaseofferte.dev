@@ -23,7 +23,7 @@ class LeaseSolutionController extends Controller
 
     public function index()
     {
-        $solutions = $this->solution->orderBy('title')->get();
+        $solutions = $this->solution->with('category')->orderBy('title')->get();
         $categories = $this->category->orderBy('value')->get();
 
         return view('site.lease-solutions', compact('solutions', 'categories'));
@@ -31,7 +31,7 @@ class LeaseSolutionController extends Controller
 
     public function show($title, $id)
     {
-        $solution = $this->solution->findOrFail($id);
+        $solution = $this->solution->with('category')->findOrFail($id);
 
         //default seo
         $this->seo()
@@ -42,7 +42,7 @@ class LeaseSolutionController extends Controller
         $this->seo()
             ->opengraph()
             ->addProperty('type', 'site')
-            ->addImage($solution->thumbnail())
+            ->addImage(str_replace('https://mediaverse-dev.nl', 'https://www.leaseofferte.com/', $solution->thumbnail()))
             ->setTitle($solution->meta_title)
             ->setUrl(url()->current())
             ->addProperty('type', 'website');
@@ -51,7 +51,6 @@ class LeaseSolutionController extends Controller
             ->twitter()
             ->setTitle($solution->meta_title);
 
-//        dd($solution, $id, $title);
         if ($solution->urlTitle !== $title){
             return redirect()->route('site.solution.show', [$solution->urlTitle, $solution->id]);
         }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Site;
 
 use App\Category;
 use App\Http\Requests\Site\CalculatorForm\StepOneRequest;
+use App\LeaseOffer;
+use App\Mail\AdminOperationalOrderRequest;
 use App\Mail\AdminOrderRequest;
 use App\Mail\OperationalOrderRequest;
 use App\Mail\OrderRequest;
@@ -35,7 +37,7 @@ class CalculatorController extends Controller
 
         if (session('formFields')){
             $objectGroup = $request->object;
-            $category = (new Solution())->find($objectGroup)->category;
+            $category = (new Solution())->with('category.dynamicFields')->find($objectGroup)->category;
             $fields = [];
             if (session('formSteps') >= 2){
                 foreach ($category->dynamicFields()->where('form_part', '=', session('formSteps'))->get() as $f){
@@ -101,8 +103,6 @@ class CalculatorController extends Controller
 
     public function operational(Request $request)
     {
-//        dd($request['bestanden']);
-//        dd($request->except(['g-recaptcha-response']));
         $validator = Validator::make($request->all(), [
             'jaarkilometrage' => 'required|numeric',
             'looptijd' => 'required',
@@ -126,13 +126,14 @@ class CalculatorController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }else {
+
             Mail::to($request->email)
                 ->send(new OperationalOrderRequest($request->except(['_token', 'g-recaptcha-response'])));
 
-//            Mail::to(env('MAIL_ADMIN'))
-//                ->send(new AdminOrderRequest($request->except(['_token', 'g-recaptcha-response'])));
+            Mail::to(env('MAIL_ADMIN'))
+                ->send(new AdminOperationalOrderRequest($request->except(['_token', 'g-recaptcha-response'])));
 
-            session()->flash('orderStatus', 'success');
+            session()->flash('orderStatusOperational', 'success');
 
             return redirect(url()->previous().'#stepsForm');
         }

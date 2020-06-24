@@ -11,7 +11,7 @@ class SiteMapController extends Controller
     public function __invoke()
     {
 //        return public_path('sitemap.xml');
-        return SitemapGenerator::create('https://mediaverse-dev.nl')
+        return SitemapGenerator()->create('https://leaseofferte.com')
             ->writeToFile(public_path('sitemap.xml'), 'sitemap.xml');
     }
 }

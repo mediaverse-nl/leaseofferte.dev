@@ -24,7 +24,7 @@
                  <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
 
                     <div class="card-body" style="padding: 30px; padding-bottom: 60px;">
-                        {!! $page->body !!}
+                        {!! str_replace('https://mediaverse-dev.nl/', '/', $page->body) !!}
                     </div>
                 </div>
 

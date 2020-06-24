@@ -20,7 +20,7 @@ if(empty($clientConfigurationId) || !is_numeric($clientConfigurationId)) {
 
 /* CAW settings */
 $caw4Page		= '/autos' . $endSlash;
-$websiteUrl		= env('APP_URL');
+$websiteUrl		= (env('APP_URL'));
 $defaultMapper  = array('btw' => 'btw', 'voertuigsoort' => 'nieuw,occasion', 'prijs' => '7950-999999', 'bouwjaar' => '2007-2099', 'sortering' => 'prijs-oplopend' );
 
 Caw4Include::setClientConfigurationId($clientConfigurationId);

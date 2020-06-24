@@ -37,7 +37,11 @@ if (!function_exists('getLeasePrice')) {
         $avg = $countUp / count($arr) / 12;
 
         $total = ($total / $looptijd) + ($avg) + ($slottermijn * $financeRate / 12);
-//        dd($total, $avg, round($countUp));
+
+        if ( $total < 0 ) {
+            $total = 0;
+        };
+
         return number_format($total, 2, ',','.');
     }
 }

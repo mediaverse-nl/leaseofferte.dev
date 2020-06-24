@@ -81,6 +81,11 @@ class MailController extends Controller
         return $pdf->stream();
     }
 
+    public function adminOfferte()
+    {
+        return new AdminOrderRequest($this->data);
+    }
+
     public function offerte()
     {
         return new OrderRequest($this->data);

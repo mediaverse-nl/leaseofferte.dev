@@ -1,14 +1,14 @@
 <?php
 
-Route::get('widget', function (){
-    return view('widget');
-});
-Route::get('test-widget', function (){
-    return view('test');
-});
+//Route::get('/widget', 'WidgetController@widget')->middleware(['calculatorToken']);
+//Route::get('/test-widget', 'WidgetController@test');
+
+//Route::get('/linkstorage', function () {
+//    Artisan::call('storage:link');
+//});
 
 //admin
-Route::name('admin.')->namespace('Admin')->middleware('isAdmin')->prefix('admin/') ->group(function () {
+Route::name('admin.')->namespace('Admin')->middleware(['isAdmin'])->prefix('admin/') ->group(function () {
     Route::get('/', 'DashboardController')->name('dashboard'); ;
     Route::get('/dashboard', 'DashboardController');
     Route::resource('pages', 'PageController');
@@ -24,10 +24,10 @@ Route::name('admin.')->namespace('Admin')->middleware('isAdmin')->prefix('admin/
     Route::get('file-manager', 'FileManagerController@index')->name('file-manager.index');
     Route::get('notificaties', 'NotificationController@index')->name('notification.index');
     Route::get('notificaties/{id}', 'NotificationController@show')->name('notification.show');
-
     Route::get('/mail-preview-1', 'MailController@contact')->name('contact');
     Route::get('/mail-preview-2', 'MailController@offerte')->name('offerte');
     Route::get('/mail-preview-3', 'MailController@operational')->name('operational');
+    Route::get('/mail-preview-4', 'MailController@adminOfferte')->name('admin.operational');
     Route::get('/pdf-operational', 'MailController@operationalPdf')->name('pdf.operational');
     Route::get('/pdf-order', 'MailController@offertePdf')->name('pdf.order');
 });
@@ -40,20 +40,15 @@ Route::get('/site-map', 'Site\SiteMapController');
 
 Auth::routes(['verify' => false, 'register' => false]);
 
-Route::post('refresh-csrf', function(){
-    return csrf_token();
-});
-
 //site
-Route::name('site.')->namespace('Site')->group(function () {
-    //cartel module test
+Route::name('site.')->namespace('Site')
+//    ->middleware('optimize')
+    ->group(function () {
     Route::get('/autos/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}', 'CartelController@index')->name('cartel.index');
-
     Route::get('/home', 'WelcomeController');
     Route::get('/', 'WelcomeController')->name('home');
-
     Route::get('autolease', 'SiteController@autolease')->name('autolease');
-
+    Route::post('refresh-csrf', 'TokenRefreshController');
     Route::get('info/nieuws', 'NewsController@index')->name('news.index');
     Route::get('info/nieuws/{title}/{id}', 'NewsController@show')->name('news.show');
     Route::get('/contact', 'ContactController@index')->name('contact.index');
@@ -67,16 +62,13 @@ Route::name('site.')->namespace('Site')->group(function () {
     Route::get('/privacy-en-cookiebeleid', 'SiteController@policy')->name('privacy');
     Route::get('/lease-oplossingen', 'LeaseSolutionController@index')->name('solution.index');
     Route::get('/lease-oplossingen-{title}/{id}', 'LeaseSolutionController@show')->name('solution.show');
-
     Route::get('/operational-lease', 'LeaseOfferController@index')->name('offer.index');
     Route::get('/operational-lease-{title}/{id}', 'LeaseOfferController@show')->name('offer.show');
-
-    Route::get('/{slug}', 'PageController@show')->name('page.show'); //This replaces all the individual routes
+    Route::get('/{slug}', 'PageController@show')->name('page.show');
 });
 
 Route::post('/text-editor-{id}', 'Api\TextEditorController@edit');
 Route::get('/lease-calculator', 'Api\LeaseCalculatorController@show');
-
 
 //Route::get('/symlink', function (){
 //    return symlink(

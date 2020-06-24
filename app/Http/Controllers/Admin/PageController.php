@@ -58,6 +58,7 @@ class PageController extends Controller
 
         $page->slug = $request->slug;
         $page->title = $request->title;
+        $page->title = $request->title;
         $page->body = $request->body;
         $page->meta_description = $request->meta_description;
         $page->meta_title = $request->meta_title;
@@ -70,6 +71,11 @@ class PageController extends Controller
             $page->options = 1;
         }else{
             $page->options = 0;
+        }
+        if ($request->options_2 == "on"){
+            $page->options_2 = 1;
+        }else{
+            $page->options_2 = 0;
         }
 
         $page->save();
@@ -94,6 +100,16 @@ class PageController extends Controller
             $page->restore();
         }else{
             $page->delete();
+        }
+        if ($request->options == "on"){
+            $page->options = 1;
+        }else{
+            $page->options = 0;
+        }
+        if ($request->options_2 == "on"){
+            $page->options_2 = 1;
+        }else{
+            $page->options_2 = 0;
         }
 
         return redirect()

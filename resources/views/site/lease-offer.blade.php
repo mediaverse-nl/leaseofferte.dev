@@ -7,7 +7,7 @@
                 <ol class="breadcrumb" style="padding: 5px 0px !important; margin-bottom: 0px !important;">
                     <li class="breadcrumb-item"><a href="{!! route('site.home') !!}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{!! route('site.autolease') !!}">Autolease</a></li>
-                    <li class="breadcrumb-item "><a href="{!! route('site.offer.index') !!}">Lease operational</a> </li>
+                    <li class="breadcrumb-item "><a href="{!! route('site.offer.index') !!}">Operational lease</a> </li>
                     <li class="breadcrumb-item active">{!! $offer->title !!}</li>
                 </ol>
             </nav>
@@ -26,13 +26,13 @@
             <div class="col-md-12 col-lg-8" style="margin-bottom:120px;">
                 <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
                     <div class="card-body" style="padding: 30px;">
-                        <h1 class="h1" style="color: #006A8E">{!! $offer->merk !!} {!! $offer->type !!}</h1>
+                        <h1 class="h1" style="color: #006A8E">{!! $offer->merk.' '.$offer->type !!}</h1>
                         <h2 class="h5" style="color: #006A8E">{!! $offer->uitvoering !!}</h2>
 
                         <div class="slider-for">
                             @if(isset($offer->images))
                                 @foreach(explode(',', $offer->images) as $img)
-                                    <img src="{!! $img !!}" alt="" class="img-fluid">
+                                    <img src="{!! str_replace('https://mediaverse-dev.nl/', '/', $img) !!}" alt="{!!  $offer->merk.' '.$offer->type.' '.$offer->uitvoering  !!}" class="img-fluid">
                                 @endforeach
                             @endif
                          </div>
@@ -41,14 +41,15 @@
                             <div class="slider-nav">
                                 @if(isset($offer->images))
                                     @foreach(explode(',', $offer->images) as $img)
-                                         <img src="{!! $img !!}" alt="" class="img-fluid">
+                                         <img src="{!! str_replace('https://mediaverse-dev.nl/', '/', $img) !!}" alt="" class="img-fluid">
                                     @endforeach
                                 @endif
                              </div>
                         </div>
 
                         @include('components.collapse-text', [
-                            'description' => $offer->description
+                            'description' => $offer->description,
+                            'data' => $offer
                         ])
 
                     </div>
@@ -59,7 +60,8 @@
                     <div class="card-body" style="color: #6F777A !important; padding: 30px;">
                         @include('components.success-order-model')
 
-                        <h1 class="h1" style="color: #006A8E">{!! $offer->merk !!}</h1>
+                        <span class="h1" style="color: #006A8E">Leasetarieven </span> <br>
+{{--                        <small>{!! $offer->type !!}</small>--}}
 
                         <table >
                             @foreach($offer->operationalLeasePrices as $i)
@@ -75,19 +77,16 @@
                                 </tr>
                             @endforeach
                         </table>
-                        <small class="text-muted">Prijzen onder voorbehoud *</small>
-
-                        <br>
                         <br>
 
                         <table cellpadding="">
                             <tr>
-                                <td><b style="padding-right: 5px;">Catalogusprijs:</b> </td>
-                                <td>&euro; {!! number_format($offer->catalogusprijs) !!}</td>
+                                <td><b style="padding-right: 5px;">Fiscale waarde:</b> </td>
+                                <td>&euro; {!! number_format($offer->catalogusprijs, 0, ',', '.') !!},-</td>
                             </tr>
                             <tr>
-                                <td><b>Bijtelling:</b></td>
-                                <td>{!! ( $offer->bijtelling) !!}%</td>
+                                <td><b>Bijtelling: </b></td>
+                                <td>{!! ( $offer->bijtelling) !!}% <small>(gemiddeld)</small></td>
                             </tr>
                         </table>
 

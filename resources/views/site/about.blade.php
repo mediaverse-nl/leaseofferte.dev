@@ -38,7 +38,7 @@
 
 
                     <div class="col-md-6">
-                        <div class="card" style="margin-top:30px; border: none !important; background: #005774 !important;">
+                        <div class="card" style="margin-top:30px; border: none !important; background: #FFFFFF !important;">
                             <div class="card-body" style="padding: 30px; padding-bottom: 60px;">
                                 {!! Editor('info_3_paragraaf', 'richtext', false, "") !!}
                             </div>

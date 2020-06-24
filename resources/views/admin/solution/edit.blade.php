@@ -76,11 +76,11 @@
                     <div class="form-group">
                         <label for="">Images</label>
                         <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <a id="lfm" data-input="productThumbnail" data-preview="imgHolder" class="btn btn-primary text-white" style="border-radius: 0px !important;">
-                                            <i class="fa fa-picture-o"></i> Choose
-                                        </a>
-                                    </span>
+                            <span class="input-group-btn">
+                                <a id="lfm" data-input="productThumbnail" data-preview="imgHolder" class="btn btn-primary text-white" style="border-radius: 0px !important;">
+                                    <i class="fa fa-picture-o"></i> Choose
+                                </a>
+                            </span>
                             <input id="productThumbnail" class="form-control" type="text" disabled
                                    value="{!! $solution->image !!}">
                             {!! Form::hidden('image', $solution->image, ['id' => 'productThumbnailCopy', 'class' => 'form-control'.(!$errors->has('images') ? '': ' is-invalid ')]) !!}

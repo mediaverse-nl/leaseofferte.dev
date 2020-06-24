@@ -45,7 +45,7 @@
                                 {!! Form::text('rate', '0 ~ 24999', ['disabled', 'class' => 'disabled form-control'.(!$errors->has('rate[1]') ? '': ' is-invalid ')]) !!}
                             </td>
                             <td>
-                                {!! Form::number('rate[1]', 5.05, ['min="0.001"max="100"', 'step="any"', 'class' => 'form-control'.(!$errors->has('rate[1]') ? '': ' is-invalid ')]) !!}
+                                {!! Form::number('rate[1]', 0.0580, ['min="0.001"max="100"', 'step="any"', 'class' => 'form-control'.(!$errors->has('rate[1]') ? '': ' is-invalid ')]) !!}
                                 @include('components.error', ['field' => 'rate[1]'])
                             </td>
                         </tr>
@@ -54,7 +54,7 @@
                                 {!! Form::text('rate', '25000 ~ 49999', ['disabled', 'class' => 'disabled form-control'.(!$errors->has('rate[2]') ? '': ' is-invalid ')]) !!}
                             </td>
                             <td>
-                                {!! Form::number('rate[2]', 4.05, ['min="0.001"max="100"', 'step="any"', 'class' => 'form-control'.(!$errors->has('rate[2]') ? '': ' is-invalid ')]) !!}
+                                {!! Form::number('rate[2]', 0.0540, ['min="0.001"max="100"', 'step="any"', 'class' => 'form-control'.(!$errors->has('rate[2]') ? '': ' is-invalid ')]) !!}
                                 @include('components.error', ['field' => 'rate[2]'])
                             </td>
                         </tr>
@@ -63,7 +63,7 @@
                                 {!! Form::text('rates', '50000 ~ 99999', ['disabled', 'class' => 'form-control'.(!$errors->has('rate[3]') ? '': ' is-invalid ')]) !!}
                             </td>
                             <td>
-                                {!! Form::number('rate[3]', 3.05, ['min="0.001"max="100"', 'step="any"', 'class' => 'form-control'.(!$errors->has('rate[3]') ? '': ' is-invalid ')]) !!}
+                                {!! Form::number('rate[3]', 0.0480, ['min="0.001"max="100"', 'step="any"', 'class' => 'form-control'.(!$errors->has('rate[3]') ? '': ' is-invalid ')]) !!}
                                 @include('components.error', ['field' => 'rate[3]'])
                             </td>
                         </tr>

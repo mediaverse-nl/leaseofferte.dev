@@ -1,0 +1,26 @@
+.g-recaptcha {
+  transform: scale(0.77);
+  transform-origin: 0 0;
+}
+
+h1,
+h2 {
+  color: #006A8E !important;
+}
+
+.jumbotron {
+  background-color: #009FD6;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 0px;
+  color: #FFFFFF;
+}
+
+.img-thumbnail {
+  border: none !important;
+}
+
+.card-header {
+  border-radius: 0px !important;
+}
+

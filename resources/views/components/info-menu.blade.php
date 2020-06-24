@@ -1,9 +1,9 @@
 @php
-    $Solutions = \App\Page::orderBy('title')->get(['title', 'slug']);
+    $Solutions = \App\Page::orderBy('title')->where('options_2', '!=', '0')->get(['title', 'slug']);
 
     $baseList = [
         [
-            'title' => 'Informatie',
+            'title' => 'Over LEASEOFFERTE.com',
             'slug' => substr(route('site.about', [], false), 1),
             'static' => true,
         ], [
@@ -29,6 +29,7 @@
             </span>
         </div>
         <ul class="list-group list-group-flush" style="padding: 0px;">
+{{--            {!! dd($Solutions) !!}--}}
             @foreach($Solutions as $s)
                 <li class="list-group-item {{request()->is($s['slug'].(isset($s['static']) ? '' : '*')) ? 'active' : ''}}">
                     <a href="{!! route('site.page.show', $s['slug']) !!}" >
@@ -50,8 +51,12 @@
         .list-group.list-group-flush > .list-group-item a{
             color: #6c757d !important;
         }
+        .list-group {
+            padding-left: 0px !important;
+        }
         .list-group.list-group-flush > .list-group-item.active{
             background: #009FD6 !important;
         }
+
     </style>
 @endpush

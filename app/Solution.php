@@ -24,7 +24,7 @@ class Solution extends Model
     public function getFinancialRate($totalPrice){
         $category = $this->category;
 
-        if ((0 <= $totalPrice) && ($totalPrice <= 24999)){
+        if ($totalPrice <= 24999){
             $interestRate = explode(",", $category->interest_rate)[0];
         }elseif ((25000 <= $totalPrice) && ($totalPrice <= 49999)){
             $interestRate = explode(",", $category->interest_rate)[1];

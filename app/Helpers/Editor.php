@@ -47,6 +47,6 @@ if (!function_exists('Editor')) {
                 $readableText = str_replace('@'.$key, $v, $readableText);
             }
         }
-        return $readableText;
+        return str_replace('https://mediaverse-dev.nl/', '/', $readableText);
     }
 }

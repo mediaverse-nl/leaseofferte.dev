@@ -1,8 +1,176 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
 
+//@import "~@fortawesome";
+//$fa-font-path: "~font-awesome/fonts";
+//@import "~@fontawesome/scss/font-awesome";
+
+//@import "~@fortawesome/scss/fontawesome.scss";
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.form-control{
+    border-color: #D9E9EE;
+    border-radius: 4px;
+}
+.btn.dropdown-toggle.btn-light{
+    border-color: #D9E9EE !important;
+}
+.slick-slide {
+    outline: none
+}
+.btn-default{
+    background: #f78e0c !important;
+    color: #FFFFFF;
+}
+.btn{
+    border-radius: 4px !important;
+}
+.breadcrumb{
+    background: none;
+}
+.jumbotron{
+    /*margin-bottom: 0px !important;*/
+}
+.nav-item a{
+    /*color: black !important;*/
+}
+a {
+    color: inherit;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+//@font-face {
+//    font-family: 'WildCoorg';
+//    font-style: normal;
+//    font-weight: 400;
+//    font-display: swap; /* Add this to your @font-face rule */
+//    src: url('path/to/your/custom/font/WildCoorg.woff') format('woff2'),
+//    url('path/to/your/custom/font/WildCoorg.woff') format('woff'),
+//    url('path/to/your/custom/font/WildCoorg.eot') format('eot');
+//}
+
+
+html,
+body {
+    background: #F1F7F9 !important;
+    height: 100%;
+    font-style: inherit;
+    font-display: swap;
+    font-family: "Roboto Light", sans-serif;
+}
+#page-content {
+    flex: 1 0 auto;
+}
+.card-header{
+    background: #006A8E;
+}
+.card-header, .card-header button{
+    color: #FFFFFF;
+}
+.card-header button:hover{
+    color: #FFFFFF;
+}
+.leaseAccordion .card-body{
+    background: #F1F7F9;
+}
+
+.breadcrumb-item a,
+.breadcrumb-item.active{
+    color: #F1F7F9 !important;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    color: #F1F7F9;
+    content: "/";
+}
+.main-menu-top .nav-item a{
+    color: #000000 !important;
+    font-size: 16px;
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+}
+
+.nav-item.active > .nav-link{
+    border-radius: 4px;
+    background: #006486;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+.nav-item.active a{
+    color: white !important;
+}
+
+.cookie-consent {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    /*border-radius: 5px;*/
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+.js-cookie-consent-agree {
+    display: block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    padding: 10px;
+    background: #f78e0c !important;
+    color: #FFFFFF;
+}
+
+footer .light a,
+footer .light h5{
+    color: #ffffff;
+}
+
+footer .blue a,
+footer .footer-copyright,
+footer .blue i,
+footer .blue h5{
+    color: #006A8E;
+}
+.note-air-popover{
+    /*background-color: #e83e8c;*/
+    width: 380px;
+    max-width: 380px;
+    min-width: 200px;
+    border-radius: 0px !important;
+}
+.popover-content.note-children-container{
+    background-color: #cecece;
+    color: #eeeeee;
+}
+input[type="button"]
+{
+    width:120px;
+    height:60px;
+    margin-left:35px;
+    display:block;
+    background-color:gray;
+    color:white;
+    border: none;
+    outline:none;
+}

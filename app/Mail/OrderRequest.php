@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Solution;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -31,6 +32,8 @@ class OrderRequest extends Mailable
      */
     public function build()
     {
+        $solution = (new Solution)->findOrFail($this->request['object']);
+
         $pdf = PDF::loadView('pdf.order', [
             'data' => $this->request,
         ]);
@@ -38,7 +41,7 @@ class OrderRequest extends Mailable
         return $this
             ->from(env('MAIL_NOREPLY'), 'Leaseofferte.com')
             ->replyTo($this->request['email'], $this->request['voornaam'])
-            ->subject('Lease aanvraag')
+            ->subject('Lease aanvraag: ' . $this->request['bedrijfsnaam'] . " | " . $solution->title)
             ->attachData($pdf->output(), "Lease-aanvraag.pdf")
             ->view('mails.order');
     }

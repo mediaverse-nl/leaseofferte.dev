@@ -15,8 +15,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-{{--                <iframe src="https://mediaverse-dev.nl/widget" scrolling="no" type="">--}}
-                <iframe src="https://mediaverse-dev.nl/widget" frameBorder="0" width="100%" height="600" scrolling="no">
+                {{--<iframe src="https://mediaverse-dev.nl/widget" scrolling="no" type="">--}}
+                <iframe
+                    id="iFrame1"
+                    src="https://mediaverse-dev.nl/widget?api_token=api_xxxx"
+                    frameBorder="0"
+                    width="100%"
+                    onLoad="autoResize(this)"
+                    style="height: 100%;"
+                    scrolling="no">
                     <p>Your browser does not support iframes.</p>
                 </iframe>
             </div>
@@ -29,8 +36,15 @@
     </style>
 @endpush
 
-@push('scripts')
-    <script>
-
+@push('js')
+    <script language="javaScript">
+        function loadFrame(){
+            console.log($(this).height($(this).contents().height()));
+            // $(this).width($(this).contents().width());
+        }
+        function autoResize(){
+            $('#iFrame1').height($('#iFrame1').contents().height());
+            // loadFrame(this);
+        }
     </script>
 @endpush

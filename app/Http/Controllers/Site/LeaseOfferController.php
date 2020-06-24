@@ -22,6 +22,8 @@ class LeaseOfferController extends Controller
         $this->offer = $offer;
     }
 
+
+
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +31,18 @@ class LeaseOfferController extends Controller
      */
     public function index()
     {
+        $this->seo()
+            ->setTitle($this->getPageSeo()->title)
+            ->setDescription($this->getPageSeo()->description);
+        //opengraph
+        $this->seo()
+            ->opengraph()
+            ->setUrl(url()->current())
+            ->addProperty('type', 'website');
+        //twitter
+        $this->seo()
+            ->twitter();
+
         $query = collect(request()->query)->toArray();
 
         $queryWithOutFilter = array_except($query, ['filter']);
@@ -52,7 +66,10 @@ class LeaseOfferController extends Controller
             $filter = [];
         }
 
+//        dd($decrypted);
+
         $offers = $this->offer
+            ->with('operationalLeasePrices')
             ->whereHas('operationalLeasePrices', function ($q) use ($filter){
                 if (isset($filter['priceRange'])) {
                     $priceRange = explode(',', $filter['priceRange']);
@@ -140,6 +157,19 @@ class LeaseOfferController extends Controller
                 }
             })
             ->where(function($sub) use ($filter){
+                if (isset($filter['transmission'])) {
+                    $count = 0;
+                    foreach ($filter['transmission'] as $i) {
+                        $count++;
+                        if ($count == 1) {
+                            $sub->where('transmission', '=', $i);
+                        } else {
+                            $sub->orWhere('transmission', '=', $i);
+                        }
+                    }
+                }
+            })
+            ->where(function($sub) use ($filter){
                 if (isset($filter['color'])) {
                     $count = 0;
                     foreach ($filter['color'] as $i) {
@@ -152,6 +182,7 @@ class LeaseOfferController extends Controller
                     }
                 }
             })
+            ->orderBy('title')
             ->get();
 
         $baseOffers = $this->offer;
@@ -169,16 +200,20 @@ class LeaseOfferController extends Controller
     {
         $offer = $this->offer->findOrFail($id);
 
+        if ($offer->urlTitle !== $title){
+            return redirect()->route('site.offer.show', [$offer->urlTitle, $offer->id]);
+        }
+
         //default seo
         $this->seo()
             ->setCanonical(url()->current())
-            ->setTitle($offer->title)
+            ->setTitle($offer->meta_title)
             ->setDescription($offer->meta_description);
         //opengraph
         $this->seo()
             ->opengraph()
             ->addProperty('type', 'site')
-            ->addImage($offer->thumbnail())
+            ->addImage(str_replace('https://mediaverse-dev.nl', 'https://www.leaseofferte.com/', $offer->thumbnail()))
             ->setTitle($offer->meta_title)
             ->setUrl(url()->current())
             ->addProperty('type', 'website');

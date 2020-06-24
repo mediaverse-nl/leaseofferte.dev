@@ -5,16 +5,19 @@
 
     if (isset($formObj->object)){
         $object_id = $formObj->object;
-        $tableFields = $categoryChecker->whereHas('solutions', function ($q) use ($object_id){
-            $q->where('id', '=', $object_id);
-        })->first();
+        $tableFields = $categoryChecker
+            ->with(['solutions', 'dynamicFields'])
+            ->whereHas('solutions', function ($q) use ($object_id){
+                $q->where('id', '=', $object_id);
+            })->first();
     }else{
-        $tableFields = $categoryChecker->first();
+        $tableFields = $categoryChecker
+            ->with(['solutions', 'dynamicFields'])
+            ->first();
     }
 
     $tableFieldsOne = $tableFields->dynamicFields()->where('form_part', '=', 2)->orderBy('field_order', 'ASC')->get();
     $tableFieldsTwo = $tableFields->dynamicFields()->where('form_part', '=', 3)->orderBy('field_order', 'ASC')->get();
-
 @endphp
 
 <div class="card" id="calculator" style="border: 1px solid rgba(0, 0, 0, 0.125); background: #FFFFFF !important; ">
@@ -73,7 +76,7 @@
 
             @foreach($tableFieldsOne as $f)
                 <tr>
-                    <td style="width: 50%;">{!! ucfirst($f->field_name) !!}</td>
+                    <td style="width: 50%;">{!! ucfirst($f->field_name == 'email' ? 'E-mail' : $f->field_name) !!}</td>
                     <td id="{!! StripReplace($f->field_name) !!}" style=""></td>
                 </tr>
             @endforeach
@@ -100,7 +103,7 @@
 
             @foreach($tableFieldsTwo as $f)
                 <tr>
-                    <td style="width: 50%;">{!! ucfirst($f->field_name) !!}</td>
+                    <td style="width: 50%;">{!! ucfirst($f->field_name == 'email' ? 'E-mail' : $f->field_name) !!}</td>
                     <td id="{!! StripReplace($f->field_name) !!}"></td>
                 </tr>
             @endforeach
@@ -121,42 +124,5 @@
 </div>
 
 @push('js')
-    <!-- Latest compiled and minified JavaScript -->
-    <script language="javascript" type="text/javascript">
-        $(document).ready(function(){
-
-            function getForm($this){
-                var Obj = $($this);
-                var ObjId = Obj.attr('id');
-                if(ObjId == 'object'){
-                    var ObjValue = $('#object option:selected').text()
-                    if(ObjValue == '--- object * ---'){
-                        var ObjValue = null;
-                    }
-                }else if(ObjId == 'aanbetaling' || ObjId == 'slottermijn' || ObjId == 'aanschaf'){
-                    var ObjValue = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(Obj.val());
-                }else if(ObjId == 'kilometerstand'){
-                    var ObjValue = new Intl.NumberFormat('nl-NL', { maximumSignificantDigits: 6 }).format(Obj.val());
-                }else{
-                    var ObjValue = Obj.val();
-                }
-                $('td#'+ObjId).html(ObjValue);
-                $('h2#'+ObjId).html(ObjValue);
-            }
-
-            $('.leaseAccordion .form-control').each(function(){
-                getForm(this);
-            });
-
-            $(' input, select').on('change keyup paste', function () {
-                getForm(this);
-            });
-        });
-    </script>
-@endpush
-
-@push('css')
-    <style>
-
-    </style>
+    <script src="/js/info-checker.js" language="javascript" type="text/javascript"></script>
 @endpush
