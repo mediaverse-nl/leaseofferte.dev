@@ -1,6 +1,6 @@
 <?php
 
-//Route::get('/widget', 'WidgetController@widget')->middleware(['calculatorToken']);
+Route::get('/widget', 'WidgetController@widget')->middleware(['calculatorToken']);
 //Route::get('/test-widget', 'WidgetController@test');
 
 //Route::get('/linkstorage', function () {

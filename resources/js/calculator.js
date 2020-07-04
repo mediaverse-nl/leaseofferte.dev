@@ -23,6 +23,8 @@ function calculation()
     var looptijd = parseFloat($("#looptijd").val().substr(0, 2));
     var obj = $('#object option:selected').val();
 
+    console.log('loop tijd', $("#looptijd").val())
+
     if(!$("#aanbetaling").val()){
         aanbetaling = 0;
     }
@@ -44,6 +46,7 @@ function calculation()
             type: 'GET',
             dataType: 'json', // added data type
             success: function(res) {
+                // console.log()
                 $(".leasePrice").html("&euro; " + res['leasePrice']);
             }
         });

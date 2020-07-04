@@ -1,3 +1,7 @@
+.bootstrap-select .dropdown-menu.inner {
+    padding-left: 0px !important;
+}
+
 .modal-body .card-header {
   margin: 0px !important;
 }
@@ -39,21 +43,21 @@
 }
 
 .steps-segment {
-  color: #009FD6 !important;
+  color: #f78e0c  !important;
 }
 
 .steps:not(.is-hollow) .steps-marker:not(.is-hollow) {
-  background-color: #009FD6;
+  background-color: #f78e0c ;
   color: #fff;
 }
 
 .steps-segment:after {
-  background-color: #009FD6;
+  background-color: #f78e0c ;
 }
 
 .steps.is-hollow .is-active .steps-marker,
 .steps .is-active .steps-marker.is-hollow {
-  border-color: #009FD6;
+  border-color: #f78e0c ;
 }
 
 .steps {

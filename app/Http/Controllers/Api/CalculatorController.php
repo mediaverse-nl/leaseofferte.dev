@@ -19,11 +19,29 @@ class CalculatorController extends Controller
     {
         $object = $this->objects->findOrFail($objectId);
 
-        $leasePrice = getLeasePrice($objectId, $request->aanschaf, $request->looptijd, $request->slottermijn, $request->aanbetaling);
+        $aanschaf = $request->aanschaf;
+        $looptijd = $request->looptijd;
+        $slottermijn = $request->slottermijn;
+        $aanbetaling = $request->aanbetaling;
+
+        if (isset($aanschaf) && !is_numeric($aanschaf)){
+            $aanschaf = 0;
+        }
+        if (isset($looptijd) && !is_numeric($looptijd)){
+            $looptijd = 0;
+        }
+        if (isset($slottermijn) && !is_numeric($slottermijn)){
+            $slottermijn = 0;
+        }
+        if (isset($aanbetaling) && !is_numeric($aanbetaling)){
+            $aanbetaling = 0;
+        }
+
+        $leasePrice = getLeasePrice($objectId, $aanschaf, $looptijd, $slottermijn, $aanbetaling);
 
         return response()
             ->json([
-                'rate' => $object->getFinancialRate($request->aanschaf - $request->aanbetaling),
+                'rate' => $object->getFinancialRate($aanschaf - $aanbetaling),
                 'leasePrice' => $leasePrice,
             ], 200);
     }

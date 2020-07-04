@@ -28,6 +28,7 @@ class WelcomeController extends Controller
         //opengraph
         $this->seo()
             ->opengraph()
+            ->addImage(url()->current().'/img/welcome-leaseofferte.jpg')
             ->setUrl(url()->current())
             ->addProperty('type', 'website');
         //twitter

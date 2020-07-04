@@ -32,12 +32,12 @@
             </div>
             <div class="col-md-4">
                 <div class="grid">
-                    <div class="card" style="border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
-                        <div class="card-body" style="padding: 0px;">
+                    <div class="card" style="margin-bottom: 20px; border: none !important; background: #FFFFFF !important; margin-top: -100px !important;">
+                        <div class="card-body" style="padding: 0px; background: #f78e0c !important;">
                             <div style="padding: 20px;">
-                                <h2 style="color: #006A8E; font-size: 32px;" class="text-center">Lease Calculator</h2>
+                                <h2 style="font-weight: 600; color: #ffffff; font-size: 32px;" class="text-center">Maak direct uw Leaseofferte</h2>
                             </div>
-                            @include('components.lease-calculator', ['preselectedObject' => $solution->category->id])
+                            @include('components.lease-calculator', ['small' => true])
                         </div>
                     </div>
                 </div>

@@ -49,7 +49,7 @@
                 <div class="col-md-3 mb-md-0 mb-3 py-4">
 
                     <!-- Links -->
-                    <h5 class="text-uppercase">contact gegevens</h5>
+                    <h5 class="text-uppercase">contactgegevens</h5>
 
                     <ul class="list-unstyled">
                         <li>
